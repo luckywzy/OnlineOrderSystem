@@ -84,6 +84,7 @@ CREATE TABLE `t_order` (
 	`order_price` DECIMAL(5,2) NOT NULL DEFAULT 0.01 COMMENT '订单价格',
 	`dispatch_address` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '配送地址',
 	`expect_time` VARCHAR(20) NOT NULL DEFAULT '立即送达' COMMENT '期望送达时间',
+	`order_status` tinyint NOT NULL DEFAULT -1  COMMENT '订单状态：-1 默认，0 准备中，1 派送中，2 已完成',
 	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '订单创建时间',
 	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '订单修改时间',
 		primary key(id),
