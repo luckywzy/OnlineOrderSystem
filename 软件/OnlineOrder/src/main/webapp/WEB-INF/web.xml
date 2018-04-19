@@ -6,12 +6,12 @@
 
 	<display-name></display-name>
 	<welcome-file-list>
-		<welcome-file>login.html</welcome-file>
+		<welcome-file></welcome-file>
 	</welcome-file-list>
 	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring/spring-*.xml</param-value>
+		<param-value>classpath:spring/applicationContext-*.xml</param-value>
 	</context-param>
 
 	<listener>
