@@ -29,4 +29,13 @@ public class EnterpriseInfoServiceImpl implements EnterpriseInfoService {
         criteria.andEnterpriseIdIsNotNull();
         return  tEnterpriseInfoDao.selectByExample(example);
     }
+
+    @Override
+    public TEnterpriseInfo queryById(String id) {
+        TEnterpriseInfoExample example = new TEnterpriseInfoExample();
+        TEnterpriseInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andEnterpriseIdEqualTo(id);
+        List<TEnterpriseInfo> tEnterpriseInfos = tEnterpriseInfoDao.selectByExample(example);
+        return tEnterpriseInfos.size()>0 ? tEnterpriseInfos.get(0): null;
+    }
 }
