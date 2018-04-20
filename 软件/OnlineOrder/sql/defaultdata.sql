@@ -2,7 +2,7 @@
 ###################################################
 #########      等级数据			  #################
 ###################################################
-insert into `t_rank` values(1,1,'游客'),
+insert into `t_rank`(id,rank_id,rank_desc) values(1,1,'游客'),
 						(2,2,'普通用户'),
 						(3,3,'高级用户'),
 						(4,4,'特殊用户'),
@@ -13,7 +13,8 @@ insert into `t_rank` values(1,1,'游客'),
 ###################################################
 #########      企业表数据			  #################
 ###################################################
-insert into `t_enterprise_info` values
+insert into `t_enterprise_info`(id,enterprise_id,enterprise_company_name,enterprise_link_man,enterprise_phone_num,
+  enterprise_address,enterprise_email) values
   (2,'00000000000000000001','京都川菜馆','abcd','13800000000','天安门广场北侧路边小胡同','12345679@163.com'),
   (3,'00013000000000000001','京都川菜馆','abcd','13800000000','天安门广场北侧路边小胡同','12345679@163.com'),
   (4,'23000000000000000001','s四川川菜馆','rose','13800000000','天安门广场北侧路边小胡同','12345679@163.com'),
@@ -27,7 +28,7 @@ insert into `t_enterprise_info` values
 ###################################################
 #########      菜品分类数据			  #################
 ###################################################
-insert into `t_item_type` values
+insert into `t_item_type`(id,item_type_id,item_type_desc) values
   (1,1,'热菜'),
   (2,2,'凉菜'),
   (3,3,'汤羹'),
@@ -48,9 +49,9 @@ insert into `t_item_type` values
 ###################################################
 #########      菜品默认数据			t_item  #################
 ###################################################
-insert into `t_item`(enterprise_id,item_id,item_name,item_price,item_pic) values
-  ('00013000000000000001','00000000000000000000','',12.5,'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3108145806,1482744700&fm=200&gp=0.jpg'),
-('01234000000000000001','00000000000000000000','',23.5,'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524224424600&di=0797c2a358841ada6bed3c7991c76ca2&imgtype=0&src=http%3A%2F%2Fimage.tech-food.com%2Fimages%2Fkndata%2Fbpic%2F201412%2F20141219135916321632.jpg'),
-('01234567000000000001','00000000000000000000','',123.5,'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524224424600&di=66e3e1510a4754074e0315f8c04659bc&imgtype=0&src=http%3A%2F%2Fpic113.nipic.com%2Ffile%2F20161025%2F23694910_162121619000_2.jpg'),
-('00000000000232323001','00000000000000000000','',12.5,'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3108145806,1482744700&fm=200&gp=0.jpg'),
-('00000000000000000000','00000000000000000000','',12.5,'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3108145806,1482744700&fm=200&gp=0.jpg');
+insert into `t_item`(enterprise_id,item_id,item_name,item_price,item_pic,item_type) values
+  ('00013000000000000001','00000000000000000001','',12.5,'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3108145806,1482744700&fm=200&gp=0.jpg', 2),
+('00013000000000000001','00000000000000000002','',23.5,'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524224424600&di=0797c2a358841ada6bed3c7991c76ca2&imgtype=0&src=http%3A%2F%2Fimage.tech-food.com%2Fimages%2Fkndata%2Fbpic%2F201412%2F20141219135916321632.jpg',5),
+('01234567000000000001','00000000000000000003','',123.5,'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524224424600&di=66e3e1510a4754074e0315f8c04659bc&imgtype=0&src=http%3A%2F%2Fpic113.nipic.com%2Ffile%2F20161025%2F23694910_162121619000_2.jpg',8),
+('00000000000232323001','00000000000000000004','',12.5,'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3108145806,1482744700&fm=200&gp=0.jpg',10),
+('00052100000000000001','00000000000000000005','',12.5,'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3108145806,1482744700&fm=200&gp=0.jpg',12);

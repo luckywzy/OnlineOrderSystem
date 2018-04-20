@@ -21,15 +21,18 @@ CREATE TABLE `t_user`(
 ####################################################
 ###### 用户等级表							########
 ####################################################
-CREATE TABLE if not exists `t_rank`(
-	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT "自增ID",
-	`rank_id` tinyint unsigned NOT NULL DEFAULT 0 COMMENT "等级ID",
-	`rank_desc` varchar(5) NOT NULL DEFAULT '' COMMENT "等级描述",
+DROP TABLE IF EXISTS `t_rank`;
+CREATE TABLE `t_rank`(
+	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+	`rank_id` tinyint unsigned NOT NULL DEFAULT 0 COMMENT '等级ID',
+	`rank_desc` varchar(5) NOT NULL DEFAULT '' COMMENT '等级描述',
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
 	 primary key(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户等级表';
 
 ###################################################
-#########      商户表			  #################
+#########      企业表			  #################
 ###################################################
 DROP TABLE IF EXISTS `t_enterprise_info`;
 CREATE TABLE `t_enterprise_info`(
@@ -40,6 +43,8 @@ CREATE TABLE `t_enterprise_info`(
 	`enterprise_phone_num` varchar(20) NOT NULL DEFAULT '' COMMENT "企业联系电话",
 	`enterprise_address` varchar(100) NOT NULL DEFAULT '' COMMENT "企业地址",
 	`enterprise_email` varchar(50) NOT NULL DEFAULT '' COMMENT "企业邮箱",
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
 	primary key(id),
 	unique(enterprise_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商户表';
@@ -52,6 +57,8 @@ CREATE TABLE `t_item_type`(
 	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT "自增ID",
 	`item_type_id` tinyint unsigned NOT NULL DEFAULT 0 COMMENT "菜品分类ID",
 	`item_type_desc` varchar(8) NOT NULL DEFAULT '' COMMENT "菜品分类信息描述",
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
 	primary key(id),
 	unique(item_type_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜品分类表';
@@ -66,10 +73,14 @@ CREATE TABLE `t_item` (
 	`item_id` varchar(20) NOT NULL DEFAULT '' COMMENT '菜品id，同时也是商品编号',
 	`item_name` varchar(50) NOT NULL DEFAULT '' COMMENT '菜品名',
 	`item_price` DECIMAL(5,2) NOT NULL DEFAULT 0.01 COMMENT '菜品价格',
-	`item_pic` varchar(100) NOT NULL DEFAULT '' COMMENT '菜品配图',
+	`item_pic` varchar(300) NOT NULL DEFAULT '' COMMENT '菜品配图',
+	`item_type` tinyint unsigned NOT NULL DEFAULT 0 COMMENT '菜品所属分类',
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
 	primary key(id),
 	unique(item_id),
-	FOREIGN KEY(enterprise_id) REFERENCES `t_enterprise_info`(enterprise_id)
+	FOREIGN KEY(enterprise_id) REFERENCES `t_enterprise_info`(enterprise_id),
+	FOREIGN KEY(item_type) REFERENCES `t_item_type`(item_type_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜品表';
 
 ###################################################
