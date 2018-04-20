@@ -37,7 +37,7 @@ CREATE TABLE `t_enterprise_info`(
 	`enterprise_id` varchar(20) NOT NULL DEFAULT '00000000000000000000' COMMENT "企业ID",
 	`enterprise_company_name` varchar(50) NOT NULL DEFAULT '' COMMENT "企业名称",
 	`enterprise_link_man` varchar(30) NOT NULL DEFAULT '' COMMENT "企业联系人",
-	`enterprise_phone_num` varchar(30) NOT NULL DEFAULT '' COMMENT "企业联系电话",
+	`enterprise_phone_num` varchar(20) NOT NULL DEFAULT '' COMMENT "企业联系电话",
 	`enterprise_address` varchar(100) NOT NULL DEFAULT '' COMMENT "企业地址",
 	`enterprise_email` varchar(50) NOT NULL DEFAULT '' COMMENT "企业邮箱",
 	primary key(id),
@@ -67,7 +67,6 @@ CREATE TABLE `t_item` (
 	`item_name` varchar(50) NOT NULL DEFAULT '' COMMENT '菜品名',
 	`item_price` DECIMAL(5,2) NOT NULL DEFAULT 0.01 COMMENT '菜品价格',
 	`item_pic` varchar(100) NOT NULL DEFAULT '' COMMENT '菜品配图',
-	`item_enterprise` varchar(20) NOT NULL DEFAULT '00000000000000000000' COMMENT "所属企业ID",
 	primary key(id),
 	unique(item_id),
 	FOREIGN KEY(enterprise_id) REFERENCES `t_enterprise_info`(enterprise_id)
