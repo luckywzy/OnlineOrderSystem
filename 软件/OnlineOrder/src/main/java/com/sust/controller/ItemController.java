@@ -32,4 +32,13 @@ public class ItemController {
         return "item";
     }
 
+    @RequestMapping("/modify")
+    public String listdedail(@RequestParam(value = "id",required = true) String id, Model model)
+    {
+        TItem item = itemService.queryByid(id);
+        model.addAttribute("item", item);
+
+        return "itemDetail";
+    }
+
 }

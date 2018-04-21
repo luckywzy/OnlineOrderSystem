@@ -33,8 +33,8 @@ public class EnterpriseInfoController {
 
     @RequestMapping(value = "/enterpriseDedail", method = RequestMethod.GET)
     public String enterpriseInfoDedail(@RequestParam(value = "id", required = true) String id, Model model) {
-        TEnterpriseInfo tEnterpriseInfos = enterpriseInfoService.queryById(id);
-        model.addAttribute("tEnterpriseInfos", tEnterpriseInfos);
-        return "list";
+        TEnterpriseInfo tEnterpriseInfo = enterpriseInfoService.queryById(id);
+        model.addAttribute("tEnterpriseInfo", tEnterpriseInfo);
+        return "enterpriseDedail";
     }
 }

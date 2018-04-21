@@ -1,6 +1,6 @@
 package com.sust.service.impl;
 
-import com.sust.dao.TEnterpriseInfoDao;
+import com.sust.dao.TEnterpriseInfoMapper;
 import com.sust.model.TEnterpriseInfo;
 import com.sust.model.TEnterpriseInfoExample;
 import com.sust.service.EnterpriseInfoService;
@@ -21,7 +21,7 @@ public class EnterpriseInfoServiceImpl implements EnterpriseInfoService {
 
     private Logger logger = LoggerFactory.getLogger(EnterpriseInfoServiceImpl.class);
     @Autowired
-    private TEnterpriseInfoDao tEnterpriseInfoDao;
+    private TEnterpriseInfoMapper tEnterpriseInfoDao;
 
     @Override public List<TEnterpriseInfo> queryByPage() {
         TEnterpriseInfoExample example = new TEnterpriseInfoExample();

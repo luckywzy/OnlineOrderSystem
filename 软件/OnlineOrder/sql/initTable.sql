@@ -1,10 +1,16 @@
+################################
+########创建数据库
+##################################
+DROP database IF EXISTS `onlineOrder`;
+create database onlineOrder;
+use onlineOrder;
 
 ####################################################
 ###### 用户表							########
 ####################################################
 DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user`(
-    `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT "自增ID",
+  `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT "自增ID",
 	`user_id` varchar(20)  NOT NULL DEFAULT '00000000000000000000' COMMENT "用户ID",
 	`username` varchar(20) NOT NULL DEFAULT '' COMMENT "用户名",
 	`password` varchar(32) NOT NULL DEFAULT '' COMMENT "密码",
@@ -74,7 +80,8 @@ CREATE TABLE `t_item` (
 	`item_name` varchar(50) NOT NULL DEFAULT '' COMMENT '菜品名',
 	`item_price` DECIMAL(5,2) NOT NULL DEFAULT 0.01 COMMENT '菜品价格',
 	`item_pic` varchar(300) NOT NULL DEFAULT '' COMMENT '菜品配图',
-	`item_type` tinyint unsigned NOT NULL DEFAULT 0 COMMENT '菜品所属分类',
+	`item_desc` varchar(600) NOT NULL DEFAULT '' COMMENT '菜品描述',
+	`item_type`  tinyint unsigned NOT NULL DEFAULT 0 COMMENT '菜品所属分类',
 	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
 	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
 	primary key(id),
@@ -89,7 +96,7 @@ CREATE TABLE `t_item` (
 DROP TABLE IF EXISTS `t_order`;
 CREATE TABLE `t_order` (
 	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
-	`order_id` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '订单号码',
+	`order_id` VARCHAR(16) NOT NULL DEFAULT '' COMMENT '订单号码',
 	`order_content` VARCHAR(100)  NOT NULL DEFAULT '' COMMENT '订单内容：填入的是商品Id,以逗号分隔',
 	`order_price` DECIMAL(5,2) NOT NULL DEFAULT 0.01 COMMENT '订单价格',
 	`dispatch_address` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '配送地址',
@@ -97,7 +104,7 @@ CREATE TABLE `t_order` (
 	`order_status` tinyint NOT NULL DEFAULT -1  COMMENT '订单状态：-1 默认，0 准备中，1 派送中，2 已完成',
 	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '订单创建时间',
 	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '订单修改时间',
-		primary key(id),
+	primary key(id),
 	unique(order_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
 
@@ -113,7 +120,7 @@ CREATE TABLE `t_user_and_order_relation` (
 	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
 	primary key(id),
   FOREIGN KEY(user_id) REFERENCES `t_user`(user_id),
-   FOREIGN KEY(order_id) REFERENCES `t_order`(order_id)
+  FOREIGN KEY(order_id) REFERENCES `t_order`(order_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户与订单关系表';
 
 

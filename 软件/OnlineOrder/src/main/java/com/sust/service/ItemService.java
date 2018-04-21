@@ -12,4 +12,6 @@ public interface ItemService {
      */
     List<TItem> queryByPage(String id);
 
+    TItem queryByid(String id);
+
 }

@@ -1,7 +1,6 @@
 package com.sust.service;
 
 import com.sust.model.TEnterpriseInfo;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

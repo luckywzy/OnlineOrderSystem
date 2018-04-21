@@ -19,23 +19,19 @@
 
 <table width="80%" align="center">
     <tr>
-        <td width="5%">id</td>
+        <td width="5%">菜品编号</td>
         <td width="25%">菜品名</td>
         <td width="25%">菜品价格</td>
-        <td width="25%">菜品配图</td>
-        <td width="10%">菜品名</td>
-        <td width="10%">菜品操作</td>
+        <td width="10%">详情&操作</td>
 
     </tr>
     <c:forEach items="${Items }" var="item" varStatus="status">
         <tr
                 <c:if test="${status.index % 2 != 0 }">style='background-color:#ECF6EE;'</c:if>>
-            <td>${item.id}</td>
+            <td>${item.itemId}</td>
             <td>${item.itemName}</td>
             <td>${item.itemPrice}</td>
-            <td>${item.itemPic}</td>
-            <td><a href="">删除</a></td>
-            <td><a href="">修改</a></td>
+            <td><a href="/item/modify?id=${item.itemId}">详情</a></td>
         </tr>
     </c:forEach>
 </table>
