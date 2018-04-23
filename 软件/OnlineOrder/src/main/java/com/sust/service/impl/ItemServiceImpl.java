@@ -16,11 +16,11 @@ public class ItemServiceImpl implements ItemService {
     TItemMapper itemDao;
 
     @Override
-    public List<TItem> queryByPage(String id) {
+    public List<TItem> queryByPage(String enterpriseid) {
 
         TItemExample tItemExample = new TItemExample();
         TItemExample.Criteria criteria = tItemExample.createCriteria();
-        criteria.andEnterpriseIdEqualTo(id);
+        criteria.andEnterpriseIdEqualTo(enterpriseid);
         return itemDao.selectByExample(tItemExample);
 
     }

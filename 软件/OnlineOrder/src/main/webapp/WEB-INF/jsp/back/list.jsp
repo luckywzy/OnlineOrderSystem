@@ -34,7 +34,7 @@
             <td>${tEnterpriseInfo.enterpriseCompanyName}</td>
             <td>${tEnterpriseInfo.enterpriseLinkMan}</td>
             <td><a href="/enterpriseInfo/enterpriseDedail?id=${tEnterpriseInfo.enterpriseId}">企业相关操作</a></td>
-            <td><a href="/item/itemOfEnterprise?id=${tEnterpriseInfo.enterpriseId}">菜品相关操作</a></td>
+            <td><a href="/item/itemOfEnterprise?enterpriseid=${tEnterpriseInfo.enterpriseId}">菜品相关操作</a></td>
         </tr>
     </c:forEach>
 </table>

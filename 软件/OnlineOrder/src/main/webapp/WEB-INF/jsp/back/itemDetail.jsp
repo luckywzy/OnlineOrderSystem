@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>菜品管理页面</title>
+    <title>菜品详情页面</title>
     <script type="text/javascript"
             src="/js/commons/jQuery.js"></script>
     <script type="text/javascript"

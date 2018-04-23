@@ -16,7 +16,7 @@
             src="/js/list.js"></script>
 </head>
 <body>
-
+<<a href="/item/toadd?enterpriseid=${enterpriseid}" value="新增菜品">新增菜品</a>
 <table width="80%" align="center">
     <tr>
         <td width="5%">菜品编号</td>
