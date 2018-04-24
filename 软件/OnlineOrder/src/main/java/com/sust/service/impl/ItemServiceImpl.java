@@ -32,4 +32,23 @@ public class ItemServiceImpl implements ItemService {
         criteria.andItemIdEqualTo(id);
         return itemDao.selectByExample(tItemExample).get(0);
     }
+
+    /**
+     * 插入item
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean insertByItem(TItem item) {
+        if(item!=null){
+            return false;
+        }
+
+        int insert = itemDao.insert(item);
+        if (insert > 0) {
+            return true;
+        }
+
+        return false;
+    }
 }

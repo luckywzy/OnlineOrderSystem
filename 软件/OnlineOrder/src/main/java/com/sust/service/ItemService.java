@@ -19,4 +19,11 @@ public interface ItemService {
      * @return
      */
     TItem queryByid(String id);
+
+    /**
+     * 增加菜品
+     * @param item
+     * @return
+     */
+    boolean insertByItem(TItem item);
 }

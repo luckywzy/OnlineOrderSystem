@@ -2,8 +2,10 @@ package com.sust.controller;
 
 import com.sust.model.TItem;
 import com.sust.service.ItemService;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * 对菜品的管理
@@ -21,7 +24,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/item")
 public class ItemController {
-
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ItemController.class);
     @Resource
     ItemService itemService;
 
@@ -40,7 +43,7 @@ public class ItemController {
         TItem item = itemService.queryByid(id);
         model.addAttribute("item", item);
         return "itemDetail";
-    }
+}
 
     /**
      * 转到菜品新增页面
@@ -57,15 +60,23 @@ public class ItemController {
 
     /**
      * 新增菜品，成功跳转 菜品列表页
-     * @param enterpriseid
+     * @param item
      * @param model
      * @return
      */
-    @RequestMapping("/add")
-    public String addItem(@RequestParam(value = "enterpriseid",required = true) String enterpriseid, Model model)
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public String addItem(/*@RequestParam(value = "enterpriseid",required = true) String enterpriseid*/
+            @ModelAttribute("item") TItem item, Model model)
     {
-        model.addAttribute("enterpriseid", enterpriseid);
-        return "redirect:/item/itemOfEnterprise";
+        String enterpriseId = item.getEnterpriseId();
+        boolean ok = itemService.insertByItem(item);
+        if(ok ) {
+            model.addAttribute("enterpriseid", enterpriseId);
+            return "redirect:/item/itemOfEnterprise";
+        }else {
+            logger.error("插入item失败，入参：{}",item);
+            return "redirect:/common/error";
+        }
     }
 
 }

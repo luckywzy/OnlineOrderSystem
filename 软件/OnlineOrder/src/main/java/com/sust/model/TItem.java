@@ -103,4 +103,8 @@ public class TItem {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override public String toString() {
+        return super.toString();
+    }
 }
