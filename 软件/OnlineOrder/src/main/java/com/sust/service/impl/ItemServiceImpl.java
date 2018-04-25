@@ -33,14 +33,28 @@ public class ItemServiceImpl implements ItemService {
         return itemDao.selectByExample(tItemExample).get(0);
     }
 
+    @Override
+    public boolean deleteItemById(String itemId) {
+
+        TItemExample example = new TItemExample();
+        TItemExample.Criteria criteria = example.createCriteria();
+        criteria.andItemIdEqualTo(itemId);
+        int delIndex = itemDao.deleteByExample(example);
+        if (delIndex > 0){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * 插入item
+     * 
      * @param item
      * @return
      */
     @Override
     public boolean insertByItem(TItem item) {
-        if(item!=null){
+        if (item == null) {
             return false;
         }
 

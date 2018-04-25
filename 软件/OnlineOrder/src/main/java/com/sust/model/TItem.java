@@ -104,7 +104,11 @@ public class TItem {
         this.updateTime = updateTime;
     }
 
-    @Override public String toString() {
-        return super.toString();
+    @Override
+    public String toString() {
+        return "TItem{" + "id=" + id + ", enterpriseId='" + enterpriseId + '\'' + ", itemId='" + itemId + '\''
+                + ", itemName='" + itemName + '\'' + ", itemPrice=" + itemPrice + ", itemPic='" + itemPic + '\''
+                + ", itemDesc='" + itemDesc + '\'' + ", itemType=" + itemType + ", createTime=" + createTime
+                + ", updateTime=" + updateTime + '}';
     }
 }

@@ -1,7 +1,11 @@
 package com.sust.controller;
 
+import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.sust.model.TItem;
 import com.sust.service.ItemService;
+import com.sust.utils.JsonUtils;
+import com.sust.utils.Result;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,6 +80,20 @@ public class ItemController {
         }else {
             logger.error("插入item失败，入参：{}",item);
             return "redirect:/common/error";
+        }
+    }
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    public String deleteItem(@RequestParam(value = "itemId",required = false)String itemId){
+
+        Preconditions.checkNotNull(itemId,"菜品Id不可为空");
+
+        boolean ok = itemService.deleteItemById(itemId);
+        if(ok){
+            return JsonUtils.objectToJson(Result.build(0, "删除成功"));
+        }else {
+            return JsonUtils.objectToJson(Result.build(1, "删除失败"));
         }
     }
 

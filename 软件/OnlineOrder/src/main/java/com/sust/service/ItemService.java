@@ -26,4 +26,11 @@ public interface ItemService {
      * @return
      */
     boolean insertByItem(TItem item);
+
+    /**
+     *  根据Id 删除item
+     * @param itemId
+     * @return
+     */
+    boolean deleteItemById(String itemId);
 }

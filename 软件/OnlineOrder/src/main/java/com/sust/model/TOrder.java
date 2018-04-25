@@ -93,4 +93,11 @@ public class TOrder {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override public String toString() {
+        return "TOrder{" + "id=" + id + ", orderId='" + orderId + '\'' + ", orderContent='" + orderContent + '\''
+                + ", orderPrice=" + orderPrice + ", dispatchAddress='" + dispatchAddress + '\'' + ", expectTime='"
+                + expectTime + '\'' + ", orderStatus=" + orderStatus + ", createTime=" + createTime + ", updateTime="
+                + updateTime + '}';
+    }
 }

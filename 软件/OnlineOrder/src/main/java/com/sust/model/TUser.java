@@ -102,4 +102,10 @@ public class TUser {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override public String toString() {
+        return "TUser{" + "id=" + id + ", userId='" + userId + '\'' + ", username='" + username + '\'' + ", password='"
+                + password + '\'' + ", rank=" + rank + ", age=" + age + ", birth=" + birth + ", use=" + use
+                + ", createTime=" + createTime + ", updateTime=" + updateTime + '}';
+    }
 }

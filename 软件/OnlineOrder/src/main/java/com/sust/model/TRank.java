@@ -52,4 +52,9 @@ public class TRank {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override public String toString() {
+        return "TRank{" + "id=" + id + ", rankId=" + rankId + ", rankDesc='" + rankDesc + '\'' + ", createTime="
+                + createTime + ", updateTime=" + updateTime + '}';
+    }
 }

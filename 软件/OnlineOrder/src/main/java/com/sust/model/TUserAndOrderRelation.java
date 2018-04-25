@@ -52,4 +52,9 @@ public class TUserAndOrderRelation {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override public String toString() {
+        return "TUserAndOrderRelation{" + "id=" + id + ", userId='" + userId + '\'' + ", orderId='" + orderId + '\''
+                + ", createTime=" + createTime + ", updateTime=" + updateTime + '}';
+    }
 }
