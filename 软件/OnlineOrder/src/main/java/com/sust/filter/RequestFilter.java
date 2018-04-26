@@ -30,8 +30,7 @@ public class RequestFilter  implements Filter{
         // 获得当前请求的URI
         String nowUrl = request.getRequestURI();
         /**
-         * TODO: 当用户访问首页时，应该显示用户页面
-         *  当用户登录为管理员时，跳转至后台管理
+         * TODO: 当用户访问首页时，应该显示用户首页, 当用户登录为管理员时，跳转至后台管理
          */
 
 
@@ -39,7 +38,8 @@ public class RequestFilter  implements Filter{
             filterChain.doFilter(request,response);
             return;
         }
-        response.sendRedirect("/enterpriseInfo/enterpriseInfoList");
+        //response.sendRedirect("/enterpriseInfo/enterpriseInfoList");
+        response.sendRedirect("/home");
       //  filterChain.doFilter(request,response);
         return;
     }

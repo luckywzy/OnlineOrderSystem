@@ -159,10 +159,10 @@
             <scope>test</scope>
         </dependency>
         <!-- JSP相关 -->
-        <dependency>
+      <!--  <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>

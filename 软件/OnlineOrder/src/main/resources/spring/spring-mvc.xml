@@ -10,6 +10,20 @@
                         http://www.springframework.org/schema/context 
                         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
     <!-- 配置包扫描器 -->
     <context:component-scan base-package="com.sust.controller" />
     <!-- 配置注解驱动 -->
@@ -20,9 +34,19 @@
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/back/" />
         <property name="suffix" value=".jsp" />
+        <!-- 定义模板顺序 -->
+        <property name="order" value="2"></property>
+    </bean>
+
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/front/" />
+        <property name="suffix" value=".html" />
+        <!-- 定义模板顺序 -->
+        <property name="order" value="1"></property>
     </bean>
     <!-- 由于在web.xml中定义的url拦截形式为“/”表示拦截所有的url请求，
                     包括静态资源例如css、js等。所以需要在springmvc.xml中添加资源映射标签： -->
-    <mvc:resources location="/WEB-INF/css/back/" mapping="/css/**"/>
-    <mvc:resources location="/WEB-INF/js/back/" mapping="/js/**"/>
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
+    <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
 </beans>

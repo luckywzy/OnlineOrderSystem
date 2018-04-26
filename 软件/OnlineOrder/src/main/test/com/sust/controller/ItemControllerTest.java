@@ -84,15 +84,19 @@ public class ItemControllerTest {
                 .andDo(print())
                 .andReturn();
 
-        logger.info("插入结果：{}", result.getResponse().getContentAsString());
+        logger.info(result.getResponse().getContentAsString());
     }
 
     @Test
     public void deleteItem() throws Exception {
         //add的item id
             String itemId = "989065359545585664";
-        MvcResult mvcResult = mockMvc.perform(post("/item/delete").param("itemId", itemId)).andExpect(status().isOk())
-                .andDo(print()).andReturn();
+        MvcResult mvcResult = mockMvc.perform(post("/item/delete").param("itemId", itemId))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andReturn();
+        logger.info(mvcResult.getResponse().getContentAsString());
+
     }
 
 }

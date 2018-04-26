@@ -2,6 +2,7 @@ package com.sust.controller;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 import com.sust.model.TItem;
 import com.sust.service.ItemService;
 import com.sust.utils.JsonUtils;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -33,14 +35,25 @@ public class ItemController {
     ItemService itemService;
 
     @RequestMapping("/itemOfEnterprise")
+    @ResponseBody
     public String list(@RequestParam(value = "enterpriseid",required = true) String enterpriseid, Model model)
     {
         List<TItem> Items = itemService.queryByPage(enterpriseid);
-        model.addAttribute("Items", Items);
+        /*model.addAttribute("Items", Items);
         model.addAttribute("enterpriseid", enterpriseid);
-        return "item";
-    }
+        return "item";*/
+        Map<String,Object> resMap = Maps.newHashMap();
+        resMap.put("enterpriseid", enterpriseid);
+        resMap.put("Items", Items);
+        return JsonUtils.objectToJson(Result.build(0,"",resMap));
+}
 
+    /**
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping("/modify")
     public String listdedail(@RequestParam(value = "id",required = true) String id, Model model)
     {
@@ -83,7 +96,12 @@ public class ItemController {
         }
     }
 
-    @RequestMapping("/delete")
+    /**
+     * 根据Id删除item
+     * @param itemId
+     * @return
+     */
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
     @ResponseBody
     public String deleteItem(@RequestParam(value = "itemId",required = false)String itemId){
 
