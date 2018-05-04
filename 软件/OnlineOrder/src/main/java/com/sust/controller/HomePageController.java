@@ -1,16 +1,22 @@
 package com.sust.controller;
 
+import com.sust.model.TItem;
 import com.sust.model.TUser;
+import com.sust.service.ItemService;
 import com.sust.service.UserService;
 import com.sust.utils.CookieUtils;
+import com.sust.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 2018/4/26
@@ -20,9 +26,23 @@ public class HomePageController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private ItemService itemService;
 
     @RequestMapping(value = "/home",method = RequestMethod.GET)
-    public String toIndex(){
+    public String toIndex(@RequestParam(value = "curpage", required = false) Integer curpage,Model model){
+        //分页数据
+        Page page = new Page();
+        int curpagetmp = 1;
+        if(curpage == null) {
+            curpagetmp = 1;
+        }else {
+            curpagetmp = curpage;
+        }
+
+        List<TItem>  items =itemService.queryAllByPage(curpagetmp, page.getPageNumber());
+        model.addAttribute("items",items);
+
         return "index";
     }
 

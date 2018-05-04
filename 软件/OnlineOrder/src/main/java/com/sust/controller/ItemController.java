@@ -1,6 +1,5 @@
 package com.sust.controller;
 
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.sust.model.TItem;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 /**
  * 对菜品的管理
@@ -57,7 +55,7 @@ public class ItemController {
     @RequestMapping("/modify")
     public String listdedail(@RequestParam(value = "id",required = true) String id, Model model)
     {
-        TItem item = itemService.queryByid(id);
+        TItem item = itemService.queryByitemId(id);
         model.addAttribute("item", item);
         return "itemDetail";
 }

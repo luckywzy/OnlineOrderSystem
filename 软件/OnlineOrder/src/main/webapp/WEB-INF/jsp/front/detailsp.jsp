@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +10,7 @@
     <script type="text/javascript" src="/js/front/public.js"></script>
     <script type="text/javascript" src="/js/front/jquery.js"></script>
     <script type="text/javascript" src="/js/front/jqpublic.js"></script>
+    <script type="text/javascript" src="/js/front/detailsp.js"></script>
     <script>
         $(function () {
             $('.title-list li').click(function () {
@@ -33,7 +36,7 @@
     <section class="Topmenubg">
         <div class="Topnav">
             <div class="LeftNav">
-                <a href="register.html">注册</a>/<a href="login.html">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a
+                <a href="register.jsp">注册</a>/<a href="login.jsp">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a
                     href="#">手机客户端</a>
             </div>
             <div class="RightNav">
@@ -45,7 +48,7 @@
     </section>
     <div class="Logo_search">
         <div class="Logo">
-            <img src="images/logo.jpg" title="DeathGhost" alt="模板">
+            <img src="images/logo.jpg" title="不错哦" alt="logo">
             <i></i>
             <span>西安市 [ <a href="#">莲湖区</a> ]</span>
         </div>
@@ -69,10 +72,10 @@
     </div>
     <nav class="menu_bg">
         <ul class="menu">
-            <li><a href="index.html">首页</a></li>
-            <li><a href="list.html">订餐</a></li>
-            <li><a href="category.html">积分商城</a></li>
-            <li><a href="article_read.html">关于我们</a></li>
+            <li><a href="index.jsp">首页</a></li>
+            <li><a href="list.jsp">订餐</a></li>
+            <li><a href="category.jsp">积分商城</a></li>
+            <li><a href="article_read.jsp">关于我们</a></li>
         </ul>
     </nav>
 </header>
@@ -80,19 +83,20 @@
 <section class="slp">
     <section class="food-hd">
         <div class="foodpic">
-            <img src="upload/02.jpg" id="showimg">
+            <img src="${item.itemPic}" id="showimg">
             <ul class="smallpic">
-                <li><img src="upload/02.jpg" onmouseover="show(this)" onmouseout="hide()"></li>
+                <li><img src="${item.itemPic}" onmouseover="show(this)" onmouseout="hide()"></li>
             </ul>
         </div>
         <div class="foodtext">
             <div class="foodname_a">
-                <h1>酸辣土豆丝</h1>
+                <h1>${item.itemName}</h1>
+                <%--TODO:需要加上餐厅的地址--%>
                 <p>西安市丈八路220号</p>
             </div>
             <div class="price_a">
-                <p class="price01">促销：￥<span>59.00</span></p>
-                <p class="price02">价格：￥<s>69.00</s></p>
+                <p class="price01">促销：￥<span>${item.itemPrice}</span></p>
+                <p class="price02">价格：￥<s>${item.itemPrice}</s></p>
             </div>
             <div class="Freight">
                 <span>配送费用：</span>
@@ -113,26 +117,28 @@
                     <p>送幸福积分</p>
                 </li>
             </ul>
-            <form action="/user/tocart">
+            <form id="addCartForm">
                 <div class="BuyNo">
                     <span>我要买：<input type="number" name="Number" required autofocus min="1" value="1"/>份</span>
                     <span>库存：3258</span>
                     <div class="Buybutton">
-                        <input name="" type="submit" value="加入购物车" class="BuyB">
+                        <input id="addTOCart" type="button" onclick="addItemToCart()" value="加入购物车" class="BuyB" >
                         <a href="shop.html"><span class="Backhome">进入店铺首页</span></a>
                     </div>
+                    <input type="text" name="itemId" hidden value="${item.itemId}"/>
                 </div>
+            </form>
         </div>
         <div class="viewhistory">
             <span class="VHtitle">看了又看</span>
             <ul class="Fsulist">
                 <li>
-                    <a href="detailsp.html" target="_blank" title="酱爆茄子"><img src="upload/03.jpg"></a>
+                    <a href="detailsp.jsp" target="_blank" title="酱爆茄子"><img src="upload/03.jpg"></a>
                     <p>酱爆茄子</p>
                     <p>￥12.80</p>
                 </li>
                 <li>
-                    <a href="detailsp.html" target="_blank" title="酱爆茄子"><img src="upload/02.jpg"></a>
+                    <a href="detailsp.jsp" target="_blank" title="酱爆茄子"><img src="upload/02.jpg"></a>
                     <p>酱爆茄子</p>
                     <p>￥12.80</p>
                 </li>
@@ -155,13 +161,8 @@
                     <!--case1-->
                     <div class="menutab show">
                         <div class="cont_padding">
-                            <img src="upload/tds.jpg">
-                            <p>测试信息，可删除！</p>
-                            <p>1. 将土豆洗净刮皮。</p>
-                            <p>2. 先将土豆切成整齐的大薄片这样是切出均匀的丝的要点。</p>
-                            <p>3. 将土豆片切成细丝。</p>
-                            <p>4. 用清水将切好的土豆丝泡去淀粉，（这样炒出的土豆丝清爽不粘）</p>
-                            <p>5. 将葱切末、辣椒剪成小段、蒜切末、红椒切丝、姜切末。</p>
+                           <%-- <img src="upload/tds.jpg">--%>
+                          ${item.itemDesc}
                         </div>
                     </div>
                     <!--case2-->
@@ -219,6 +220,8 @@
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
         </article>
         <!--ad&other infor-->
         <aside>
@@ -229,11 +232,7 @@
 </section>
 <!--End content-->
 <div class="F-link">
-    <span>友情链接：</span>
-    <a href="http://www.deathghost.cn" target="_blank" title="DeathGhost">DeathGhost</a>
-    <a href="http://www.17sucai.com/pins/15966.html" target="_blank" title="免费后台管理模板">绿色清爽版通用型后台管理模板免费下载</a>
-    <a href="http://www.17sucai.com/pins/17567.html" target="_blank" title="果蔬菜类模板源码">HTML5果蔬菜类模板源码</a>
-    <a href="http://www.17sucai.com/pins/14931.html" target="_blank" title="黑色的cms商城网站后台管理模板">黑色的cms商城网站后台管理模板</a>
+
 </div>
 <footer>
     <section class="Otherlink">
@@ -259,34 +258,33 @@
             <div>
                 <span><i class="i1"></i>配送支付</span>
                 <ul>
-                    <li><a href="article_read.html" target="_blank" title="标题">支付方式</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">支付方式</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">配送方式</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">配送效率</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">服务费用</a></li>
                 </ul>
             </div>
             <div>
                 <span><i class="i2"></i>关于我们</span>
                 <ul>
-                    <li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">招贤纳士</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">网站介绍</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">配送效率</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">商家加盟</a></li>
                 </ul>
             </div>
             <div>
                 <span><i class="i3"></i>帮助中心</span>
                 <ul>
-                    <li><a href="article_read.html" target="_blank" title="标题">服务内容</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">服务介绍</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">常见问题</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">网站地图</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">服务内容</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">服务介绍</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">常见问题</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">网站地图</a></li>
                 </ul>
             </div>
         </section>
     </section>
-    <div class="copyright">© 版权所有 2016 DeathGhost 技术支持：<a href="http://www.deathghost.cn"
-                                                          title="DeathGhost">DeathGhost</a></div>
+    <div class="copyright">© 版权所有 2018 SUST 技术支持：<a href="http://www.sust.edu.cn" title="SUST">SUST</a></div>
 </footer>
 </body>
 </html>

@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,19 +17,19 @@
     <section class="Topmenubg">
         <div class="Topnav">
             <div class="LeftNav">
-                <a href="register.html">注册</a>/<a href="login.html">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a
+                <a href="register.jsp">注册</a>/<a href="login.jsp">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a
                     href="#">手机客户端</a>
             </div>
             <div class="RightNav">
                 <a href="user_center.html">用户中心</a> <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a>
-                <a href="cart.html">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a
+                <a href="cart.jsp">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a
                     href="#">商家入驻</a>
             </div>
         </div>
     </section>
     <div class="Logo_search">
         <div class="Logo">
-            <img src="/images/logo.jpg" title="DeathGhost" alt="模板">
+            <img src="images/logo.jpg" title="不错哦" alt="logo">
             <i></i>
             <span>西安市 [ <a href="#">莲湖区</a> ]</span>
         </div>
@@ -51,10 +53,10 @@
     </div>
     <nav class="menu_bg">
         <ul class="menu">
-            <li><a href="index.html">首页</a></li>
-            <li><a href="list.html">订餐</a></li>
-            <li><a href="category.html">积分商城</a></li>
-            <li><a href="article_read.html">关于我们</a></li>
+            <li><a href="index.jsp">首页</a></li>
+            <li><a href="list.jsp">订餐</a></li>
+            <li><a href="category.jsp">积分商城</a></li>
+            <li><a href="article_read.jsp">关于我们</a></li>
         </ul>
     </nav>
 </header>
@@ -72,35 +74,38 @@
                 <td class="tb1_td7">操作</td>
             </tr>
         </table>
-        <table cellpadding="0" cellspacing="0" class="gwc_tb2" id="table1">
-            <tr>
-                <td colspan="7" class="shopname Font14 FontW">店铺：好味来快餐店</td>
-            </tr>
-            <tr>
-                <td class="tb2_td1"><input type="checkbox" value="1" name="newslist" id="newslist-1"/></td>
-                <td class="tb2_td2"><a href="detailsp.html" target="_blank"><img src="/upload/01.jpg"/></a></td>
-                <td class="tb2_td3"><a href="detailsp.html" target="_blank">酸辣土豆丝</a></td>
-                <td class="tb1_td4"><s>￥59.00</s></td>
-                <td class="tb1_td5"><input id="min1" name="" style="width:30px; height:30px;border:1px solid #ccc;"
-                                           type="button" value="-"/>
-                    <input id="text_box1" name="" type="text" value="1"
-                           style=" width:40px;height:28px; text-align:center; border:1px solid #ccc;"/>
-                    <input id="add1" name="" style="width:30px; height:30px;border:1px solid #ccc;" type="button"
-                           value="+"/>
-                </td>
-                <td class="tb1_td6"><label id="total1" class="tot"
-                                           style="color:#ff5500;font-size:14px; font-weight:bold;"></label></td>
-                <td class="tb1_td7"><a href="#" id="delcart1">删除</a></td>
-            </tr>
-        </table>
-        <table cellpadding="0" cellspacing="0" class="gwc_tb2" id="table2">
+
+        <c:forEach items="${itemDetailDtos}" var="itemDetailDto" varStatus="status">
+            <table cellpadding="0" cellspacing="0" class="gwc_tb2" id="table1">
+                <tr>
+                    <td colspan="7" class="shopname Font14 FontW">${itemDetailDto.enterpriseCompanyName}</td>
+                </tr>
+                <tr>
+                    <td class="tb2_td1"><input type="checkbox" value="1" name="newslist" id="newslist-1"/></td>
+                    <td class="tb2_td2"><a href="detailsp.jsp" target="_blank"><img src="${itemDetailDto.itemPic}"/></a></td>
+                    <td class="tb2_td3"><a href="detailsp.jsp" target="_blank">${itemDetailDto.itemName}</a></td>
+                    <td class="tb1_td4"><s>￥${itemDetailDto.itemPrice}</s></td>
+                    <td class="tb1_td5"><input id="min1" name="" style="width:30px; height:30px;border:1px solid #ccc;"
+                                               type="button" value="-"/>
+                        <input id="text_box1" name="" type="text" value="${itemDetailDto.cnt}"
+                               style=" width:40px;height:28px; text-align:center; border:1px solid #ccc;"/>
+                        <input id="add1" name="" style="width:30px; height:30px;border:1px solid #ccc;" type="button"
+                               value="+"/>
+                    </td>
+                    <td class="tb1_td6"><label id="total1" class="tot"
+                                               style="color:#ff5500;font-size:14px; font-weight:bold;">${itemDetailDto.itemPrice}</label></td>
+                    <td class="tb1_td7"><a href="#" id="delcart1">删除</a></td>
+                </tr>
+            </table>
+        </c:forEach>
+        <%--<table cellpadding="0" cellspacing="0" class="gwc_tb2" id="table2">
             <tr>
                 <td colspan="7" class="shopname Font14 FontW">店铺：肯德基</td>
             </tr>
             <tr>
                 <td class="tb2_td1"><input type="checkbox" value="1" name="newslist" id="newslist-2"/></td>
-                <td class="tb2_td2"><a href="detailsp.html" target="_blank"><img src="/upload/02.jpg"/></a></td>
-                <td class="tb2_td3"><a href="detailsp.html" target="_blank">酸辣土豆丝</a></td>
+                <td class="tb2_td2"><a href="detailsp.jsp" target="_blank"><img src="/upload/02.jpg"/></a></td>
+                <td class="tb2_td3"><a href="detailsp.jsp" target="_blank">酸辣土豆丝</a></td>
                 <td class="tb1_td4"><s>￥59.00</s></td>
                 <td class="tb1_td5"><input id="min2" name="" style=" width:30px; height:30px;border:1px solid #ccc;"
                                            type="button" value="-"/>
@@ -113,7 +118,7 @@
                                            style="color:#ff5500;font-size:14px; font-weight:bold;"></label></td>
                 <td class="tb1_td7"><a href="#" id="delcart2">删除</a></td>
             </tr>
-        </table>
+        </table>--%>
         <table cellpadding="0" cellspacing="0" class="gwc_tb3">
             <tr>
                 <td class="tb1_td1"><input id="checkAll" class="allselect" type="checkbox"/></td>
@@ -129,8 +134,8 @@
                     件
                 </td>
                 <td class="tb3_td3">合计(不含运费):<span>￥</span><span style=" color:#ff5500;">
-        <label id="zong1" style="color:#ff5500;font-size:14px; font-weight:bold;">0.00</label>
-        </span></td>
+    <label id="zong1" style="color:#ff5500;font-size:14px; font-weight:bold;">0.00</label>
+    </span></td>
                 <td class="tb3_td4"><span id="jz1">结算</span><a href="/user/toconfirm_order" style=" display:none;"
                                                                class="jz2" id="jz2">结算</a></td>
             </tr>
@@ -164,28 +169,28 @@
             <div>
                 <span><i class="i1"></i>配送支付</span>
                 <ul>
-                    <li><a href="article_read.html" target="_blank" title="标题">支付方式</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">支付方式</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">配送方式</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">配送效率</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">服务费用</a></li>
                 </ul>
             </div>
             <div>
                 <span><i class="i2"></i>关于我们</span>
                 <ul>
-                    <li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">招贤纳士</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">网站介绍</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">配送效率</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">商家加盟</a></li>
                 </ul>
             </div>
             <div>
                 <span><i class="i3"></i>帮助中心</span>
                 <ul>
-                    <li><a href="article_read.html" target="_blank" title="标题">服务内容</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">服务介绍</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">常见问题</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">网站地图</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">服务内容</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">服务介绍</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">常见问题</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">网站地图</a></li>
                 </ul>
             </div>
         </section>

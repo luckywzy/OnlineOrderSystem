@@ -15,10 +15,10 @@ public interface ItemService {
 
     /**
      * 根据 item  Id  查询
-     * @param id
+     * @param itemIid
      * @return
      */
-    TItem queryByid(String id);
+    TItem queryByitemId(String itemIid);
 
     /**
      * 增加菜品
@@ -33,4 +33,13 @@ public interface ItemService {
      * @return
      */
     boolean deleteItemById(String itemId);
+
+    List<TItem> queryAllByPage(int curpagetmp, int pageNumber);
+
+    /**
+     * 根据itemIdList 批量查询
+     * @param itemIdList
+     * @return
+     */
+    List<TItem> BatchQueryByitemId(List<String> itemIdList);
 }

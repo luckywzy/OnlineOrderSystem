@@ -1,5 +1,6 @@
 package com.sust.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.sust.dao.TItemMapper;
 import com.sust.model.TItem;
 import com.sust.model.TItemExample;
@@ -26,10 +27,10 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public TItem queryByid(String id) {
+    public TItem queryByitemId(String itemId) {
         TItemExample tItemExample = new TItemExample();
         TItemExample.Criteria criteria = tItemExample.createCriteria();
-        criteria.andItemIdEqualTo(id);
+        criteria.andItemIdEqualTo(itemId);
         return itemDao.selectByExample(tItemExample).get(0);
     }
 
@@ -44,6 +45,28 @@ public class ItemServiceImpl implements ItemService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<TItem> queryAllByPage(int curpagetmp, int pageNumber) {
+        //分页处理
+        PageHelper.startPage(curpagetmp, pageNumber);
+
+        TItemExample example = new TItemExample();
+        TItemExample.Criteria criteria = example.createCriteria();
+        criteria.andIdIsNotNull();
+        List<TItem> tItems = itemDao.selectByExample(example);
+        return tItems;
+    }
+
+    @Override
+    public List<TItem> BatchQueryByitemId(List<String> itemIdList) {
+        TItemExample example = new TItemExample();
+        TItemExample.Criteria criteria = example.createCriteria();
+        criteria.andItemIdIn(itemIdList);
+
+        List<TItem> tItems = itemDao.selectByExample(example);
+        return tItems;
     }
 
     /**

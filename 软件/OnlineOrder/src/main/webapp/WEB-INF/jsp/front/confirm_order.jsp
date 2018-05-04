@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +16,12 @@
     <section class="Topmenubg">
         <div class="Topnav">
             <div class="LeftNav">
-                <a href="register.html">注册</a>/<a href="login.html">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a
+                <a href="register.jsp">注册</a>/<a href="login.jsp">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a
                     href="#">手机客户端</a>
             </div>
             <div class="RightNav">
                 <a href="user_center.html">用户中心</a> <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a>
-                <a href="cart.html">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a
+                <a href="cart.jsp">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a
                     href="#">商家入驻</a>
             </div>
         </div>
@@ -50,10 +52,10 @@
     </div>
     <nav class="menu_bg">
         <ul class="menu">
-            <li><a href="index.html">首页</a></li>
-            <li><a href="list.html">订餐</a></li>
-            <li><a href="category.html">积分商城</a></li>
-            <li><a href="article_read.html">关于我们</a></li>
+            <li><a href="index.jsp">首页</a></li>
+            <li><a href="list.jsp">订餐</a></li>
+            <li><a href="category.jsp">积分商城</a></li>
+            <li><a href="article_read.jsp">关于我们</a></li>
         </ul>
     </nav>
 </header>
@@ -238,28 +240,28 @@
             <div>
                 <span><i class="i1"></i>配送支付</span>
                 <ul>
-                    <li><a href="article_read.html" target="_blank" title="标题">支付方式</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">支付方式</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">配送方式</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">配送效率</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">服务费用</a></li>
                 </ul>
             </div>
             <div>
                 <span><i class="i2"></i>关于我们</span>
                 <ul>
-                    <li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">招贤纳士</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">网站介绍</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">配送效率</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">商家加盟</a></li>
                 </ul>
             </div>
             <div>
                 <span><i class="i3"></i>帮助中心</span>
                 <ul>
-                    <li><a href="article_read.html" target="_blank" title="标题">服务内容</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">服务介绍</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">常见问题</a></li>
-                    <li><a href="article_read.html" target="_blank" title="标题">网站地图</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">服务内容</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">服务介绍</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">常见问题</a></li>
+                    <li><a href="article_read.jsp" target="_blank" title="标题">网站地图</a></li>
                 </ul>
             </div>
         </section>
