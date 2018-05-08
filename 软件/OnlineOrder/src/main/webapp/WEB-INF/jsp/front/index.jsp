@@ -22,7 +22,7 @@
     <section class="Topmenubg">
         <div class="Topnav">
             <div class="LeftNav">
-                <a href="/register">注册</a>/<a href="/login">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
+                <a href="/register.html">注册</a>/<a href="/login.html">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
             </div>
             <div class="RightNav">
                 <a href="/user/user_center">用户中心</a> <a href="/user/user_orderlist" target="_blank"
@@ -33,8 +33,8 @@
     </section>
     <div class="Logo_search">
         <div class="Logo">
-            <!--TODO：需要更换这个logo-->
-            <img src="images/logo.jpg" title="不错哦" alt="logo">
+
+            <img src="/images/logo.jpg" title="不错哦" alt="logo">
             <i></i>
             <span>西安市 [ <a href="#">莲湖区</a> ]</span>
         </div>

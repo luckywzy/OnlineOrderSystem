@@ -46,12 +46,12 @@ public class HomePageController {
         return "index";
     }
 
-    @RequestMapping(value = "/register",method = RequestMethod.GET)
+    @RequestMapping(value = "/register.html",method = RequestMethod.GET)
     public String toRegister(){
         return "register";
     }
     //跳转登录页面
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    @RequestMapping(value = "/login.html",method = RequestMethod.GET)
     public String toLogin(){
         return "login";
     }

@@ -25,23 +25,23 @@
     </bean>
 
     <!-- 配置包扫描器 -->
-    <context:component-scan base-package="com.sust.controller" />
+    <context:component-scan base-package="com.sust.controller"/>
     <!-- 配置注解驱动 -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
     <!-- 配置视图解析器 -->
     <bean
-        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/back/" />
-        <property name="suffix" value=".jsp" />
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/back/"/>
+        <property name="suffix" value=".jsp"/>
         <!-- 定义模板顺序 -->
         <property name="order" value="2"></property>
     </bean>
 
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/front/" />
-        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/WEB-INF/jsp/front/"/>
+        <property name="suffix" value=".jsp"/>
         <!-- 定义模板顺序 -->
         <property name="order" value="1"></property>
     </bean>
@@ -49,4 +49,24 @@
                     包括静态资源例如css、js等。所以需要在springmvc.xml中添加资源映射标签： -->
     <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
     <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
+
+    <!--配置拦截器，未登录的用户限制访问-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/home/**"/>
+            <mvc:exclude-mapping path="/login**"/>
+            <mvc:exclude-mapping path="/userlogin"/>
+            <mvc:exclude-mapping path="/register**"/>
+            <mvc:exclude-mapping path="/**/*.css"/>
+            <mvc:exclude-mapping path="/**/*.js"/>
+            <mvc:exclude-mapping path="/**/*.png"/>
+            <mvc:exclude-mapping path="/**/*.gif"/>
+            <mvc:exclude-mapping path="/**/*.jpg"/>
+            <mvc:exclude-mapping path="/**/*.jpeg"/>
+            <bean class="com.sust.handler.AuthorityHandlerInterruptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
 </beans>

@@ -7,6 +7,7 @@
     <title>确认订单</title>
     <meta name="author" content="zongyu.wang"/>
     <link href="/css/front/style.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/js/front/order.js"></script>
     <script type="text/javascript" src="/js/front/public.js"></script>
     <script type="text/javascript" src="/js/front/jquery.js"></script>
     <script type="text/javascript" src="/js/front/jqpublic.js"></script>
@@ -87,7 +88,7 @@
         <!--已保存的地址列表-->
         <form action="#">
             <ul class="address">
-                <li id="style1"><input type="radio" value="" id="1" name="rdColor" onclick="changeColor(1)"/><label
+                <li id="style1"><input  type="radio" value="" id="1" name="rdColor" onclick="changeColor(1)"/><label
                         for="1"> 浙江省 杭州市 余杭区 航海路1588号（孙先生收）<span class="fontcolor">183092***73</span></label></li>
                 <li id="style2"><input type="radio" value="" id="2" name="rdColor" onclick="changeColor(2)"/><label
                         for="2"> 陕西省 西安市 雁塔区 丈八路22号（孙先生收）<span class="fontcolor">183092***73</span></label></li>
@@ -97,38 +98,40 @@
             </ul>
         </form>
         <!--add new address-->
-        <form action="#">
+        <form id="address_form" action="/user/add_address" method="post">
             <div id="light" class="O-L-content">
                 <ul>
                     <li><span><label for="">选择所在地：</label></span>
-                        <p><em>*</em><select name="">
+                        <p><em>*</em><select name="province">
                             <option>陕西省</option>
-                        </select> <select name="">
+                        </select> <select name="city">
                             <option>西安市</option>
-                        </select> <select name="">
+                        </select> <select name="district">
                             <option>雁塔区</option>
                         </select></p>
                     </li>
                     <li><span><label for="">邮政编码：</label></span>
-                        <p><em>*</em><input name="" type="text" class="Y_N" pattern="[0-9]{6}" required></p></li>
+                        <p><em>*</em><input name="postCode" type="text" class="Y_N" pattern="[0-9]{6}" required></p>
+                    </li>
                     <li><span><label for="">街道地址：</label></span>
-                        <p><em>*</em><textarea name="" cols="80" rows="5"></textarea></p></li>
+                        <p><em>*</em><textarea name="detailAddr" cols="80" rows="5"></textarea></p></li>
                     <li><span><label for="">收件人姓名：</label></span>
-                        <p><em>*</em><input name="" type="text"></p></li>
+                        <p><em>*</em><input name="consignee" type="text"></p></li>
                     <li><span><label for="">手机号码：</label></span>
-                        <p><em>*</em><input name="" type="text" pattern="[0-9]{11}" required></p></li>
-                    <div class="button-a"><input type="button" value="确 定" class="C-button"/><a
-                            href="javascript:void(0)"
-                            onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span><input
-                            name="" type="button" value="取 消" class="Cancel-b"/></a></div>
+                        <p><em>*</em><input name="phoneNum" type="text" pattern="[0-9]{11}" required></p></li>
+
+                    <div class="button-a"><input id="new_address" type="submit" value="确 定" class="C-button" />
+                        <a href="javascript:void(0)"
+                           onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
+                            <span><input name="" type="button" value="取 消" class="Cancel-b"/></span>
+                        </a>
+                    </div>
                     <div class="close-botton"><a href="javascript:void(0)"
                                                  onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"></a>
                     </div>
                 </ul>
             </div>
             <div id="fade" class="overlay"></div>
-
-
             <!--End add new address-->
         </form>
     </div>
@@ -154,26 +157,23 @@
             </ul>
         </form>
     </div>
-    <form action="#">
+    <form action="/user/order/create_order" id="order_form" method="post">
         <div class="inforlist">
             <span class="flow_title">商品清单</span>
+            <%--显示订单商品列表--%>
             <table>
                 <th>名称</th>
                 <th>数量</th>
                 <th>价格</th>
                 <th>小计</th>
-                <tr>
-                    <td>酸辣土豆丝</td>
-                    <td>2</td>
-                    <td>￥59</td>
-                    <td>￥118</td>
-                </tr>
-                <tr>
-                    <td>鱼香肉丝</td>
-                    <td>1</td>
-                    <td>￥59</td>
-                    <td>￥59</td>
-                </tr>
+                <c:forEach items="${itemDetailDtos}" var="itemDetailDto">
+                    <tr>
+                        <td>${itemDetailDto.itemName}</td>
+                        <td>${itemDetailDto.cnt}</td>
+                        <td>￥${itemDetailDto.itemPrice}</td>
+                        <td>￥${itemDetailDto.itemPrice * itemDetailDto.cnt}</td>
+                    </tr>
+                </c:forEach>
             </table>
             <div class="Order_M">
                 <p><em>订单附言:</em><input name="" type="text"></p>
@@ -184,23 +184,24 @@
                 </p>
             </div>
             <div class="Sum_infor">
-                <p class="p1">配送费用：￥0.00+商品费用：￥177.00-优惠券：￥10.00</p>
-                <p class="p2">合计：<span>￥167.00</span></p>
-                <input type="submit" value="提交订单"  class="p3button">
+                <p class="p1">配送费用：￥0.00+商品费用：￥${total}-优惠券：￥00.00</p>
+                <p class="p2">合计：<span>￥${total}</span></p>
+                <input type="button" id="order_submit" value="提交订单" class="p3button" onclick="odr_sub()">
             </div>
         </div>
+        <input type="hidden" id="addressid" value="">
     </form>
     </div>
 </section>
 <script>
     //Test code,You can delete this script /2014-9-21DeathGhost/
-    $(document).ready(function () {
+    /*$(document).ready(function () {
         var submitorder = $.noConflict();
         submitorder(".p3button").click(function () {
             submitorder("#Cflow").hide();
             submitorder("#Aflow").show();
         });
-    });
+    });*/
 </script>
 <section class="Psection MT20 Textcenter" style="display:none;" id="Aflow">
     <!-- 订单提交成功后则显示如下 -->

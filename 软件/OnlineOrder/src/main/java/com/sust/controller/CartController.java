@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @RequestMapping("/user")
@@ -50,37 +52,6 @@ public class CartController {
 
         addItemToCart(itemId, Number, request, response);
 
-        //String cookieVal = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
-        /*List<ItemDetailDto> itemDetailDtos = new ArrayList<>();
-
-        if(cookieVal == null){
-            TItem tItem = itemService.queryByitemId(itemId);
-            TEnterpriseInfo tEnterpriseInfo = enterpriseInfoService.queryById(tItem.getEnterpriseId());
-            ItemDetailDto itemDetailDto = new ItemDetailDto();
-            itemDetailDto.setItemDetailDto(tItem,tEnterpriseInfo);
-            // 数量设置
-            itemDetailDto.setCnt(Number);
-            itemDetailDtos.add(itemDetailDto);
-
-        }else {
-            Map<String, Integer> cart = JsonUtils.jsonToPojo(cookieVal, HashMap.class);
-            List<String> itemIdList = cart.keySet().stream().collect(Collectors.toList());
-            List<TItem> itemList = itemService.BatchQueryByitemId(itemIdList);
-
-            for (TItem item : itemList) {
-                // 属性设置
-                ItemDetailDto itemDetailDto = new ItemDetailDto();
-                TEnterpriseInfo tEnterpriseInfo = enterpriseInfoService.queryById(item.getEnterpriseId());
-                itemDetailDto.setItemDetailDto(item, tEnterpriseInfo);
-                // 数量设置
-                itemDetailDto.setCnt(cart.get(item.getItemId()));
-
-                itemDetailDtos.add(itemDetailDto);
-            }
-        }
-
-        model.addAttribute("itemDetailDtos", itemDetailDtos);*/
-
         return JsonUtils.objectToJson(Result.build(0, "添加成功"));
     }
 
@@ -89,32 +60,50 @@ public class CartController {
                          HttpServletResponse response,
                          Model model) {
         String cookieVal = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
-        List<ItemDetailDto> itemDetailDtos = new ArrayList<>();
+        List<ItemDetailDto> itemDetailDtos = null;
         if(cookieVal != null) {
-            Map<String, Integer> cart = JsonUtils.jsonToPojo(cookieVal, HashMap.class);
-            List<String> itemIdList = cart.keySet().stream().collect(Collectors.toList());
-            List<TItem> itemList = itemService.BatchQueryByitemId(itemIdList);
-
-            for (TItem item : itemList) {
-                // 属性设置
-                ItemDetailDto itemDetailDto = new ItemDetailDto();
-                TEnterpriseInfo tEnterpriseInfo = enterpriseInfoService.queryById(item.getEnterpriseId());
-                itemDetailDto.setItemDetailDto(item, tEnterpriseInfo);
-                // 数量设置
-                itemDetailDto.setCnt(cart.get(item.getItemId()));
-
-                itemDetailDtos.add(itemDetailDto);
-            }
+            itemDetailDtos = getItemFromCart(cookieVal);
         }
         model.addAttribute("itemDetailDtos", itemDetailDtos);
         return "cart";
     }
 
-    @RequestMapping("/toconfirm_order")
+    @RequestMapping(value = "/toconfirm_order",method = RequestMethod.GET)
     public String toconfirm_order() {
-        return "confirm_order";
+
+      /*  String cookieValue = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
+        List<ItemDetailDto> itemDetailDtos = new ArrayList<>();
+        if(cookieValue != null) {
+            getItemFromCart(cookieValue,itemDetailDtos);
+        }
+        model.addAttribute("total", total);
+        model.addAttribute("itemDetailDtos", itemDetailDtos);*/
+
+        return "redirect:/user/confirm_order";
     }
 
+    @RequestMapping(value = "/confirm_order")
+    public String confirm_order(HttpServletRequest request,
+                                HttpServletResponse response,
+                                Model model) {
+
+        String cookieValue = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
+        List<ItemDetailDto> itemDetailDtos = null;
+        if(cookieValue != null) {
+            itemDetailDtos = getItemFromCart(cookieValue);
+        }
+        BigDecimal total = null;
+        //计算总价格
+        for (ItemDetailDto itemDetailDto : itemDetailDtos) {
+            double val = 0.0;
+            val += itemDetailDto.getItemPrice().doubleValue() * itemDetailDto.getCnt();
+            total = new BigDecimal(val);
+        }
+        model.addAttribute("total", total);
+        model.addAttribute("itemDetailDtos", itemDetailDtos);
+
+        return "confirm_order";
+    }
 
     private void addItemToCart(String itemId,
                                Integer cnt,
@@ -155,5 +144,29 @@ public class CartController {
             return;
         }
         cart.put(itemId, cnt);
+    }
+
+    /**
+     * 从cookie中得到商品数据
+     * @param cookieVal
+     */
+    public List<ItemDetailDto> getItemFromCart(String cookieVal){
+        List<ItemDetailDto> itemDetailDtos = new ArrayList<>();
+        Map<String, Integer> cart = JsonUtils.jsonToPojo(cookieVal, HashMap.class);
+        List<String> itemIdList = cart.keySet().stream().collect(Collectors.toList());
+        List<TItem> itemList = itemService.BatchQueryByitemId(itemIdList);
+
+        for (TItem item : itemList) {
+            // 属性设置
+            ItemDetailDto itemDetailDto = new ItemDetailDto();
+            TEnterpriseInfo tEnterpriseInfo = enterpriseInfoService.queryById(item.getEnterpriseId());
+            itemDetailDto.setItemDetailDto(item, tEnterpriseInfo);
+            // 数量设置
+            itemDetailDto.setCnt(cart.get(item.getItemId()));
+
+            itemDetailDtos.add(itemDetailDto);
+        }
+
+        return itemDetailDtos;
     }
 }

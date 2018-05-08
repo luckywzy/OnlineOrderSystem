@@ -29,7 +29,7 @@
     </section>
     <div class="Logo_search">
         <div class="Logo">
-            <img src="images/logo.jpg" title="不错哦" alt="logo">
+            <img src="/images/logo.jpg" title="不错哦" alt="logo">
             <i></i>
             <span>西安市 [ <a href="#">莲湖区</a> ]</span>
         </div>
@@ -81,8 +81,9 @@
                     <td colspan="7" class="shopname Font14 FontW">${itemDetailDto.enterpriseCompanyName}</td>
                 </tr>
                 <tr>
-                    <td class="tb2_td1"><input type="checkbox" value="1" name="newslist" id="newslist-1"/></td>
-                    <td class="tb2_td2"><a href="detailsp.jsp" target="_blank"><img src="${itemDetailDto.itemPic}"/></a></td>
+                    <td class="tb2_td1"><input type="checkbox" value="${itemDetailDto.itemPrice}" name="newslist" id="newslist-1"/></td>
+                    <td class="tb2_td2"><a href="detailsp.jsp" target="_blank"><img src="${itemDetailDto.itemPic}"/></a>
+                    </td>
                     <td class="tb2_td3"><a href="detailsp.jsp" target="_blank">${itemDetailDto.itemName}</a></td>
                     <td class="tb1_td4"><s>￥${itemDetailDto.itemPrice}</s></td>
                     <td class="tb1_td5"><input id="min1" name="" style="width:30px; height:30px;border:1px solid #ccc;"
@@ -93,32 +94,13 @@
                                value="+"/>
                     </td>
                     <td class="tb1_td6"><label id="total1" class="tot"
-                                               style="color:#ff5500;font-size:14px; font-weight:bold;">${itemDetailDto.itemPrice}</label></td>
+                                               style="color:#ff5500;font-size:14px; font-weight:bold;">${itemDetailDto.itemPrice}</label>
+                    </td>
                     <td class="tb1_td7"><a href="#" id="delcart1">删除</a></td>
                 </tr>
             </table>
         </c:forEach>
-        <%--<table cellpadding="0" cellspacing="0" class="gwc_tb2" id="table2">
-            <tr>
-                <td colspan="7" class="shopname Font14 FontW">店铺：肯德基</td>
-            </tr>
-            <tr>
-                <td class="tb2_td1"><input type="checkbox" value="1" name="newslist" id="newslist-2"/></td>
-                <td class="tb2_td2"><a href="detailsp.jsp" target="_blank"><img src="/upload/02.jpg"/></a></td>
-                <td class="tb2_td3"><a href="detailsp.jsp" target="_blank">酸辣土豆丝</a></td>
-                <td class="tb1_td4"><s>￥59.00</s></td>
-                <td class="tb1_td5"><input id="min2" name="" style=" width:30px; height:30px;border:1px solid #ccc;"
-                                           type="button" value="-"/>
-                    <input id="text_box2" name="" type="text" value="1"
-                           style=" width:40px;height:28px; text-align:center; border:1px solid #ccc;"/>
-                    <input id="add2" name="" style=" width:30px; height:30px;border:1px solid #ccc;" type="button"
-                           value="+"/>
-                </td>
-                <td class="tb1_td6"><label id="total2" class="tot"
-                                           style="color:#ff5500;font-size:14px; font-weight:bold;"></label></td>
-                <td class="tb1_td7"><a href="#" id="delcart2">删除</a></td>
-            </tr>
-        </table>--%>
+
         <table cellpadding="0" cellspacing="0" class="gwc_tb3">
             <tr>
                 <td class="tb1_td1"><input id="checkAll" class="allselect" type="checkbox"/></td>
@@ -136,8 +118,8 @@
                 <td class="tb3_td3">合计(不含运费):<span>￥</span><span style=" color:#ff5500;">
     <label id="zong1" style="color:#ff5500;font-size:14px; font-weight:bold;">0.00</label>
     </span></td>
-                <td class="tb3_td4"><span id="jz1">结算</span><a href="/user/toconfirm_order" style=" display:none;"
-                                                               class="jz2" id="jz2">结算</a></td>
+                <td class="tb3_td4"><span id="jz1">结算</span><a  href="/user/toconfirm_order" style=" display:none;"
+                                                               class="jz2" id="jz2" >结算</a></td>
             </tr>
         </table>
     </div>

@@ -124,5 +124,23 @@ CREATE TABLE `t_user_and_order_relation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户与订单关系表';
 
 
-
+###################################################
+########### 用户地址表					###############
+###################################################
+DROP TABLE IF EXISTS `t_user_address`;
+CREATE TABLE `t_user_address` (
+	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+	`user_id` varchar(20)  NOT NULL DEFAULT '00000000000000000000' COMMENT "用户ID",
+	`province` VARCHAR(10) NOT NULL DEFAULT '' COMMENT 'XX省',
+	`city` VARCHAR(10) NOT NULL DEFAULT '' COMMENT 'XX市',
+	`district` VARCHAR(10) NOT NULL DEFAULT '' COMMENT 'XX区/县',
+	`post_code` VARCHAR(8) NOT NULL DEFAULT '' COMMENT '邮政编码',
+	`detail_addr` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '详细地址',
+	`consignee` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '收货人',
+	`phone_num` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '收货人手机号码',
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+	primary key(id),
+  FOREIGN KEY(user_id) REFERENCES `t_user`(user_id),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户地址表';
 

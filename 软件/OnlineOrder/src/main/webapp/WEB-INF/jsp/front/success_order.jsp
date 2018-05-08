@@ -1,17 +1,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>不错哦订餐-登录</title>
-    <meta name="author" content="DeathGhost"/>
-    <link href="${pageContext.request.contextPath}/css/front/style.css" rel="stylesheet" type="text/css"/>
+    <title>确认订单</title>
+    <meta name="author" content="zongyu.wang"/>
+    <link href="/css/front/style.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/js/front/order.js"></script>
     <script type="text/javascript" src="/js/front/public.js"></script>
     <script type="text/javascript" src="/js/front/jquery.js"></script>
     <script type="text/javascript" src="/js/front/jqpublic.js"></script>
-
 </head>
 <body>
 <header>
@@ -30,7 +29,7 @@
     </section>
     <div class="Logo_search">
         <div class="Logo">
-            <img src="images/logo.jpg" title="DeathGhost" alt="模板">
+            <img src="/images/logo.jpg" title="DeathGhost" alt="模板">
             <i></i>
             <span>西安市 [ <a href="#">莲湖区</a> ]</span>
         </div>
@@ -61,43 +60,28 @@
         </ul>
     </nav>
 </header>
-<!--Start content-->
-<section class="Psection MT20">
-    <form id="user_form" action="#">
-        <table class="login">
-            <tr>
-                <td width="40%" align="right" class="FontW">账号：</td>
-                <td><input type="text" id="username" name="username" required autofocus placeholder="账号/电子邮件/手机号码"></td>
-            </tr>
-            <tr>
-                <td width="40%" align="right" class="FontW">密码：</td>
-                <td><input type="password" id="password" name="password" required></td>
-            </tr>
-            <tr>
-                <td width="40%" align="right" class="FontW">验证码：</td>
-                <td><%--<input type="text" name="" required><img src="upload/captcha.png"
-                                                             style="margin-left:8px; vertical-align:bottom" width="83"
-                                                             height="36">--%></td>
-            </tr>
-            <tr>
-                <td width="40%" align="right"></td>
-                <td><input type="button" id="login_btn" value="登 录" class="Submit_b" onclick="login_f()">
-                    <a href="/register" class="Submit_b">注 册</a>
-                </td>
-            </tr>
-        </table>
-    </form>
+<section class="Psection MT20 Textcenter" style="display:none;" id="Aflow">
+    <!-- 订单提交成功后则显示如下 -->
+    <p class="Font14 Lineheight35 FontW">恭喜你！订单提交成功！</p>
+    <p class="Font14 Lineheight35 FontW">您的订单编号为：<span class="CorRed">201409205134</span></p>
+    <p class="Font14 Lineheight35 FontW">共计金额：<span class="CorRed">￥359</span></p>
+    <p>
+        <button type="button" class="Lineheight35"><a href="#" target="_blank" disabled="true">支付宝立即支付</a></button>
+        <button type="button" class="Lineheight35"><a href="#" target="_blank">线下支付</a></button>
+        <button type="button" class="Lineheight35"><a href="/user/user_center">进入用户中心</a></button>
+    </p>
 </section>
 <!--End content-->
 <div class="F-link">
+
 </div>
 <footer>
     <section class="Otherlink">
         <aside>
             <div class="ewm-left">
                 <p>手机扫描二维码：</p>
-                <img src="images/Android_ico_d.gif">
-                <img src="images/iphone_ico_d.gif">
+                <img src="/images/Android_ico_d.gif">
+                <img src="/images/iphone_ico_d.gif">
             </div>
             <div class="tips">
                 <p>客服热线</p>
