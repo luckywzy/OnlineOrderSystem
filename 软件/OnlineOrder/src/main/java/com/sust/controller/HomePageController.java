@@ -85,7 +85,7 @@ public class HomePageController {
 
 
     private boolean isLogin(HttpServletRequest request){
-        String userName = CookieUtils.getCookieValue(request, "userName");
+        String userName = CookieUtils.getCookieValue(request, "userId");
         if(userName != null && userName.length() > 0){
             return true;
         }

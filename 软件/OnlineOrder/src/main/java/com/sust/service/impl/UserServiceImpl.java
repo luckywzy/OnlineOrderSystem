@@ -1,11 +1,9 @@
 package com.sust.service.impl;
 
+import com.sust.dao.TOrderMapper;
 import com.sust.dao.TUserAddressMapper;
 import com.sust.dao.TUserMapper;
-import com.sust.model.TUser;
-import com.sust.model.TUserAddress;
-import com.sust.model.TUserAddressExample;
-import com.sust.model.TUserExample;
+import com.sust.model.*;
 import com.sust.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +18,9 @@ public class UserServiceImpl implements UserService {
     private TUserMapper userdao;
     @Resource
     private TUserAddressMapper addressdao;
+    @Resource
+    private TOrderMapper orderdao;
+
 
     @Override
     public boolean insertAddress(TUserAddress userAddress) {
@@ -39,14 +40,44 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String queryAddressById(Integer id, String userId) {
+    public List<TUserAddress> queryAddressByUserId(String userId) {
+        TUserAddressExample example = new TUserAddressExample();
+        TUserAddressExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(userId);
+        List<TUserAddress> userAddresses = addressdao.selectByExample(example);
+
+        return userAddresses;
+    }
+
+    @Override
+    public List<TOrder> queryOrderListByUserId(String userId) {
+        TOrderExample example = new TOrderExample();
+        TOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(userId);
+        List<TOrder> orderList = orderdao.selectByExample(example);
+        return orderList;
+    }
+
+    @Override
+    public TOrder queryOrderDetailByOrderId(String orderid) {
+
+        TOrderExample example = new TOrderExample();
+        TOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderIdEqualTo(orderid);
+        List<TOrder> orderList = orderdao.selectByExample(example);
+
+        return orderList.size() > 0 ? orderList.get(0) : null;
+    }
+
+    @Override
+    public TUserAddress queryAddressById(Integer id, String userId) {
 
         TUserAddressExample example = new TUserAddressExample();
         TUserAddressExample.Criteria criteria = example.createCriteria();
         criteria.andIdEqualTo(id).andUserIdEqualTo(userId);
-        addressdao.selectByExample(example);
+        List<TUserAddress> userAddresses = addressdao.selectByExample(example);
 
-        return null;
+        return userAddresses.size()>0 ? userAddresses.get(0): null;
     }
 
     @Override

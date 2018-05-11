@@ -1,16 +1,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>确认订单</title>
+    <title>用户中心</title>
     <meta name="author" content="zongyu.wang"/>
     <link href="/css/front/style.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="/js/front/order.js"></script>
     <script type="text/javascript" src="/js/front/public.js"></script>
     <script type="text/javascript" src="/js/front/jquery.js"></script>
     <script type="text/javascript" src="/js/front/jqpublic.js"></script>
+
 </head>
 <body>
 <header>
@@ -21,8 +23,8 @@
                     href="#">手机客户端</a>
             </div>
             <div class="RightNav">
-                <a href="user_center.jsp">用户中心</a> <a href="user_orderlist.jsp" target="_blank" title="我的订单">我的订单</a>
-                <a href="cart.jsp">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a
+                <a href="user_center.jsp">用户中心</a> <a href="user_orderlist.jsp" target="_blank" title="我的订单">我的订单</a> <a
+                    href="cart.jsp">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a
                     href="#">商家入驻</a>
             </div>
         </div>
@@ -60,20 +62,64 @@
         </ul>
     </nav>
 </header>
-<section class="Psection MT20 Textcenter" style="display:none;" id="Aflow">
-    <!-- 订单提交成功后则显示如下 -->
-    <p class="Font14 Lineheight35 FontW">恭喜你！订单提交成功！</p>
-    <p class="Font14 Lineheight35 FontW">您的订单编号为：<span class="CorRed">201409205134</span></p>
-    <p class="Font14 Lineheight35 FontW">共计金额：<span class="CorRed">￥359</span></p>
-    <p>
-        <button type="button" class="Lineheight35"><a href="#" target="_blank" disabled="true">支付宝立即支付</a></button>
-        <button type="button" class="Lineheight35"><a href="#" target="_blank">线下支付</a></button>
-        <button type="button" class="Lineheight35"><a href="/user/user_center">进入用户中心</a></button>
-    </p>
+<!--Start content-->
+<section class="Psection MT20">
+    <nav class="U-nav Font14 FontW">
+        <ul>
+            <li><i></i><a href="user_center.html">用户中心首页</a></li>
+            <li><i></i><a href="user_orderlist.html">我的订单</a></li>
+            <li><i></i><a href="user_address.html">收货地址</a></li>
+            <li><i></i><a href="user_message.html">我的留言</a></li>
+            <li><i></i><a href="user_coupon.html">我的优惠券</a></li>
+            <li><i></i><a href="user_favorites.html">我的收藏</a></li>
+            <li><i></i><a href="user_account.html">账户管理</a></li>
+            <li><i></i><a href="#">安全退出</a></li>
+        </ul>
+    </nav>
+    <article class="U-article Overflow">
+        <!--user order list-->
+        <section>
+            <table class="Myorder">
+                <th class="Font14 FontW">订单编号</th>
+                <th class="Font14 FontW">下单时间</th>
+                <th class="Font14 FontW">收件人</th>
+                <th class="Font14 FontW">订单总金额</th>
+                <th class="Font14 FontW">订单状态</th>
+                <th class="Font14 FontW">操作</th>
+
+                <%--<td class="FontW"><a href="user_orderdetail.html">201409225367</a></td>
+                <td>2014-09-22 19:21:38</td>
+                <td>DeathGhost</td>
+                <td>￥328.00</td>
+                <td>未付款,未发货</td>
+                <td><a href="#">取消订单</a> | <a href="#">付款</a></td>--%>
+                <c:forEach items="${userOrderDtoList}" var="order">
+                    <tr>
+                        <td class="FontW"><a href="user_orderdetail.html?orderid=${order.orderId}">${order.orderId}</a></td>
+                        <td>${order.createTime}</td>
+                        <td>${order.consignee}</td>
+                        <td>${order.orderPrice}</td>
+                        <td>${order.orderStatus}</td>
+                        <td><a href="#">取消订单</a> | <a href="#">付款</a></td>
+
+                    </tr>
+                </c:forEach>
+            </table>
+            <div class="TurnPage">
+                <a href="#">
+                    <span class="Prev"><i></i>首页</span>
+                </a>
+                <a href="#"><span class="PNumber">1</span></a>
+                <a href="#"><span class="PNumber">2</span></a>
+                <a href="#">
+                    <span class="Next">最后一页<i></i></span>
+                </a>
+            </div>
+        </section>
+    </article>
 </section>
 <!--End content-->
 <div class="F-link">
-
 </div>
 <footer>
     <section class="Otherlink">
@@ -125,7 +171,8 @@
             </div>
         </section>
     </section>
-    <div class="copyright">© 版权所有 2016 SUST 技术支持：<a href="http://www.sust.edu.cn" title="SUST">SUST</a></div>
+    <div class="copyright">© 版权所有 2016 DeathGhost 技术支持：<a href="http://www.deathghost.cn"
+                                                          title="DeathGhost">DeathGhost</a></div>
 </footer>
 </body>
 </html>

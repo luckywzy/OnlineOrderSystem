@@ -42,4 +42,6 @@ public interface ItemService {
      * @return
      */
     List<TItem> BatchQueryByitemId(List<String> itemIdList);
+
+    TItem queryById(Integer id);
 }

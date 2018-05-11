@@ -5,6 +5,7 @@ import com.sust.dto.ItemDetailDto;
 import com.sust.model.TEnterpriseInfo;
 import com.sust.model.TItem;
 import com.sust.model.TOrder;
+import com.sust.model.TUserAddress;
 import com.sust.process.CookieProcess;
 import com.sust.service.OrderService;
 import com.sust.service.UserService;
@@ -56,8 +57,8 @@ public class OrderController {
         order.setOrderId(IdUtils.getNextId());
         order.setOrderPrice(total);
         String userId = CookieUtils.getCookieValue(request, "userId");
-        String address = userService.queryAddressById(Integer.valueOf(addressid),userId);
-        order.setDispatchAddress(address);
+        TUserAddress address = userService.queryAddressById(Integer.valueOf(addressid),userId);
+        order.setDispatchAddress(address.getId());
         boolean ok = orderService.insertOrder(order);
 
         return "success_order";

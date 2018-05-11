@@ -16,8 +16,9 @@ CREATE TABLE `t_user`(
 	`password` varchar(32) NOT NULL DEFAULT '' COMMENT "密码",
 	`rank` tinyint NOT NULL DEFAULT 1 COMMENT "用户级别：1 游客， 2 普通用户， 3 高级用户， 4 特殊用户，5 管理员，6 超级管理员",
 	`age` tinyint unsigned NOT NULL DEFAULT 0 COMMENT "年龄",
-	`birth` date NOT NULL DEFAULT '1001:01:01' COMMENT "生日",
-	`use` tinyint NOT NULL DEFAULT 1 COMMENT "iscan use: 0 cannot use, 1 can use",
+  `email` varchar(30) NOT NULL DEFAULT '' COMMENT "邮箱",
+  `phone_num` varchar(20) NOT NULL DEFAULT '' COMMENT "电话",
+	`used` tinyint NOT NULL DEFAULT 1 COMMENT "iscan use: 0 cannot use, 1 can use",
 	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "create_time",
 	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "update_time",
 	primary key(id),
@@ -97,15 +98,17 @@ DROP TABLE IF EXISTS `t_order`;
 CREATE TABLE `t_order` (
 	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
 	`order_id` VARCHAR(16) NOT NULL DEFAULT '' COMMENT '订单号码',
-	`order_content` VARCHAR(100)  NOT NULL DEFAULT '' COMMENT '订单内容：填入的是商品Id,以逗号分隔',
+	`user_id` varchar(20) NOT NULL DEFAULT  '' COMMENT '用户ID',
+	`order_content` VARCHAR(500)  NOT NULL DEFAULT '' COMMENT '订单内容：填入的是商品Id,数量,以逗号分隔,每个商品之间以分号分隔',
 	`order_price` DECIMAL(5,2) NOT NULL DEFAULT 0.01 COMMENT '订单价格',
-	`dispatch_address` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '配送地址',
+	`dispatch_address` int unsigned NOT NULL DEFAULT 0 COMMENT '配送地址编号',
 	`expect_time` VARCHAR(20) NOT NULL DEFAULT '立即送达' COMMENT '期望送达时间',
 	`order_status` tinyint NOT NULL DEFAULT -1  COMMENT '订单状态：-1 默认，0 准备中，1 派送中，2 已完成',
 	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '订单创建时间',
 	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '订单修改时间',
 	primary key(id),
-	unique(order_id)
+	unique(order_id),
+	FOREIGN KEY(user_id) REFERENCES `t_user`(user_id),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
 
 ###################################################

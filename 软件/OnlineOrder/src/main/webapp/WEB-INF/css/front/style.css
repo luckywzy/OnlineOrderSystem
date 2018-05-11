@@ -39,6 +39,7 @@ code::selection {background:#dddddd;}
 .Overflow{overflow:hidden;}
 .BlueA{color:#3366cc}
  /*public form*/
+.input_pri{border:1px #dddddd solid;padding:5px;width:80px;}
 .input_name{border:1px #dddddd solid;padding:8px;width:120px;}
 .input_zipcode{border:1px #dddddd solid;padding:8px;width:120px;}
 .input_addr{border:1px #dddddd solid;width:500px;padding:8px;}

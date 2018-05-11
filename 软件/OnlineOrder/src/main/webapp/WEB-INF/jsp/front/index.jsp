@@ -25,7 +25,7 @@
                 <a href="/register.html">注册</a>/<a href="/login.html">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
             </div>
             <div class="RightNav">
-                <a href="/user/user_center">用户中心</a> <a href="/user/user_orderlist" target="_blank"
+                <a href="/user/user_center.html">用户中心</a> <a href="/user/user_orderlist" target="_blank"
                                                         title="我的订单">我的订单</a> <a href="/user/cart">购物车（0）</a> <a
                     href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
             </div>

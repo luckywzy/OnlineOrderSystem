@@ -462,66 +462,6 @@ public class TUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andAgeIsNull() {
-            addCriterion("age is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAgeIsNotNull() {
-            addCriterion("age is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAgeEqualTo(Byte value) {
-            addCriterion("age =", value, "age");
-            return (Criteria) this;
-        }
-
-        public Criteria andAgeNotEqualTo(Byte value) {
-            addCriterion("age <>", value, "age");
-            return (Criteria) this;
-        }
-
-        public Criteria andAgeGreaterThan(Byte value) {
-            addCriterion("age >", value, "age");
-            return (Criteria) this;
-        }
-
-        public Criteria andAgeGreaterThanOrEqualTo(Byte value) {
-            addCriterion("age >=", value, "age");
-            return (Criteria) this;
-        }
-
-        public Criteria andAgeLessThan(Byte value) {
-            addCriterion("age <", value, "age");
-            return (Criteria) this;
-        }
-
-        public Criteria andAgeLessThanOrEqualTo(Byte value) {
-            addCriterion("age <=", value, "age");
-            return (Criteria) this;
-        }
-
-        public Criteria andAgeIn(List<Byte> values) {
-            addCriterion("age in", values, "age");
-            return (Criteria) this;
-        }
-
-        public Criteria andAgeNotIn(List<Byte> values) {
-            addCriterion("age not in", values, "age");
-            return (Criteria) this;
-        }
-
-        public Criteria andAgeBetween(Byte value1, Byte value2) {
-            addCriterion("age between", value1, value2, "age");
-            return (Criteria) this;
-        }
-
-        public Criteria andAgeNotBetween(Byte value1, Byte value2) {
-            addCriterion("age not between", value1, value2, "age");
-            return (Criteria) this;
-        }
-
         public Criteria andBirthIsNull() {
             addCriterion("birth is null");
             return (Criteria) this;
@@ -582,63 +522,203 @@ public class TUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andUseIsNull() {
-            addCriterion("use is null");
+        public Criteria andEmailIsNull() {
+            addCriterion("email is null");
             return (Criteria) this;
         }
 
-        public Criteria andUseIsNotNull() {
-            addCriterion("use is not null");
+        public Criteria andEmailIsNotNull() {
+            addCriterion("email is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUseEqualTo(Byte value) {
-            addCriterion("use =", value, "use");
+        public Criteria andEmailEqualTo(String value) {
+            addCriterion("email =", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andUseNotEqualTo(Byte value) {
-            addCriterion("use <>", value, "use");
+        public Criteria andEmailNotEqualTo(String value) {
+            addCriterion("email <>", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andUseGreaterThan(Byte value) {
-            addCriterion("use >", value, "use");
+        public Criteria andEmailGreaterThan(String value) {
+            addCriterion("email >", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andUseGreaterThanOrEqualTo(Byte value) {
-            addCriterion("use >=", value, "use");
+        public Criteria andEmailGreaterThanOrEqualTo(String value) {
+            addCriterion("email >=", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andUseLessThan(Byte value) {
-            addCriterion("use <", value, "use");
+        public Criteria andEmailLessThan(String value) {
+            addCriterion("email <", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andUseLessThanOrEqualTo(Byte value) {
-            addCriterion("use <=", value, "use");
+        public Criteria andEmailLessThanOrEqualTo(String value) {
+            addCriterion("email <=", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andUseIn(List<Byte> values) {
-            addCriterion("use in", values, "use");
+        public Criteria andEmailLike(String value) {
+            addCriterion("email like", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andUseNotIn(List<Byte> values) {
-            addCriterion("use not in", values, "use");
+        public Criteria andEmailNotLike(String value) {
+            addCriterion("email not like", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andUseBetween(Byte value1, Byte value2) {
-            addCriterion("use between", value1, value2, "use");
+        public Criteria andEmailIn(List<String> values) {
+            addCriterion("email in", values, "email");
             return (Criteria) this;
         }
 
-        public Criteria andUseNotBetween(Byte value1, Byte value2) {
-            addCriterion("use not between", value1, value2, "use");
+        public Criteria andEmailNotIn(List<String> values) {
+            addCriterion("email not in", values, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailBetween(String value1, String value2) {
+            addCriterion("email between", value1, value2, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotBetween(String value1, String value2) {
+            addCriterion("email not between", value1, value2, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumIsNull() {
+            addCriterion("phone_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumIsNotNull() {
+            addCriterion("phone_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumEqualTo(String value) {
+            addCriterion("phone_num =", value, "phoneNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumNotEqualTo(String value) {
+            addCriterion("phone_num <>", value, "phoneNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumGreaterThan(String value) {
+            addCriterion("phone_num >", value, "phoneNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumGreaterThanOrEqualTo(String value) {
+            addCriterion("phone_num >=", value, "phoneNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumLessThan(String value) {
+            addCriterion("phone_num <", value, "phoneNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumLessThanOrEqualTo(String value) {
+            addCriterion("phone_num <=", value, "phoneNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumLike(String value) {
+            addCriterion("phone_num like", value, "phoneNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumNotLike(String value) {
+            addCriterion("phone_num not like", value, "phoneNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumIn(List<String> values) {
+            addCriterion("phone_num in", values, "phoneNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumNotIn(List<String> values) {
+            addCriterion("phone_num not in", values, "phoneNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumBetween(String value1, String value2) {
+            addCriterion("phone_num between", value1, value2, "phoneNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNumNotBetween(String value1, String value2) {
+            addCriterion("phone_num not between", value1, value2, "phoneNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedIsNull() {
+            addCriterion("used is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedIsNotNull() {
+            addCriterion("used is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedEqualTo(Byte value) {
+            addCriterion("used =", value, "used");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedNotEqualTo(Byte value) {
+            addCriterion("used <>", value, "used");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedGreaterThan(Byte value) {
+            addCriterion("used >", value, "used");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedGreaterThanOrEqualTo(Byte value) {
+            addCriterion("used >=", value, "used");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedLessThan(Byte value) {
+            addCriterion("used <", value, "used");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedLessThanOrEqualTo(Byte value) {
+            addCriterion("used <=", value, "used");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedIn(List<Byte> values) {
+            addCriterion("used in", values, "used");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedNotIn(List<Byte> values) {
+            addCriterion("used not in", values, "used");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedBetween(Byte value1, Byte value2) {
+            addCriterion("used between", value1, value2, "used");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedNotBetween(Byte value1, Byte value2) {
+            addCriterion("used not between", value1, value2, "used");
             return (Criteria) this;
         }
 

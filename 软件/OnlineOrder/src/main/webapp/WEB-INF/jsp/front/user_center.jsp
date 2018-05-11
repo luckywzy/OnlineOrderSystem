@@ -1,23 +1,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>确认订单</title>
+    <title>用户中心</title>
     <meta name="author" content="zongyu.wang"/>
-    <link href="/css/front/style.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="/js/front/order.js"></script>
+    <link href="${pageContext.request.contextPath}/css/front/style.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="/js/front/public.js"></script>
     <script type="text/javascript" src="/js/front/jquery.js"></script>
     <script type="text/javascript" src="/js/front/jqpublic.js"></script>
+
 </head>
 <body>
 <header>
     <section class="Topmenubg">
         <div class="Topnav">
             <div class="LeftNav">
-                <a href="register.jsp">注册</a>/<a href="login.jsp">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a
+                <a href="register.html">注册</a>/<a href="login.html">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a
                     href="#">手机客户端</a>
             </div>
             <div class="RightNav">
@@ -60,28 +61,52 @@
         </ul>
     </nav>
 </header>
-<section class="Psection MT20 Textcenter" style="display:none;" id="Aflow">
-    <!-- 订单提交成功后则显示如下 -->
-    <p class="Font14 Lineheight35 FontW">恭喜你！订单提交成功！</p>
-    <p class="Font14 Lineheight35 FontW">您的订单编号为：<span class="CorRed">201409205134</span></p>
-    <p class="Font14 Lineheight35 FontW">共计金额：<span class="CorRed">￥359</span></p>
-    <p>
-        <button type="button" class="Lineheight35"><a href="#" target="_blank" disabled="true">支付宝立即支付</a></button>
-        <button type="button" class="Lineheight35"><a href="#" target="_blank">线下支付</a></button>
-        <button type="button" class="Lineheight35"><a href="/user/user_center">进入用户中心</a></button>
-    </p>
+<!--Start content-->
+<section class="Psection MT20">
+    <nav class="U-nav Font14 FontW">
+        <ul>
+            <li><i></i><a href="/user/user_center.html">用户中心首页</a></li>
+            <li><i></i><a href="/user/user_orderlist.html">我的订单</a></li>
+            <li><i></i><a href="/user/user_address.html">收货地址</a></li>
+            <li><i></i><a href="/user/user_message.html">我的留言</a></li>
+            <li><i></i><a href="/user/user_coupon.html">我的优惠券</a></li>
+            <li><i></i><a href="/user/user_favorites.html">我的收藏</a></li>
+            <li><i></i><a href="/user/user_account.html">账户管理</a></li>
+            <li><i></i><a href="#">安全退出</a></li>
+        </ul>
+    </nav>
+    <article class="U-article Overflow">
+        <!--"引用“user_page/user_index.html”"-->
+        <section class="usercenter">
+            <span class="Weltitle Block Font16 CorRed FontW Lineheight35">Welcome欢迎光临！</span>
+            <div class="U-header MT20 Overflow">
+                <img src="/upload/testuser.jpg">
+                <p class="Font14 FontW">DeathGhost 欢迎您回到 用户中心！</p>
+                <p class="Font12">您的上一次登录时间:
+                    <time> 2016-05-18 14:20:04</time>
+                </p>
+                <p class="Font12 CorRed FontW">我的优惠券( 0 ) | 我的积分( 0 )</p>
+            </div>
+            <ul class="s-States Overflow FontW" id="Lbn">
+                <li class="Font14 FontW">幸福业务在线提醒：</li>
+                <li><a href="#">待付款( 0 )</a></li>
+                <li><a href="#">待发货( 0 )</a></li>
+                <li><a href="#">待收货( 0 )</a></li>
+                <li><a href="#">待评价( 0 )</a></li>
+            </ul>
+        </section>
+    </article>
 </section>
 <!--End content-->
 <div class="F-link">
-
-</div>
+   </div>
 <footer>
     <section class="Otherlink">
         <aside>
             <div class="ewm-left">
                 <p>手机扫描二维码：</p>
-                <img src="/images/Android_ico_d.gif">
-                <img src="/images/iphone_ico_d.gif">
+                <img src="images/Android_ico_d.gif">
+                <img src="images/iphone_ico_d.gif">
             </div>
             <div class="tips">
                 <p>客服热线</p>
@@ -125,7 +150,8 @@
             </div>
         </section>
     </section>
-    <div class="copyright">© 版权所有 2016 SUST 技术支持：<a href="http://www.sust.edu.cn" title="SUST">SUST</a></div>
+    <div class="copyright">© 版权所有 2016 DeathGhost 技术支持：<a href="http://www.deathghost.cn"
+                                                          title="DeathGhost">DeathGhost</a></div>
 </footer>
 </body>
 </html>

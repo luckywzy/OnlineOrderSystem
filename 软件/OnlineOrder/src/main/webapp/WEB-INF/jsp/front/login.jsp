@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>不错哦订餐-登录</title>
-    <meta name="author" content="DeathGhost"/>
+    <meta name="author" content="zongyu.wang"/>
     <link href="${pageContext.request.contextPath}/css/front/style.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="/js/front/public.js"></script>
     <script type="text/javascript" src="/js/front/jquery.js"></script>
@@ -22,7 +22,7 @@
                     href="#">手机客户端</a>
             </div>
             <div class="RightNav">
-                <a href="user_center.html">用户中心</a> <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a>
+                <a href="user_center.jsp">用户中心</a> <a href="user_orderlist.jsp" target="_blank" title="我的订单">我的订单</a>
                 <a href="cart.jsp">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a
                     href="#">商家入驻</a>
             </div>
@@ -30,7 +30,7 @@
     </section>
     <div class="Logo_search">
         <div class="Logo">
-            <img src="images/logo.jpg" title="DeathGhost" alt="模板">
+            <img src="/images/logo.jpg" title="DeathGhost" alt="模板">
             <i></i>
             <span>西安市 [ <a href="#">莲湖区</a> ]</span>
         </div>
@@ -63,7 +63,7 @@
 </header>
 <!--Start content-->
 <section class="Psection MT20">
-    <form id="user_form" action="#">
+    <form id="user_form"  action="/userlogin" method="post">
         <table class="login">
             <tr>
                 <td width="40%" align="right" class="FontW">账号：</td>
@@ -81,7 +81,7 @@
             </tr>
             <tr>
                 <td width="40%" align="right"></td>
-                <td><input type="button" id="login_btn" value="登 录" class="Submit_b" onclick="login_f()">
+                <td><input type="submit" id="login_btn" value="登 录" class="Submit_b">
                     <a href="/register" class="Submit_b">注 册</a>
                 </td>
             </tr>
@@ -96,8 +96,8 @@
         <aside>
             <div class="ewm-left">
                 <p>手机扫描二维码：</p>
-                <img src="images/Android_ico_d.gif">
-                <img src="images/iphone_ico_d.gif">
+                <img src="/images/Android_ico_d.gif">
+                <img src="/images/iphone_ico_d.gif">
             </div>
             <div class="tips">
                 <p>客服热线</p>

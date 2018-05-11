@@ -69,6 +69,13 @@ public class ItemServiceImpl implements ItemService {
         return tItems;
     }
 
+    @Override
+    public TItem queryById(Integer id) {
+
+        TItem item = itemDao.selectByPrimaryKey(id);
+        return item;
+    }
+
     /**
      * 插入item
      * 
