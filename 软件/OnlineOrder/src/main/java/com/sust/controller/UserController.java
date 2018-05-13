@@ -7,11 +7,9 @@ import com.sust.constants.TUserConstant;
 import com.sust.dto.OrderContentDto;
 import com.sust.dto.UserOrderDto;
 import com.sust.enumeration.OrderStatusEnum;
-import com.sust.model.TItem;
-import com.sust.model.TOrder;
-import com.sust.model.TUser;
-import com.sust.model.TUserAddress;
+import com.sust.model.*;
 import com.sust.service.ItemService;
+import com.sust.service.OrderService;
 import com.sust.service.UserService;
 import com.sust.utils.CookieUtils;
 import org.slf4j.LoggerFactory;
@@ -24,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +33,8 @@ public class UserController {
     UserService userService;
     @Resource
     ItemService itemService;
-
+    @Resource
+    OrderService orderService;
     /**
      * 登陆动作，添加用户cookie
      * @return
@@ -128,10 +128,22 @@ public class UserController {
             orderDto.setConsignee(userAddress.getConsignee());
             orderDto.setOrderPrice(order.getOrderPrice());
             orderDto.setOrderStatus(OrderStatusEnum.getName(order.getOrderStatus()));
-
+            orderDto.setStatusCode(Integer.valueOf(order.getOrderStatus()));
             userOrderDtoList.add(orderDto);
         }
+        //按照时间顺序排序
+        userOrderDtoList.sort(new Comparator<UserOrderDto>() {
+            @Override
+            public int compare(UserOrderDto o1, UserOrderDto o2) {
 
+                if(o1.getCreateTime().after(o2.getCreateTime()) == true){
+                    return -1;
+                }else if(o1.getCreateTime().before(o2.getCreateTime())){
+                    return 1;
+                }
+                return 0;
+            }
+        });
         model.addAttribute("userOrderDtoList",userOrderDtoList);
         return "user_orderlist";
     }
@@ -147,7 +159,12 @@ public class UserController {
     }
 
     @RequestMapping("/user/user_message.html")
-    public String touser_message(){
+    public String touser_message(HttpServletRequest request, HttpServletResponse response, Model model){
+        //添加留言信息
+        String userId = CookieUtils.getCookieValue(request, TUserConstant.USER_COOKIE_NAME);
+        List<TLeaveWordsForOrder> leaveWordsForOrderList = orderService.queryLeaveWordsByUserId(userId);
+        model.addAttribute("leaveWordsForOrderList", leaveWordsForOrderList);
+        //TODO : 添加店家回复消息
 
         return "user_message";
     }

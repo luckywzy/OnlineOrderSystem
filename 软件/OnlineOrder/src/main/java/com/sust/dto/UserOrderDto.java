@@ -1,5 +1,7 @@
 package com.sust.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -35,6 +37,17 @@ public class UserOrderDto {
 
     private String orderStatus;
 
+    private Integer statusCode;
+
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     public String getOrderId() {

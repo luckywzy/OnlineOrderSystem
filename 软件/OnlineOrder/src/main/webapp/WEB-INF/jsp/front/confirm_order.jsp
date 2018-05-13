@@ -88,10 +88,16 @@
         <!--已保存的地址列表-->
         <form action="#">
             <ul class="address">
-                <li id="style1"><input  type="radio" value="" id="1" name="rdColor" onclick="changeColor(1)"/><label
+                <c:forEach items="${userAddressList}" var="addr">
+                    <li id="style${addr.id}"><input  type="radio" value="${addr.id}" id="${addr.id}" name="rdColor" onclick="changeColor(${addr.id})"/><label
+                            for="${addr.id}"> ${addr.province} ${addr.city} ${addr.district} ${addr.detailAddr}（${addr.consignee}收）<span class="fontcolor">${addr.phoneNum}</span></label></li>
+
+                </c:forEach>
+
+                <%--<li id="style1"><input  type="radio" value="" id="1" name="rdColor" onclick="changeColor(1)"/><label
                         for="1"> 浙江省 杭州市 余杭区 航海路1588号（孙先生收）<span class="fontcolor">183092***73</span></label></li>
                 <li id="style2"><input type="radio" value="" id="2" name="rdColor" onclick="changeColor(2)"/><label
-                        for="2"> 陕西省 西安市 雁塔区 丈八路22号（孙先生收）<span class="fontcolor">183092***73</span></label></li>
+                        for="2"> 陕西省 西安市 雁塔区 丈八路22号（孙先生收）<span class="fontcolor">183092***73</span></label></li>--%>
                 <li><a href="javascript:void(0)"
                        onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><img
                         src="/images/newaddress.png"/></a></li>
@@ -176,20 +182,22 @@
                 </c:forEach>
             </table>
             <div class="Order_M">
-                <p><em>订单附言:</em><input name="" type="text"></p>
-                <p><em>优惠券:</em>
+                <p><em>订单附言:</em><input name="leaveWords" type="text"></p>
+                <%--<p><em>优惠券:</em>
                     <select name="">
                         <option>￥10元优惠券</option>
                     </select>
-                </p>
+                </p>--%>
             </div>
             <div class="Sum_infor">
-                <p class="p1">配送费用：￥0.00+商品费用：￥${total}-优惠券：￥00.00</p>
-                <p class="p2">合计：<span>￥${total}</span></p>
+                <p class="p1">配送费用：￥${dispatchPrice}+商品费用：￥${total}<%---优惠券：￥00.00--%></p>
+                <p class="p2">合计：<span>￥${total+dispatchPrice}</span></p>
+                <input type="hidden" id="orderPrice" name="orderPrice" value="${total+dispatchPrice}">
+                <input type="hidden" id="addressid" name="addressid">
                 <input type="button" id="order_submit" value="提交订单" class="p3button" onclick="odr_sub()">
             </div>
         </div>
-        <input type="hidden" id="addressid" value="">
+
     </form>
     </div>
 </section>

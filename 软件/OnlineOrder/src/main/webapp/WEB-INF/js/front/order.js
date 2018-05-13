@@ -33,7 +33,7 @@
  * 订单_提交
  */
 function odr_sub() {
-    alert("提交成功");
+   /* alert("提交成功");
     $('#order_submit').click(function () {
         $.ajax({
             url: "/user/order/create_order",
@@ -42,5 +42,71 @@ function odr_sub() {
             data:$('#order_form').serialize(),
             contentType:"application/json"
         })
+    })*/
+   var id = $('input:radio:checked').val();
+    /*document.getElementById("addressid").setAttribute("value", id);*/
+    $("#addressid").val(id);
+   $("#order_form").submit();
+}
+
+/**
+ * 添加评论
+ */
+function access_sub() {
+    var msg = $("#access").val();
+    var orderId = $("#orderId").val();
+    var data = {"orderId":orderId,"access":msg};
+    $.ajax({
+        url: "/user/order/create_access",
+        type:
+            "POST",
+        data:data,
+        dataType:"json",
+        success:function (res) {
+            if(res.status == 0){
+                //评论成功跳转到订单页面
+                alert(res.msg);
+                window.location.href="user_orderlist.html";
+            }
+
+        },
+        error:function (res) {
+            if(res.status != 0){
+                alert(res.msg);
+            }
+        }
     })
+
+}
+
+/**
+ * 取消订单
+ */
+function cancelOrder(orderId) {
+    var con = confirm("确定删除正在准备的订单？");
+    if(con == false){
+        return;
+    }
+    var data = {"orderId":orderId};
+
+    $.ajax({
+        url: "/user/order/cancel_order",
+        type:
+            "POST",
+        data:data,
+        dataType:"json",
+        success:function (res) {
+            if(res.status == 0){
+                //评论成功跳转到订单页面
+                alert(res.msg);
+                location.reload(true);
+            }
+        },
+        error:function (res) {
+            if(res.status != 0){
+                alert(res.msg);
+            }
+        }
+    })
+
 }

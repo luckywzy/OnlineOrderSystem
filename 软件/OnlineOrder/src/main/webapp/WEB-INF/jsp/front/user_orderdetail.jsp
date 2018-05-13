@@ -112,21 +112,19 @@
         </table>
         <span class="Font14 FontW Lineheight35 Block">配送费用：￥${dispatchPrice}</span>
         <span class="Font14 FontW Lineheight35 Block">共计金额：￥${orderPrice}</span>
-        <span class="Font14 FontW Lineheight35 Block">收件地址：</span>
-        <form action="#">
+        <span class="Font14 FontW Lineheight35 Block">收件地址：${address.province} ${address.city} ${address.district} ${address.detailAddr}</span>
+        <span class="Font14 FontW Lineheight35 Block">收件人：	&nbsp;&nbsp;${address.consignee}</span>
+        <span class="Font14 FontW Lineheight35 Block">电话：	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${address.phoneNum}</span>
+        <span class="Font14 FontW Lineheight35 Block">来给个评价吧：
+            <input type="text" id="access" class="input_addr" value="来说说你的感受"/>
+            <input type="hidden" id="orderId" value="${orderId}"/>
+            <input type="button" id="access_sub_btn" class="Submit" value="评价" onclick="access_sub()"/>
+        </span>
+        <%--<form action="#">
             <table>
                 <tr>
                     <td width="30%" class="Font14 FontW Lineheight35" align="right">所在地：</td>
                     <td>
-                        <%--<select name="" class="select_ssq">
-                            <option>陕西省</option>
-                        </select>--%>
-                        <%--<select name="" class="select_ssq">
-                            <option>西安市</option>
-                        </select>
-                        <select name="" class="select_ssq">
-                            <option>莲湖区</option>
-                        </select>--%>
                         <input name="province" class="input_pri" value="${address.province}" required>
                         <input name="city" class="input_pri" value="${address.city}" required>
                         <input name="district" class="input_pri" value="${address.district}" required>
@@ -160,7 +158,7 @@
                     </td>
                 </tr>
             </table>
-        </form>
+        </form>--%>
     </article>
 </section>
 <!--End content-->

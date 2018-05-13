@@ -28,6 +28,9 @@ public class CookieProcess {
     @Resource
     private EnterpriseInfoService enterpriseInfoService;
 
+
+
+
     public BigDecimal getTotal(HttpServletRequest request,HttpServletResponse response){
         BigDecimal total = null;
         String cookieValue = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
@@ -88,5 +91,14 @@ public class CookieProcess {
         }
 
         return itemDetailDtos;
+    }
+
+    public List<TItem> getItemsFromCart(String cookieVal){
+        List<ItemDetailDto> itemDetailDtos = new ArrayList<>();
+        Map<String, Integer> cart = JsonUtils.jsonToPojo(cookieVal, HashMap.class);
+        List<String> itemIdList = cart.keySet().stream().collect(Collectors.toList());
+        List<TItem> itemList = itemService.BatchQueryByitemId(itemIdList);
+
+        return itemList;
     }
 }

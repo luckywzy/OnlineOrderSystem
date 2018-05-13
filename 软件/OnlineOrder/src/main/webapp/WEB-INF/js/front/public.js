@@ -47,7 +47,8 @@ function changeColor(arg) {
 
     //设置订单提交的地址ID
     var id = arg;
-    document.getElementById("addressid").setAttribute("value", id);
+
+
 }
 
 

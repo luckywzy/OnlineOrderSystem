@@ -93,14 +93,21 @@
                 <td>￥328.00</td>
                 <td>未付款,未发货</td>
                 <td><a href="#">取消订单</a> | <a href="#">付款</a></td>--%>
-                <c:forEach items="${userOrderDtoList}" var="order">
-                    <tr>
+                <c:forEach items="${userOrderDtoList}" var="order" varStatus="status">
+                    <tr  <c:if test="${status.index % 2 != 0 }">style='background-color:#ECF6EE;'</c:if>>
                         <td class="FontW"><a href="user_orderdetail.html?orderid=${order.orderId}">${order.orderId}</a></td>
                         <td>${order.createTime}</td>
                         <td>${order.consignee}</td>
                         <td>${order.orderPrice}</td>
                         <td>${order.orderStatus}</td>
-                        <td><a href="#">取消订单</a> | <a href="#">付款</a></td>
+
+                        <c:if test="${order.statusCode < 1 }">
+                            <%--TODO:完成取消订单--%>
+                            <td><a href="javascript:cancelOrder('${order.orderId }')">取消订单</a> | <a href="#">付款</a></td>
+                        </c:if>
+                        <c:if test="${order.statusCode > 1 }">
+                            <td><a href="user_orderdetail.html?orderid=${order.orderId}">查看详情</a></td>
+                        </c:if>
 
                     </tr>
                 </c:forEach>

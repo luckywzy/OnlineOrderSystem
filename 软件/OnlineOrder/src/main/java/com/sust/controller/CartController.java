@@ -1,12 +1,16 @@
 package com.sust.controller;
 
 import com.sust.constants.CookieConstant;
+import com.sust.constants.DisPatchPriceConstants;
+import com.sust.constants.TUserConstant;
 import com.sust.dto.ItemDetailDto;
 import com.sust.model.ShoppingCart;
 import com.sust.model.TEnterpriseInfo;
 import com.sust.model.TItem;
+import com.sust.model.TUserAddress;
 import com.sust.service.EnterpriseInfoService;
 import com.sust.service.ItemService;
+import com.sust.service.UserService;
 import com.sust.utils.CookieUtils;
 import com.sust.utils.JsonUtils;
 import com.sust.utils.Result;
@@ -39,6 +43,8 @@ public class CartController {
     private ItemService itemService;
     @Resource
     private EnterpriseInfoService enterpriseInfoService;
+    @Resource
+    private UserService userService;
 
     @RequestMapping(value = "/additemtocart", method = RequestMethod.POST)
     @ResponseBody
@@ -82,12 +88,21 @@ public class CartController {
         return "redirect:/user/confirm_order";
     }
 
+    /**
+     * 生成订单信息，
+     *  包括获取地址信息，生成商品信息
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/confirm_order")
     public String confirm_order(HttpServletRequest request,
                                 HttpServletResponse response,
                                 Model model) {
 
         String cookieValue = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
+        //获取商品信息
         List<ItemDetailDto> itemDetailDtos = null;
         if(cookieValue != null) {
             itemDetailDtos = getItemFromCart(cookieValue);
@@ -99,8 +114,15 @@ public class CartController {
             val += itemDetailDto.getItemPrice().doubleValue() * itemDetailDto.getCnt();
             total = new BigDecimal(val);
         }
+
+        //获取地址信息
+        String userId = CookieUtils.getCookieValue(request,TUserConstant.USER_COOKIE_NAME);
+        List<TUserAddress> userAddressList = userService.queryAddressByUserId(userId);
+
+        model.addAttribute("userAddressList", userAddressList);
         model.addAttribute("total", total);
         model.addAttribute("itemDetailDtos", itemDetailDtos);
+        model.addAttribute("dispatchPrice",DisPatchPriceConstants.DISPATCH_PRICE);
 
         return "confirm_order";
     }

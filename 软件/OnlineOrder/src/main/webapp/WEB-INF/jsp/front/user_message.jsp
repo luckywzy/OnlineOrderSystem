@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -80,14 +81,16 @@
         <!--user message-->
         <section class="Mymessage Overflow">
             <span class="Mmtitle Block Font14 FontW Lineheight35">我的留言</span>
+            <c:forEach items="${leaveWordsForOrderList}" var="leaveWordsForOrder">
             <p class="FontW">
-                <time>2014-09-22 11:09</time>
-                这是一个提问，网站是什么？
+                <time>${leaveWordsForOrder.createTime} </time>
+                <%--这是一个提问，网站是什么？--%> ${leaveWordsForOrder.leaveWords}
             </p>
-            <p class="CorRed">
+            </c:forEach>
+           <%-- <p class="CorRed">
                 <time>2014-09-22 13:09</time>
                 <span>重庆川菜馆回复：</span>这这里回答，详情登录 http://www.deathghost.cn！
-            </p>
+            </p>--%>
             <div class="TurnPage">
                 <a href="#">
                     <span class="Prev"><i></i>首页</span>

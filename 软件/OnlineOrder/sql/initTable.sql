@@ -147,3 +147,37 @@ CREATE TABLE `t_user_address` (
   FOREIGN KEY(user_id) REFERENCES `t_user`(user_id),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户地址表';
 
+###################################################
+########### 订单留言表					###############
+###################################################
+
+DROP TABLE IF EXISTS `t_leave_words_for_order`;
+CREATE TABLE `t_leave_words_for_order` (
+	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+	`user_id` varchar(20)  NOT NULL DEFAULT '00000000000000000000' COMMENT "用户ID",
+	`order_id` VARCHAR(16) NOT NULL DEFAULT '' COMMENT '订单号码',
+	`leave_words` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '用户留言',
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+	primary key(id),
+  FOREIGN KEY(user_id) REFERENCES `t_user`(user_id),
+  FOREIGN KEY(order_id) REFERENCES `t_order`(order_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单留言表';
+
+###################################################
+########### 订单评价表					###############
+###################################################
+
+DROP TABLE IF EXISTS `t_order_access`;
+CREATE TABLE `t_order_access` (
+	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+	`user_id` varchar(20)  NOT NULL DEFAULT '00000000000000000000' COMMENT "用户ID",
+	`item_id` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '所购商品ID',
+	`pay_count` SMALLINT NOT NULL DEFAULT 0 COMMENT '所购商品数量',
+	`access_words` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '评价内容',
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+	primary key(id),
+  FOREIGN KEY(user_id) REFERENCES `t_user`(user_id),
+  FOREIGN KEY(order_id) REFERENCES `t_order`(order_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单评价表';

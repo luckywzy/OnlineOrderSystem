@@ -20,6 +20,9 @@ public class DetailspController {
     public String todetailsp(@RequestParam("itemId")String itemId, Model model){
 
         TItem item = itemService.queryByitemId(itemId);
+
+        //查询评论信息
+
         model.addAttribute("item",item);
         return "detailsp";
     }
