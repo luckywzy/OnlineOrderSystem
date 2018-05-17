@@ -51,11 +51,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean deleteOrderByOrderId(String orderId) {
 
-        TOrderAccessExample accessExample = new TOrderAccessExample();
-        TOrderAccessExample.Criteria accessExampleCriteria = accessExample.createCriteria();
-        accessExampleCriteria.andOrderIdEqualTo(orderId);
-        int i = accessdao.deleteByExample(accessExample);
-
         TOrderExample example = new TOrderExample();
         TOrderExample.Criteria criteria = example.createCriteria();
         criteria.andOrderIdEqualTo(orderId);
@@ -65,10 +60,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean InsertOrderAccess(TOrderAccess orderAccess) {
+    public TOrder queryOrderByOrderId(String orderId) {
 
-        int insert = accessdao.insert(orderAccess);
+        TOrderExample example = new TOrderExample();
+        TOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderIdEqualTo(orderId);
+        List<TOrder> orderList = orderMapper.selectByExample(example);
 
-        return insert>0 ? true : false;
+        return orderList.size() > 0 ? orderList.get(0) : null;
+    }
+
+    @Override
+    public boolean InsertOrderAccess(List<TOrderAccess> orderAccess) {
+
+        for (TOrderAccess access : orderAccess) {
+            int insert = accessdao.insert(access);
+        }
+        return true;
     }
 }

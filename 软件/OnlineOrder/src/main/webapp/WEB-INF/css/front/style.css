@@ -74,7 +74,7 @@ code::selection {background:#dddddd;}
 .Logo_search .Search .Search_area .searchbutton{background:#00661c;color:#fff;font-weight:bold;font-size:14px;padding:10px 15px;float:left;}
 
 /*menu*/
-.menu_bg{width:100%;margin:0 auto;height:80px;box-shadow:0 10px 20px #d3d3d3;border-top:3px #00670c solid;line-height:90px;}
+.menu_bg{width:100%;margin:0 auto;height:20px;box-shadow:0 10px 20px #d3d3d3;border-top:3px #00670c solid;line-height:90px;}
 .menu_bg .menu{width:1200px;height:80px;line-height:80px;margin:0 auto;font-size:16px;font-weight:bold;display:box;display:-webkit-box;}
 .menu_bg .menu li{box-flex:1;-webkit-box-flex:1;-moz-box-flex:1;text-align:center;border-right:1px #f5f5f5 dotted;float:left;width:288px;}
 .menu_bg .menu li:last-child{border:none;}
@@ -143,17 +143,18 @@ code::selection {background:#dddddd;}
 .Sfainfor .Sflist #Indexcontent ul .SCcontent figure figcaption .price i{font-size:12px;font-style:normal;}
 /*订餐*/
 .Sfainfor .Sflist #Indexcontent ul .DCcontent{width:auto;height:auto;clear:both;margin-top:10px;}
-.Sfainfor .Sflist #Indexcontent ul .DCcontent figure{width:284px;height:373px; float:left;overflow:hidden;border:1px #d1cdce solid;padding:1px;margin:0 7px 8px 5px;}
+.Sfainfor .Sflist #Indexcontent ul .DCcontent figure{width:284px;height:340px; float:left;overflow:hidden;border:1px #d1cdce solid;padding:1px;margin:0 7px 8px 5px;}
 .Sfainfor .Sflist #Indexcontent ul .DCcontent figure:hover{border:1px #9fa900 solid;}
 .Sfainfor .Sflist #Indexcontent ul .DCcontent figure .p1{height:40px;line-height:20px;padding:0 8px;border-bottom:1px #fff solid;overflow:hidden;}
 .Sfainfor .Sflist #Indexcontent ul .DCcontent figure .p2{height:40px;line-height:40px;padding:0 8px;}
 .Sfainfor .Sflist #Indexcontent ul .DCcontent figure .p2 img{width:15px;height:15px;vertical-align:middle;}
 .Sfainfor .Sflist #Indexcontent ul .DCcontent figure .p3{height:46px;line-height:23px;padding:0 8px;border-top:1px #fff solid;}
 .Sfainfor .Sflist #Indexcontent ul .DCcontent figure img{width:284px;height:200px;}
+.Sfainfor .Sflist #Indexcontent ul .DCcontent figure .imgc{width:20px;height:20px;}
 .Sfainfor .Sflist #Indexcontent ul .DCcontent figure figcaption{background:#f8f8f8;width:284px;height:40px;line-height:40px;padding:0 8px;border-bottom:1px #c4c4c4 solid;}
 .Sfainfor .Sflist #Indexcontent ul .DCcontent figure figcaption .title{font-size:13px;color:#000;font-weight:bold;width:142px;text-align:left;display: inline-block;border-right:1px #dddddd solid;}
 .Sfainfor .Sflist #Indexcontent ul .DCcontent figure figcaption .price{font-size:13px;color:#F00;width:141px;text-align:right;/*display:inline-block;*/}
-.Sfainfor .Sflist #Indexcontent ul .DCcontent figure figcaption .price i{font-size:13px;font-style:normal;background:#F00;padding:2px 5px;border-radius:3px;color:#0F0;}
+.Sfainfor .Sflist #Indexcontent ul .DCcontent figure figcaption .price i{font-size:13px;font-style:normal;/*background:#F00;*/padding:2px 5px;border-radius:3px;color:#0F0;}
 
 .Sfainfor .Sflist #Indexcontent ul .bestshop{width:auto;height:auto;clear:both;margin-top:10px;}
 .Sfainfor .Sflist #Indexcontent ul .bestshop figure{width:166px;height:117px; float:left;overflow:hidden;border:1px #d1cdce solid;padding:1px;margin:0 5px 8px 5px;}

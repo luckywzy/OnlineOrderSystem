@@ -108,5 +108,4 @@ function cancelOrder(orderId) {
             }
         }
     })
-
 }

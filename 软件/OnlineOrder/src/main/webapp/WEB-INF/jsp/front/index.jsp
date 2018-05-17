@@ -18,16 +18,17 @@
 </head>
 
 <body>
-<header>
+<%@include file="topnav.jsp" %>
+<%--<header>
     <section class="Topmenubg">
         <div class="Topnav">
             <div class="LeftNav">
-                <a href="/register.html">注册</a>/<a href="/login.html">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
+                <a href="/register.html">注册</a>/<a href="/login.html">登录</a>
             </div>
             <div class="RightNav">
                 <a href="/user/user_center.html">用户中心</a> <a href="/user/user_orderlist" target="_blank"
-                                                        title="我的订单">我的订单</a> <a href="/user/cart">购物车（0）</a> <a
-                    href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
+                                                             title="我的订单">我的订单</a> <a href="/user/cart">购物车（0）</a> <a
+                    href="/user/user_favorites.html" target="_blank" title="我的收藏">我的收藏</a>
             </div>
         </div>
     </section>
@@ -47,7 +48,8 @@
                 <div class="Search_area">
                     <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..."
                            class="searchbox"/>
-                    <input type="submit" class="searchbutton" value="搜 索"/>
+                    <input type="hidden" id="search_type"/>
+                    <input type="button" class="searchbutton" onclick="sub_search()" value="搜 索"/>
                 </div>
             </form>
             <p class="hotkeywords"><a href="#" title="酸辣土豆丝">酸辣土豆丝</a><a href="#" title="这里是产品名称">螃蟹炒年糕</a><a href="#"
@@ -64,7 +66,7 @@
             <li><a href="article_read.jsp">关于我们</a></li>
         </ul>
     </nav>
-</header>
+</header>--%>
 <!--Start content-->
 <section class="Cfn">
     <aside class="C-left">
@@ -76,8 +78,8 @@
         <div class="C-time">
             <img src="upload/dc.jpg"/>
         </div>
-        <a href="list.jsp" target="_blank"><img src="images/by_button.png"></a>
-        <a href="list.jsp" target="_blank"><img src="images/dc_button.png"></a>
+        <a href="/list" target="_blank"><img src="images/by_button.png"></a>
+        <a href="/list" target="_blank"><img src="images/dc_button.png"></a>
     </aside>
     <div class="F-middle">
         <ul class="rslides f426x240">
@@ -145,23 +147,9 @@
             <div id="Indexcontent">
                 <ul style="display:block;">
                     <li>
-                        <p class="seekarea">
-                            <a href="#">碑林区</a>
-                            <a href="#">新城区</a>
-                            <a href="#">未央区</a>
-                            <a href="#">雁塔区</a>
-                            <a href="#">莲湖区</a>
-                            <a href="#">高新区</a>
-                            <a href="#">灞桥区</a>
-                            <a href="#">高陵区</a>
-                            <a href="#">阎良区</a>
-                            <a href="#">临潼区</a>
-                            <a href="#">长安区</a>
-                            <a href="#">周至县</a>
-                            <a href="#">蓝田县 </a>
-                        </p>
-                        <div class="SCcontent">
 
+                        <div class="SCcontent">
+                            <%--展示菜单信息--%>
                             <c:forEach items="${items}" var="item" varStatus="status">
                                 <a href="/todetailsp?itemId=${item.itemId}" target="_blank" title="${item.itemName}">
                                     <figure>
@@ -173,24 +161,7 @@
                                     </figure>
                                 </a>
                             </c:forEach>
-                            <%--<a href="/todetailsp" target="_blank" title="菜品名称">
-                                <figure>
-                                    <img src="upload/04.jpg">
-                                    <figcaption>
-                                        <span class="title">老李家的糖醋鲤鱼</span>
-                                        <span class="price"><i>￥</i>169.00</span>
-                                    </figcaption>
-                                </figure>
-                            </a>
-                            <a href="/todetailsp" target="_blank" title="菜品名称">
-                                <figure>
-                                    <img src="upload/06.jpg">
-                                    <figcaption>
-                                        <span class="title">老李家的糖醋鲤鱼</span>
-                                        <span class="price"><i>￥</i>169.00</span>
-                                    </figcaption>
-                                </figure>
-                            </a>--%>
+
                         </div>
                         <div class="bestshop">
                             <a href="shop.html" target="_blank" title="店铺名称">
@@ -223,7 +194,7 @@
                 </ul>
                 <ul>
                     <li>
-                        <p class="seekarea">
+                        <%--<p class="seekarea">
                             <a href="#">碑林区</a>
                             <a href="#">新城区</a>
                             <a href="#">未央区</a>
@@ -237,65 +208,38 @@
                             <a href="#">长安区</a>
                             <a href="#">周至县</a>
                             <a href="#">蓝田县 </a>
-                        </p>
+                        </p>--%>
                         <div class="DCcontent">
-                            <a href="shop.html" target="_blank" title="TITLE:店名">
-                                <figure>
-                                    <img src="upload/cc.jpg">
-                                    <figcaption>
-                                        <span class="title">老重庆川菜馆</span>
-                                        <span class="price">预定折扣：<i>8.9折</i></span>
-                                    </figcaption>
-                                    <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
-                                    <p class="p2">
-                                        店铺评分：
-                                        <img src="images/star-on.png">
-                                        <img src="images/star-on.png">
-                                        <img src="images/star-on.png">
-                                        <img src="images/star-on.png">
-                                        <img src="images/star-off.png">
-                                    </p>
-                                    <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
-                                </figure>
-                            </a>
-                            <a href="shop.html" target="_blank" title="TITLE:店名">
-                                <figure>
-                                    <img src="upload/cc.jpg">
-                                    <figcaption>
-                                        <span class="title">老重庆川菜馆</span>
-                                        <span class="price">预定折扣：<i>8.9折</i></span>
-                                    </figcaption>
-                                    <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
-                                    <p class="p2">
-                                        店铺评分：
-                                        <img src="images/star-on.png">
-                                        <img src="images/star-on.png">
-                                        <img src="images/star-on.png">
-                                        <img src="images/star-on.png">
-                                        <img src="images/star-off.png">
-                                    </p>
-                                    <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
-                                </figure>
-                            </a>
-                            <a href="shop.html" target="_blank" title="TITLE:店名">
-                                <figure>
-                                    <img src="upload/cc.jpg">
-                                    <figcaption>
-                                        <span class="title">老重庆川菜馆</span>
-                                        <span class="price">预定折扣：<i>8.9折</i></span>
-                                    </figcaption>
-                                    <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
-                                    <p class="p2">
-                                        店铺评分：
-                                        <img src="images/star-on.png">
-                                        <img src="images/star-on.png">
-                                        <img src="images/star-on.png">
-                                        <img src="images/star-on.png">
-                                        <img src="images/star-off.png">
-                                    </p>
-                                    <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
-                                </figure>
-                            </a>
+                            <%--展示店铺信息--%>
+                            <c:forEach items="${enterInfoForDispatchList}" var="enterInfoForDispatch">
+                                <a href="shop.html?enterpriseId=${enterInfoForDispatch.enterpriseId}" target="_blank"
+                                   title="${enterInfoForDispatch.companyName}">
+                                    <figure>
+                                        <img src="${enterInfoForDispatch.enterImg}">
+                                        <figcaption>
+                                            <span class="title">${enterInfoForDispatch.companyName}</span>
+                                            <span class="price">预定折扣：<i>暂无</i></span>
+                                        </figcaption>
+                                            <%-- <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>--%>
+                                        <p class="p2">
+                                            店铺评分：
+                                            <c:forEach var="i" begin="1" end="5" step="1">
+                                                <c:if test="${i <= enterInfoForDispatch.rank}">
+                                                    <img src="images/star-on.png">
+                                                </c:if>
+                                                <c:if test="${i > enterInfoForDispatch.rank}">
+                                                    <img src="images/star-off.png">
+                                                </c:if>
+                                            </c:forEach>
+
+                                        </p>
+                                        <p class="p3">起送：￥${enterInfoForDispatch.sendPrice} 	&nbsp;	&nbsp;
+                                            配送费用：￥${enterInfoForDispatch.dispatchPrice} 	&nbsp;	&nbsp;	&nbsp;<img class="imgc"
+                                                                                             src="/images/icon_timer.png">${enterInfoForDispatch.dispatchTime}
+                                        </p>
+                                    </figure>
+                                </a>
+                            </c:forEach>
                         </div>
                     </li>
                 </ul>
@@ -322,7 +266,9 @@
 <!--End content-->
 <div class="F-link">
 </div>
-<footer>
+
+<%@include file="footer.jsp" %>
+<%--<footer>
     <section class="Otherlink">
         <aside>
             <div class="ewm-left">
@@ -373,6 +319,6 @@
         </section>
     </section>
     <div class="copyright">© 版权所有 2018 SUST 技术支持：<a href="http://www.sust.edu.cn" title="SUST">SUST</a></div>
-</footer>
+</footer>--%>
 </body>
 </html>

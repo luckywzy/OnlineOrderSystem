@@ -3,19 +3,33 @@
 /*Tab Search style*/
 function selectsearch(theA, word) {
     obj = document.getElementById("selectsearch").getElementsByTagName("a");
+    $("#search_type").val(word);
     for (var i = 0; i < obj.length; i++) {
         obj[i].className = '';
     }
     theA.className = 'choose';
     if (word == 'restaurant_name') {
+
         document.getElementById('main_a_serach').action = "/search_restaurant.html";//Test url
     } else if (word == 'food_name') {
         document.getElementById('main_a_serach').action = "/search_food.html";//Test url
     }
 }
 
+function sub_search() {
+    var word = $("#search_type").val();
+
+    if (word == 'restaurant_name') {
+
+        $('#main_a_serach').action = "/search_restaurant.html";//Test url
+    } else if (word == 'food_name') {
+        $('#main_a_serach').action = "/search_food.html";//Test url
+    }
+    $('#main_a_serach').submit();
+}
+
 //INDEX TAB LIST
-/*
+
 window.onload = function () {
     var oLi = document.getElementById("Indextab").getElementsByTagName("li");
     var oUl = document.getElementById("Indexcontent").getElementsByTagName("ul");
@@ -29,7 +43,7 @@ window.onload = function () {
         }
     }
 }
-*/
+
 
 /*change radio background color*/
 function changeColor(arg) {

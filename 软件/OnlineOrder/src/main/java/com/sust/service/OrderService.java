@@ -34,7 +34,7 @@ public interface OrderService {
      * @param orderAccess
      * @return
      */
-    boolean InsertOrderAccess(TOrderAccess orderAccess);
+    boolean InsertOrderAccess(List<TOrderAccess> orderAccess);
 
     /**
      * 删除订单
@@ -42,4 +42,11 @@ public interface OrderService {
      * @return
      */
     boolean deleteOrderByOrderId(String orderId);
+
+    /**
+     * 查询订单
+     * @param orderId
+     * @return
+     */
+    TOrder queryOrderByOrderId(String orderId);
 }

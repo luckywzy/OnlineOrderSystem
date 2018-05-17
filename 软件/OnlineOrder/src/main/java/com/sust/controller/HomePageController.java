@@ -1,13 +1,12 @@
 package com.sust.controller;
 
+import com.sust.model.TEnterInfoForDispatch;
 import com.sust.model.TItem;
-import com.sust.model.TUser;
+import com.sust.service.EnterInfoForDispatchService;
 import com.sust.service.ItemService;
 import com.sust.service.UserService;
 import com.sust.utils.CookieUtils;
 import com.sust.utils.Page;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,38 +27,47 @@ public class HomePageController {
     private UserService userService;
     @Resource
     private ItemService itemService;
+    @Resource
+    private EnterInfoForDispatchService enterInfoForDispatchService;
 
-    @RequestMapping(value = "/home",method = RequestMethod.GET)
-    public String toIndex(@RequestParam(value = "curpage", required = false) Integer curpage,Model model){
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String toIndex(@RequestParam(value = "curpage", required = false) Integer curpage, Model model) {
         //分页数据
         Page page = new Page();
         int curpagetmp = 1;
-        if(curpage == null) {
+        if (curpage == null) {
             curpagetmp = 1;
-        }else {
+        } else {
             curpagetmp = curpage;
         }
 
-        List<TItem>  items =itemService.queryAllByPage(curpagetmp, page.getPageNumber());
-        model.addAttribute("items",items);
+        //查询商品信息
+        List<TItem> items = itemService.queryAllByPage(curpagetmp, page.getPageNumber());
+        //查询店铺信息
+        List<TEnterInfoForDispatch> enterInfoForDispatchList = enterInfoForDispatchService.queryEnterInfoForDispatchByPage(curpagetmp, page.getPageNumber());
+
+        model.addAttribute("items", items);
+        model.addAttribute("enterInfoForDispatchList", enterInfoForDispatchList);
 
         return "index";
     }
 
-    @RequestMapping(value = "/register.html",method = RequestMethod.GET)
-    public String toRegister(){
+    @RequestMapping(value = "/register.html", method = RequestMethod.GET)
+    public String toRegister() {
         return "register";
     }
+
     //跳转登录页面
-    @RequestMapping(value = "/login.html",method = RequestMethod.GET)
-    public String toLogin(){
+    @RequestMapping(value = "/login.html", method = RequestMethod.GET)
+    public String toLogin() {
         return "login";
     }
+
     //跳转用户中心
-    @RequestMapping(value = "/user/user_center",method = RequestMethod.GET)
-    public String toUserCenter(HttpServletRequest request){
+    @RequestMapping(value = "/user/user_center", method = RequestMethod.GET)
+    public String toUserCenter(HttpServletRequest request) {
         //判断用户是否存在,存在转到user_center，否则转到登录页
-        if(this.isLogin(request)){
+        if (this.isLogin(request)) {
            /* String userId = CookieUtils.getCookieValue(request, "userId");
             TUser user = userService.queryUserInfoByUserId(userId);*/
             return "user_center";
@@ -67,26 +75,32 @@ public class HomePageController {
         return "login";
     }
 
-    @RequestMapping(value = "/user/user_orderlist",method = RequestMethod.GET)
-    public String toUserOrderlist(HttpServletRequest request){
-        if(this.isLogin(request)){
-            return "user_orderlist";
-        }
-        return "login";
-    }
-    @RequestMapping(value = "/user/cart",method = RequestMethod.GET)
-    public String toCart(HttpServletRequest request){
-        if(this.isLogin(request)){
+    @RequestMapping(value = "/user/user_orderlist", method = RequestMethod.GET)
+    public String toUserOrderlist(HttpServletRequest request) {
+        if (this.isLogin(request)) {
             return "user_orderlist";
         }
         return "login";
     }
 
+    @RequestMapping(value = "/user/cart", method = RequestMethod.GET)
+    public String toCart(HttpServletRequest request) {
+        if (this.isLogin(request)) {
+            return "user_orderlist";
+        }
+        return "login";
+    }
+
+    @RequestMapping("/list")
+    public String toList(){
+        return "list";
+    }
 
 
-    private boolean isLogin(HttpServletRequest request){
+
+    private boolean isLogin(HttpServletRequest request) {
         String userName = CookieUtils.getCookieValue(request, "userId");
-        if(userName != null && userName.length() > 0){
+        if (userName != null && userName.length() > 0) {
             return true;
         }
         return false;

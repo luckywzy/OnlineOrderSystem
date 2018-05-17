@@ -5,6 +5,7 @@ import com.sust.constants.TUserConstant;
 import com.sust.dto.ItemDetailDto;
 import com.sust.model.*;
 import com.sust.process.CookieProcess;
+import com.sust.process.OrderProcess;
 import com.sust.service.ItemService;
 import com.sust.service.OrderService;
 import com.sust.service.UserService;
@@ -104,13 +105,25 @@ public class OrderController {
     public String create_access(@RequestParam("orderId") String orderId,
                                 @RequestParam("access") String access,
                                 HttpServletRequest request){
-        TOrderAccess orderAccess = new TOrderAccess();
 
-        //TODO: 评论表已修改，需要更改
-        orderAccess.setOrderId(orderId);
-        orderAccess.setUserId(CookieUtils.getCookieValue(request,TUserConstant.USER_COOKIE_NAME));
-        orderAccess.setAccessWords(access);
-        boolean ok = orderService.InsertOrderAccess(orderAccess);
+        List<TOrderAccess> accessList = new ArrayList<>();
+
+        String userId = CookieUtils.getCookieValue(request, TUserConstant.USER_COOKIE_NAME);
+        TOrder order = orderService.queryOrderByOrderId(orderId);
+        Map<String, String> orderContentMap = OrderProcess.splitOrderContent(order.getOrderContent());
+        for (Map.Entry<String, String> entry : orderContentMap.entrySet()) {
+            TOrderAccess orderAccess = new TOrderAccess();
+            //此处为自增ID，不是 itemId
+            orderAccess.setItemId(entry.getKey());
+            orderAccess.setPayCount(Short.valueOf(entry.getValue()));
+            orderAccess.setUserId(userId);
+            orderAccess.setAccessWords(access);
+
+            accessList.add(orderAccess);
+        }
+
+
+        boolean ok = orderService.InsertOrderAccess(accessList);
 
         if(ok){
             return JsonUtils.objectToJson(Result.build(0,"评论成功"));

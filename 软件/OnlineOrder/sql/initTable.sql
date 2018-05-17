@@ -56,6 +56,50 @@ CREATE TABLE `t_enterprise_info`(
 	unique(enterprise_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商户表';
 
+
+###################################################
+#########      用户展示的商家表		  #################
+###################################################
+DROP TABLE IF EXISTS `t_enter_info_for_user`;
+CREATE TABLE `t_enter_info_for_user`(
+	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+	`enterprise_id` varchar(20) NOT NULL DEFAULT '00000000000000000000' COMMENT '企业ID',
+	`company_name` varchar(50) NOT NULL DEFAULT '' COMMENT '餐厅名称',
+	`address` varchar(100) NOT NULL DEFAULT '' COMMENT '餐厅地址',
+	`phone_num` varchar(20) NOT NULL DEFAULT '' COMMENT '餐厅电话',
+	`feature_items` VARCHAR(200) NOT NULL DEFAULT '' COMMENT '特色菜品',
+	`preferential_activities` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '优惠活动',
+	`parking_space` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '停车位',
+	`business_hours` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '营业时间',
+	`wifi` VARCHAR(10) NOT NULL DEFAULT '' COMMENT '是否有wifi',
+	`average_price` VARCHAR(5) NOT NULL DEFAULT '' COMMENT '人均价格',
+	`enter_img` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '商家门面图',
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+	primary key(id),
+	unique(enterprise_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户展示的商家表';
+
+###################################################
+#########      商家配送安排表		  #################
+###################################################
+DROP TABLE IF EXISTS `t_enter_info_for_dispatch`;
+CREATE TABLE `t_enter_info_for_dispatch`(
+	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+	`enterprise_id` varchar(20) NOT NULL DEFAULT '00000000000000000000' COMMENT '企业ID',
+	`company_name` varchar(50) NOT NULL DEFAULT '' COMMENT '餐厅名称',
+	`enter_img` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '商家门面图',
+	`rank` tinyint unsigned NOT NULL DEFAULT 5 COMMENT '餐厅评价分数 1-5分',
+	`send_price` smallint unsigned NOT NULL DEFAULT 20 COMMENT '起送价格',
+	`dispatch_price` smallint unsigned NOT NULL DEFAULT 3 COMMENT '配送费',
+	`dispatch_time` VARCHAR(10) NOT NULL DEFAULT '20分钟' COMMENT '配送时间',
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+	primary key(id),
+	unique(enterprise_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商家配送安排表';
+
+
 ###################################################
 #########      菜品分类表		  #################
 ###################################################

@@ -116,7 +116,7 @@ $(function () {
         $("#newslist-1").val(parseInt(t.val()) * 59);
     }*/
 
-    setTotal();
+
 })
 /*< !---总数--
 -- >*/
@@ -144,7 +144,7 @@ $(function () {
 var data = {"total": 0, "rows": []};
 var totalCost = 0;
 
-$(function () {
+/*$(function () {
     $('#cartcontent').datagrid({
         singleSelect: true
     });
@@ -172,7 +172,7 @@ $(function () {
             addProduct(name, parseFloat(price.split('￥')[1]));
         }
     });
-});
+});*/
 
 function addProduct(name, price) {
     function add() {
@@ -221,4 +221,27 @@ function comfirm_order() {
             }
         }
     })
+}
+
+/**
+ * 从店铺直接添加商品到购物车
+ */
+function addItemToCartFromShop(itemId) {
+
+    var data = {"itemId":itemId,"Number":1};
+    $.ajax({
+        url: '/user/additemtocart',
+        type: 'post',
+        dataType: "json",
+        data: data,
+        /* beforeSubmit: function () {
+         },*/
+        success: function (data) {
+            if (data.status == 0) {
+                alert(data.msg);
+            } else {
+                //alert(data.Msg);
+            }
+        }
+    });
 }

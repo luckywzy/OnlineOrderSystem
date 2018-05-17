@@ -32,53 +32,8 @@
     </script>
 </head>
 <body>
-<header>
-    <section class="Topmenubg">
-        <div class="Topnav">
-            <div class="LeftNav">
-                <a href="register.jsp">注册</a>/<a href="login.jsp">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a
-                    href="#">手机客户端</a>
-            </div>
-            <div class="RightNav">
-                <a href="/user/user_center.html">用户中心</a> <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a>
-                <a href="/user/tocart">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a
-                    href="#">商家入驻</a>
-            </div>
-        </div>
-    </section>
-    <div class="Logo_search">
-        <div class="Logo">
-            <img src="images/logo.jpg" title="不错哦" alt="logo">
-            <i></i>
-            <span>西安市 [ <a href="#">莲湖区</a> ]</span>
-        </div>
-        <div class="Search">
-            <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
-                <div class="Search_nav" id="selectsearch">
-                    <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
-                    <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
-                </div>
-                <div class="Search_area">
-                    <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..."
-                           class="searchbox"/>
-                    <input type="submit" class="searchbutton" value="搜 索"/>
-                </div>
-            </form>
-            <p class="hotkeywords"><a href="#" title="酸辣土豆丝">酸辣土豆丝</a><a href="#" title="这里是产品名称">螃蟹炒年糕</a><a href="#"
-                                                                                                              title="这里是产品名称">牛奶炖蛋</a><a
-                    href="#" title="这里是产品名称">芝麻酱凉面</a><a href="#" title="这里是产品名称">滑蛋虾仁</a><a href="#" title="这里是产品名称">蒜汁茄子</a>
-            </p>
-        </div>
-    </div>
-    <nav class="menu_bg">
-        <ul class="menu">
-            <li><a href="/home">首页</a></li>
-            <li><a href="list.jsp">订餐</a></li>
-            <li><a href="category.jsp">积分商城</a></li>
-            <li><a href="article_read.jsp">关于我们</a></li>
-        </ul>
-    </nav>
-</header>
+<%@include file="topnav.jsp"%>
+
 <!--Start content-->
 <section class="slp">
     <section class="food-hd">
@@ -109,7 +64,7 @@
                     <p>月销量</p>
                 </li>
                 <li class="line">
-                    <p class="Numerical">58</p>
+                    <p class="Numerical">${accesscnt}</p>
                     <p>累计评价</p>
                 </li>
                 <li>
@@ -120,10 +75,10 @@
             <form id="addCartForm">
                 <div class="BuyNo">
                     <span>我要买：<input type="number" name="Number" required autofocus min="1" value="1"/>份</span>
-                    <span>库存：3258</span>
+                    <span>库存：9999</span>
                     <div class="Buybutton">
-                        <input id="addTOCart" type="button" onclick="addItemToCart()" value="加入购物车" class="BuyB" >
-                        <a href="shop.html"><span class="Backhome">进入店铺首页</span></a>
+                        <input id="addTOCart" type="button" onclick="addItemToCart()" value="加入购物车" class="BuyB">
+                        <a href="shop.html?enterpriseId=${item.enterpriseId}"><span class="Backhome">进入店铺首页</span></a>
                     </div>
                     <input type="text" name="itemId" hidden value="${item.itemId}"/>
                 </div>
@@ -154,7 +109,7 @@
                         <li class="on">详细说明</li>
                         <%--TODO: 增加菜品详情页面的评论 和成交记录--%>
                         <li>评价详情（${accesscnt}）</li>
-                        <li>成交记录（${ordercnt}）</li>
+                        <li>成交记录</li>
                         <p><b></b></p>
                     </ul>
                 </div>
@@ -162,8 +117,8 @@
                     <!--case1-->
                     <div class="menutab show">
                         <div class="cont_padding">
-                           <%-- <img src="upload/tds.jpg">--%>
-                          ${item.itemDesc}
+                            <%-- <img src="upload/tds.jpg">--%>
+                            ${item.itemDesc}
                         </div>
                     </div>
                     <!--case2-->
@@ -172,14 +127,16 @@
                             <table class="Dcomment">
                                 <th width="80%">评价内容</th>
                                 <th width="20%" style="text-align:right">评价人</th>
-                                <tr>
-                                    <td>
-                                        ${orderaccess.access}
-                                       <%-- 还不错，速度倒是挺速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快快...--%>
-                                        <time>${orderaccess.createTime}</time>
-                                    </td>
-                                    <td align="right">DEATHGHOST</td>
-                                </tr>
+                                <c:forEach items="${accessDtoList}" var="access">
+                                    <tr>
+                                        <td>
+                                                ${access.accessWords}
+                                                <%-- 还不错，速度倒是挺速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快快...--%>
+                                            <time>${access.createTime}</time>
+                                        </td>
+                                        <td align="right">${access.userName}</td>
+                                    </tr>
+                                </c:forEach>
                             </table>
                             <div class="TurnPage">
                                 <a href="#">
@@ -199,15 +156,15 @@
 
                             <table width="888">
                                 <th width="35%">买家</th>
-                                <th width="20%">价格</th>
                                 <th width="15%">数量</th>
                                 <th width="30%">成交时间</th>
-                                <tr height="40">
-                                    <td>d***t</td>
-                                    <td>￥59</td>
-                                    <td>1</td>
-                                    <td>2014-9-18 11:13:07</td>
-                                </tr>
+                                <c:forEach items="${doneRecordDtoList}" var="doneRecord">
+                                    <tr height="40">
+                                        <td>${doneRecord.buyer}</td>
+                                        <td>${doneRecord.cnt}</td>
+                                        <td>${doneRecord.createTime}</td>
+                                    </tr>
+                                </c:forEach>
                             </table>
 
                         </div>
@@ -236,57 +193,8 @@
 <div class="F-link">
 
 </div>
-<footer>
-    <section class="Otherlink">
-        <aside>
-            <div class="ewm-left">
-                <p>手机扫描二维码：</p>
-                <img src="images/Android_ico_d.gif">
-                <img src="images/iphone_ico_d.gif">
-            </div>
-            <div class="tips">
-                <p>客服热线</p>
-                <p><i>1830927**73</i></p>
-                <p>配送时间</p>
-                <p>
-                    <time>09：00</time>
-                    ~
-                    <time>22:00</time>
-                </p>
-                <p>网站公告</p>
-            </div>
-        </aside>
-        <section>
-            <div>
-                <span><i class="i1"></i>配送支付</span>
-                <ul>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">支付方式</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">配送方式</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">配送效率</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">服务费用</a></li>
-                </ul>
-            </div>
-            <div>
-                <span><i class="i2"></i>关于我们</span>
-                <ul>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">招贤纳士</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">网站介绍</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">配送效率</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">商家加盟</a></li>
-                </ul>
-            </div>
-            <div>
-                <span><i class="i3"></i>帮助中心</span>
-                <ul>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">服务内容</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">服务介绍</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">常见问题</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">网站地图</a></li>
-                </ul>
-            </div>
-        </section>
-    </section>
-    <div class="copyright">© 版权所有 2018 SUST 技术支持：<a href="http://www.sust.edu.cn" title="SUST">SUST</a></div>
-</footer>
+
+<%@include file="footer.jsp"%>
+
 </body>
 </html>

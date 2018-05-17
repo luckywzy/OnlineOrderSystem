@@ -26,6 +26,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import static com.sust.process.OrderProcess.splitOrderContent;
+
 @Controller
 public class UserController {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -61,7 +63,7 @@ public class UserController {
     @RequestMapping("/user/user_center.html")
     public String touser_center(){
 
-        return "user_center";
+        return "redirect:/user/user_orderlist.html";
     }
 
     /**
@@ -206,11 +208,4 @@ public class UserController {
         return "redirect:/user/confirm_order";
     }
 
-
-    private Map<String,String> splitOrderContent(String orderContent){
-        int index = orderContent.lastIndexOf(OrderContentConstant.ITEM_SPLIT);
-        orderContent = orderContent.substring(0,index);
-        Map<String,String> itemIdAndCnt = Splitter.on(OrderContentConstant.ITEM_SPLIT).withKeyValueSeparator(OrderContentConstant.ITEMID_AND_CNT_SPLIT).split(orderContent);
-        return itemIdAndCnt;
-    }
 }
