@@ -13,18 +13,55 @@
     <script type="text/javascript" src="/js/front/jqpublic.js"></script>
 </head>
 <body>
-<%@include file="topnav.jsp"%>
+<%@include file="topnav.jsp" %>
 <!--Start content-->
 <section class="Psection MT20">
     <article class="Searchlist Overflow">
         <ul class="Overflow">
-            <li>
-                <a href="shop.html" target="_blank" title="好味来快餐店"><img src="upload/cc.jpg"></a>
-                <p class="P-shop Overflow"><span class="sa"><a href="shop.html" target="_blank"
-                                                               title="好味来快餐店">好味来快餐店</a></span><span
-                        class="sp">西安·莲湖区</span></p>
-                <p class="P-shop Overflow">西安市莲湖区土门十字往西100米...</p>
-            </li>
+
+
+                <div class="DCcontent">
+
+                    <c:forEach items="${enterInfoForDispatchList}" var="enterInfoForDispatch">
+                        <li>
+                        <a href="shop.html?enterpriseId=${enterInfoForDispatch.enterpriseId}" target="_blank"
+                           title="${enterInfoForDispatch.companyName}">
+                            <figure>
+                                <img src="${enterInfoForDispatch.enterImg}">
+                                <figcaption>
+                                    <span class="title">${enterInfoForDispatch.companyName}</span>
+                                    <span class="price">预定折扣：<i>暂无</i></span>
+                                </figcaption>
+
+                                <p class="p2">
+                                    店铺评分：
+                                    <c:forEach var="i" begin="1" end="5" step="1">
+                                        <c:if test="${i <= enterInfoForDispatch.rank}">
+                                            <img src="images/star-on.png">
+                                        </c:if>
+                                        <c:if test="${i > enterInfoForDispatch.rank}">
+                                            <img src="images/star-off.png">
+                                        </c:if>
+                                    </c:forEach>
+
+                                </p>
+                                <p class="p3">起送：￥${enterInfoForDispatch.sendPrice} &nbsp; &nbsp;
+                                    配送费用：￥${enterInfoForDispatch.dispatchPrice} &nbsp; &nbsp; &nbsp;<img
+                                            class="imgc"
+                                            src="/images/icon_timer.png">${enterInfoForDispatch.dispatchTime}
+                                </p>
+                            </figure>
+                        </a>
+                        <%--<a href="shop.html?enterpriseId=${enterInfoForDispatch.enterpriseId}" target="_blank" title="${enterInfoForDispatch.companyName}"><img src="${enterInfoForDispatch.enterImg}"></a>
+                        <p class="P-shop Overflow"><span class="sa"><a href="shop.html?enterpriseId=${enterInfoForDispatch.enterpriseId}" target="_blank"
+                                                                       title="好味来快餐店">好味来快餐店</a></span><span
+                                class="sp">西安·莲湖区</span></p>
+                        <p class="P-shop Overflow">西安市莲湖区土门十字往西100米...</p>--%>
+                        </li>
+                    </c:forEach>
+                </div>
+
+
         </ul>
         <div class="TurnPage">
             <a href="#">
@@ -39,7 +76,7 @@
     </article>
     <aside class="Sraside">
         <div class="bestshop">
-            <span class="Bpt Block FontW Font14">推荐店铺</span>
+            <%--<span class="Bpt Block FontW Font14">推荐店铺</span>
             <ul>
                 <li>
                     <a href="shop.html" title="好味来快餐店" target="_blank"><img src="upload/cc.jpg"></a>
@@ -50,15 +87,15 @@
                         <span class="Block Overflow">西安市莲湖区土门十字...</span>
                     </p>
                 </li>
-            </ul>
+            </ul>--%>
         </div>
         <!--广告位或其他推荐版块-->
-        <img src="upload/ggw.jpg">
+        <%--<img src="upload/ggw.jpg">--%>
     </aside>
 </section>
 <!--End content-->
 <div class="F-link">
 </div>
-<%@include file="footer.jsp"%>
+<%@include file="footer.jsp" %>
 </body>
 </html>

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -18,11 +19,12 @@ import java.util.List;
  * 2018/4/19
  */
 @Controller
-@RequestMapping("/enterpriseInfo")
+@RequestMapping("/admin")
 public class EnterpriseInfoController {
 
     @Resource
     private EnterpriseInfoService enterpriseInfoService;
+
 
     @RequestMapping(value = "/enterpriseInfoList", method = RequestMethod.GET)
     public String enterpriseInfoList(Model model) {

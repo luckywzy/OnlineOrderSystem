@@ -32,6 +32,6 @@ public class ShopController {
 
         model.addAttribute("enterInfoForUser", enterInfoForUser);
         model.addAttribute("tItems", tItems);
-        return "shop";
+        return "front/shop";
     }
 }

@@ -56,7 +56,7 @@ public class UserController {
         if(ok){
             return "redirect:/home";
         }else {
-            return "error";
+            return "front/error";
         }
     }
 
@@ -126,7 +126,7 @@ public class UserController {
         model.addAttribute("dispatchPrice",dispatchPrice);
         model.addAttribute("orderPrice",orderPrice);
         model.addAttribute("address",address);
-        return "user_orderdetail";
+        return "front/user_orderdetail";
     }
 
     /**
@@ -171,7 +171,7 @@ public class UserController {
             }
         });
         model.addAttribute("userOrderDtoList",userOrderDtoList);
-        return "user_orderlist";
+        return "front/user_orderlist";
     }
 
     @RequestMapping("/user/user_address.html")
@@ -181,7 +181,7 @@ public class UserController {
         TUser user = userService.queryUserInfoByUserId(userId);
         List<TUserAddress> userAddresses = userService.queryAddressByUserId(userId);
         model.addAttribute("userAddresses",userAddresses);
-        return "user_address";
+        return "front/user_address";
     }
 
     @RequestMapping("/user/user_message.html")
@@ -192,19 +192,19 @@ public class UserController {
         model.addAttribute("leaveWordsForOrderList", leaveWordsForOrderList);
         //TODO : 添加店家回复消息
 
-        return "user_message";
+        return "front/user_message";
     }
 
     @RequestMapping("/user/user_favorites.html")
     public String touser_favorites(){
 
-        return "user_favorites";
+        return "front/user_favorites";
     }
 
     @RequestMapping("/user/user_coupon.html")
     public String touser_coupon(){
 
-        return "user_coupon";
+        return "front/user_coupon";
     }
 
     @RequestMapping("/user/user_account.html")
@@ -213,7 +213,7 @@ public class UserController {
         String userId = CookieUtils.getCookieValue(request, "userId");
         TUser user = userService.queryUserInfoByUserId(userId);
         model.addAttribute("user", user);
-        return "user_account";
+        return "front/user_account";
     }
 
 

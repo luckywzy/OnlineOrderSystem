@@ -45,14 +45,14 @@ public class HomePageController {
         model.addAttribute("enterInfoForDispatchList", enterInfoForDispatchList);
         page.updatePageInfo(items);
         model.addAttribute("page", page);
-        return "index";
+        return "front/index";
     }
 
     @RequestMapping(value = "/list_item", method = RequestMethod.GET)
     public String listItem(@RequestParam(value = "curpage", required = false) Integer curpage, Model model) {
         //分页数据
         listItemAction(curpage, model);
-        return "index";
+        return "front/index";
     }
 
 
@@ -72,13 +72,13 @@ public class HomePageController {
 
     @RequestMapping(value = "/register.html", method = RequestMethod.GET)
     public String toRegister() {
-        return "register";
+        return "front/register";
     }
 
     //跳转登录页面
     @RequestMapping(value = "/login.html", method = RequestMethod.GET)
     public String toLogin() {
-        return "login";
+        return "front/login";
     }
 
     //跳转用户中心
@@ -88,30 +88,30 @@ public class HomePageController {
         if (this.isLogin(request)) {
            /* String userId = CookieUtils.getCookieValue(request, "userId");
             TUser user = userService.queryUserInfoByUserId(userId);*/
-            return "user_center";
+            return "front/user_center";
         }
-        return "login";
+        return "front/login";
     }
 
     @RequestMapping(value = "/user/user_orderlist", method = RequestMethod.GET)
     public String toUserOrderlist(HttpServletRequest request) {
         if (this.isLogin(request)) {
-            return "user_orderlist";
+            return "front/user_orderlist";
         }
-        return "login";
+        return "front/login";
     }
 
     @RequestMapping(value = "/user/cart", method = RequestMethod.GET)
     public String toCart(HttpServletRequest request) {
         if (this.isLogin(request)) {
-            return "user_orderlist";
+            return "front/user_orderlist";
         }
-        return "login";
+        return "front/login";
     }
 
     @RequestMapping("/list")
     public String toList() {
-        return "list";
+        return "front/list";
     }
 
 

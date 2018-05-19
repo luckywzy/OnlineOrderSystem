@@ -29,22 +29,36 @@
     <!-- 配置注解驱动 -->
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
-    <!-- 配置视图解析器 -->
-    <bean
+
+    <!--<bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/back/"/>
-        <property name="suffix" value=".jsp"/>
-        <!-- 定义模板顺序 -->
+
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+        <property name="prefix" value="/WEB-INF/jsp/back/"></property>
+        <property name="suffix" value=".jsp"></property>
+        <property name="viewNames" value="*"></property>
+
         <property name="order" value="2"></property>
     </bean>
 
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/front/"/>
+
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+        <property name="viewNames" value="*"></property>
+        <property name="order" value="1"></property>
+    </bean>-->
+
+    <!-- 配置视图解析器 -->
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
-        <!-- 定义模板顺序 -->
         <property name="order" value="1"></property>
     </bean>
+
     <!-- 由于在web.xml中定义的url拦截形式为“/”表示拦截所有的url请求，
                     包括静态资源例如css、js等。所以需要在springmvc.xml中添加资源映射标签： -->
     <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
@@ -58,6 +72,7 @@
             <mvc:exclude-mapping path="/login**"/>
             <mvc:exclude-mapping path="/userlogin"/>
             <mvc:exclude-mapping path="/register**"/>
+            <mvc:exclude-mapping path="/admin/**"/>
             <mvc:exclude-mapping path="/**/*.css"/>
             <mvc:exclude-mapping path="/**/*.js"/>
             <mvc:exclude-mapping path="/**/*.png"/>

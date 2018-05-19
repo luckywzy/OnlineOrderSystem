@@ -14,4 +14,6 @@ public interface EnterInfoForDispatchService {
     TEnterInfoForDispatch queryEnterInfoForDispatchByenterpriseId(String enterpriseId);
 
     List<TEnterInfoForDispatch> queryEnterInfoForDispatchByPage(int curpagetmp, int pageNumber);
+
+    List<TEnterInfoForDispatch> queryEnterInfoForDispatchByKeywork(String keyword);
 }

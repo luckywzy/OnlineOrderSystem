@@ -49,4 +49,6 @@ public interface OrderService {
      * @return
      */
     TOrder queryOrderByOrderId(String orderId);
+
+    List<TOrder> queryOrderByStatus(Byte status);
 }

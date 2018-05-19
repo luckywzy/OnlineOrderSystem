@@ -89,7 +89,7 @@ public class OrderController {
                                   Model model){
         model.addAttribute("orderId",orderId);
         model.addAttribute("orderPrice",orderPrice);
-        return "success_order";
+        return "front/success_order";
     }
 
 

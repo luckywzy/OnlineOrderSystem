@@ -63,11 +63,11 @@
                 <li class="current">点菜</li>
                 <li>餐馆</li>
                 <p class="class_B">
-                    <a href="#">中餐</a>
+                    <%--<a href="#">中餐</a>
                     <a href="#">西餐</a>
                     <a href="#">甜点</a>
                     <a href="#">日韩料理</a>
-                    <span><a href="#" target="_blank">more ></a></span>
+                    <span><a href="#" target="_blank">more ></a></span>--%>
                 </p>
             </ul>
             <div id="Indexcontent">

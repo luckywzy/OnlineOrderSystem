@@ -71,6 +71,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<TOrder> queryOrderByStatus(Byte status) {
+
+        TOrderExample example = new TOrderExample();
+        TOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderStatusEqualTo(status);
+        List<TOrder> orderList = orderMapper.selectByExample(example);
+        return orderList;
+    }
+
+    @Override
     public boolean InsertOrderAccess(List<TOrderAccess> orderAccess) {
 
         for (TOrderAccess access : orderAccess) {

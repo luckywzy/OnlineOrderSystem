@@ -71,7 +71,7 @@ public class CartController {
             itemDetailDtos = getItemFromCart(cookieVal);
         }
         model.addAttribute("itemDetailDtos", itemDetailDtos);
-        return "cart";
+        return "front/cart";
     }
 
     @RequestMapping(value = "/toconfirm_order",method = RequestMethod.GET)
@@ -124,7 +124,7 @@ public class CartController {
         model.addAttribute("itemDetailDtos", itemDetailDtos);
         model.addAttribute("dispatchPrice",DisPatchPriceConstants.DISPATCH_PRICE);
 
-        return "confirm_order";
+        return "front/confirm_order";
     }
 
     private void addItemToCart(String itemId,

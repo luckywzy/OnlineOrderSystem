@@ -40,4 +40,17 @@ public class EnterInfoForDispatchServiceImpl implements EnterInfoForDispatchServ
 
         return enterInfoForDispatchList;
     }
+
+    @Override
+    public List<TEnterInfoForDispatch> queryEnterInfoForDispatchByKeywork(String keyword) {
+
+        keyword = '%' + keyword +'%';
+
+        TEnterInfoForDispatchExample example = new TEnterInfoForDispatchExample();
+        TEnterInfoForDispatchExample.Criteria criteria = example.createCriteria();
+        criteria.andCompanyNameLike(keyword);
+        List<TEnterInfoForDispatch> infoList = enterInfoForDispatchdao.selectByExample(example);
+
+        return infoList;
+    }
 }

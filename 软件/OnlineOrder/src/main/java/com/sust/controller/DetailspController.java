@@ -64,6 +64,6 @@ public class DetailspController {
         model.addAttribute("accessDtoList", accessDtoList);
         model.addAttribute("doneRecordDtoList",doneRecordDtoList);
 
-        return "detailsp";
+        return "front/detailsp";
     }
 }
