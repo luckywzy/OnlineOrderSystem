@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>酸辣土豆丝</title>
+    <title>${item.itemName}</title>
     <meta name="author" content="zongyu.wang"/>
     <link href="/css/front/style.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="/js/front/public.js"></script>

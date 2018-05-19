@@ -1,5 +1,10 @@
 package com.sust.utils;
 
+import com.github.pagehelper.PageInfo;
+import com.sust.model.TItem;
+
+import java.util.List;
+
 /**
  * 分页功能对应的实体类
  */
@@ -9,12 +14,29 @@ public class Page
     private int currentPage; //当前页码
     private int totalPage; 	 //总页数
 
-    private int pageNumber = 3; //每页显示条数
+    private int pageNumber = 6; //每页显示条数
+
+    public void vaildCurrentPageNum(Integer curpage){
+        int curpagetmp = 1;
+        if (curpage == null) {
+            curpagetmp = 1;
+        } else {
+            curpagetmp = curpage;
+        }
+        currentPage = curpagetmp;
+    }
+
+    public <T> void updatePageInfo(List<T> list){
+        PageInfo<T> pageInfo = new PageInfo<>(list);
+        this.setTotalNumber((int)pageInfo.getTotal());
+        this.count();
+    }
+
 
     /*
      * 根据当前对象中属性值计算并设置相关属性值
      */
-    public void count()
+    private void count()
     {
         //计算总页数
         int totalPageTemp = this.totalNumber /this.pageNumber;

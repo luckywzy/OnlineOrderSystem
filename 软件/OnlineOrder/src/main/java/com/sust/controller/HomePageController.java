@@ -34,22 +34,40 @@ public class HomePageController {
     public String toIndex(@RequestParam(value = "curpage", required = false) Integer curpage, Model model) {
         //分页数据
         Page page = new Page();
-        int curpagetmp = 1;
-        if (curpage == null) {
-            curpagetmp = 1;
-        } else {
-            curpagetmp = curpage;
-        }
+        page.vaildCurrentPageNum(curpage);
 
         //查询商品信息
-        List<TItem> items = itemService.queryAllByPage(curpagetmp, page.getPageNumber());
+        List<TItem> items = itemService.queryAllByPage(page.getCurrentPage(), page.getPageNumber());
         //查询店铺信息
-        List<TEnterInfoForDispatch> enterInfoForDispatchList = enterInfoForDispatchService.queryEnterInfoForDispatchByPage(curpagetmp, page.getPageNumber());
+        List<TEnterInfoForDispatch> enterInfoForDispatchList = enterInfoForDispatchService.queryEnterInfoForDispatchByPage(page.getCurrentPage(), page.getPageNumber());
 
         model.addAttribute("items", items);
         model.addAttribute("enterInfoForDispatchList", enterInfoForDispatchList);
-
+        page.updatePageInfo(items);
+        model.addAttribute("page", page);
         return "index";
+    }
+
+    @RequestMapping(value = "/list_item", method = RequestMethod.GET)
+    public String listItem(@RequestParam(value = "curpage", required = false) Integer curpage, Model model) {
+        //分页数据
+        listItemAction(curpage, model);
+        return "index";
+    }
+
+
+    private void listItemAction(Integer curpage, Model model) {
+        Page page = new Page();
+        page.vaildCurrentPageNum(curpage);
+
+        //查询商品信息
+        List<TItem> items = itemService.queryAllByPage(page.getCurrentPage(), page.getPageNumber());
+
+
+        page.updatePageInfo(items);
+
+        model.addAttribute("items", items);
+        model.addAttribute("page", page);
     }
 
     @RequestMapping(value = "/register.html", method = RequestMethod.GET)
@@ -92,10 +110,9 @@ public class HomePageController {
     }
 
     @RequestMapping("/list")
-    public String toList(){
+    public String toList() {
         return "list";
     }
-
 
 
     private boolean isLogin(HttpServletRequest request) {

@@ -90,5 +90,21 @@ function login_f() {
             }
         })
     })
-
 }
+
+/**
+ * 分页操作
+ * @param currentPage
+ */
+function changeCurrentPage(currentPage)
+{
+    //var data={"curpage":currentPage};
+    window.location.href ="/home?curpage="+currentPage;
+   /* $.ajax({
+        url: "/home",
+        type:
+            "GET",
+        data:data
+    })*/
+}
+

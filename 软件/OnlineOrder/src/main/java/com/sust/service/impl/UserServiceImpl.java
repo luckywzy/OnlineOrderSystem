@@ -59,6 +59,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean insertUser(TUser user) {
+        int insert = userdao.insertSelective(user);
+
+        return insert > 0 ? true : false;
+    }
+
+    @Override
     public TOrder queryOrderDetailByOrderId(String orderid) {
 
         TOrderExample example = new TOrderExample();

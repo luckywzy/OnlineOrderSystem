@@ -57,4 +57,11 @@ public interface UserService {
      * @return
      */
     TOrder queryOrderDetailByOrderId(String orderid);
+
+    /**
+     * 注册用户
+     * @param user
+     * @return
+     */
+    boolean insertUser(TUser user);
 }

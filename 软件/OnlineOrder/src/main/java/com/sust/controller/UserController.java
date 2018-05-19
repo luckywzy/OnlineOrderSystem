@@ -12,6 +12,7 @@ import com.sust.service.ItemService;
 import com.sust.service.OrderService;
 import com.sust.service.UserService;
 import com.sust.utils.CookieUtils;
+import com.sust.utils.IdUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,29 @@ public class UserController {
     ItemService itemService;
     @Resource
     OrderService orderService;
+
+    @RequestMapping(value = "/register.do",method = RequestMethod.POST)
+    public String registerDo(@RequestParam("username")String username,
+                             @RequestParam("password")String password,
+                             @RequestParam("email")String email,
+                             @RequestParam("phone_num")String phone_num){
+        TUser user = new TUser();
+        user.setUserId(IdUtils.getNextId());
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setPhoneNum(phone_num);
+        user.setRank(Byte.valueOf("2")); //普通用户
+        user.setUsed(Byte.valueOf("1")); //可用
+        boolean ok = userService.insertUser(user);
+        if(ok){
+            return "redirect:/home";
+        }else {
+            return "error";
+        }
+    }
+
+
     /**
      * 登陆动作，添加用户cookie
      * @return
