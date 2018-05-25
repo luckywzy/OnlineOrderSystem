@@ -84,18 +84,22 @@
                             <tr>
                                 <td><input type="checkbox"/></td>
                                 <td>${item.id}</td>
-                                <td><a href="/admin/itemDetail?itemId=${item.itemId}">${item.itemId}</a></td>
+                                <td><a href="/admin/admin-modify-item.html?itemId=${item.itemId}">${item.itemId}</a></td>
                                 <td>${item.itemName}</td>
                                 <td>${item.itemPrice}</td>
                                 <td>${item.updateTime}</td>
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
-                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
-                                                    class="am-icon-pencil-square-o"></span> 编辑
+
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary" >
+                                                <a href="/admin/admin-modify-item.html?itemId=${item.itemId}">
+                                                <span
+                                                    class="am-icon-pencil-square-o"></span> 编辑</a>
                                             </button>
-                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger"><span
-                                                    class="am-icon-trash-o"></span> 删除
+
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger" onclick="deleteItem('${item.itemId}')"><span
+                                                    class="am-icon-trash-o" ></span> 删除
                                             </button>
                                         </div>
                                     </div>
@@ -164,5 +168,6 @@
 <script src="/css/back/js/amazeui.min.js"></script>
 <!--<![endif]-->
 <script src="/css/back/js/app.js"></script>
+<script src="/css/back/js/item.js"></script>
 </body>
 </html>

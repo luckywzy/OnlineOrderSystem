@@ -64,6 +64,14 @@
     <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
     <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
 
+    <!-- 需要文件上传功能时，启用以下配置 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxInMemorySize">
+            <value>1638400</value>
+        </property>
+    </bean>
+
+
     <!--配置拦截器，未登录的用户限制访问-->
     <mvc:interceptors>
         <mvc:interceptor>

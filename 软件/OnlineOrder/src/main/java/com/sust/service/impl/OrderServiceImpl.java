@@ -25,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
 
         int insert = orderMapper.insert(order);
 
-        return insert>0 ? true : false;
+        return insert > 0 ? true : false;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
 
         int insert = leaveWordsForOrderdao.insert(leaveWords);
 
-        return insert>0 ? true : false;
+        return insert > 0 ? true : false;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
         criteria.andOrderIdEqualTo(orderId);
         int delete = orderMapper.deleteByExample(example);
 
-        return delete>0 ? true : false;
+        return delete > 0 ? true : false;
     }
 
     @Override
@@ -78,6 +78,28 @@ public class OrderServiceImpl implements OrderService {
         criteria.andOrderStatusEqualTo(status);
         List<TOrder> orderList = orderMapper.selectByExample(example);
         return orderList;
+    }
+
+    @Override
+    public boolean updateOrderStatus(String orderId, String status) {
+        TOrder order = new TOrder();
+        order.setOrderId(orderId);
+        order.setOrderStatus(Byte.valueOf(status));
+        TOrderExample example = new TOrderExample();
+        TOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderIdEqualTo(orderId);
+        int update = orderMapper.updateByExampleSelective(order, example);
+        return update > 0 ? true : false;
+    }
+
+    @Override
+    public TLeaveWordsForOrder queryLeaveWordsByOrderId(String orderId) {
+        TLeaveWordsForOrderExample example = new TLeaveWordsForOrderExample();
+        TLeaveWordsForOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderIdEqualTo(orderId);
+        List<TLeaveWordsForOrder> leaveWordsForOrderList = leaveWordsForOrderdao.selectByExample(example);
+
+        return leaveWordsForOrderList.size() > 0 ? leaveWordsForOrderList.get(0): null;
     }
 
     @Override

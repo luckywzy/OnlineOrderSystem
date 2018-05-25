@@ -51,4 +51,8 @@ public interface OrderService {
     TOrder queryOrderByOrderId(String orderId);
 
     List<TOrder> queryOrderByStatus(Byte status);
+
+    boolean updateOrderStatus(String orderId, String status);
+
+    TLeaveWordsForOrder queryLeaveWordsByOrderId(String orderId);
 }

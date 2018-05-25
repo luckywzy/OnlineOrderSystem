@@ -2,6 +2,7 @@ package com.sust.service;
 
 import com.sust.model.TEnterpriseInfo;
 import com.sust.model.TItem;
+import com.sust.model.TItemType;
 
 import java.util.List;
 
@@ -44,4 +45,13 @@ public interface ItemService {
     List<TItem> BatchQueryByitemId(List<String> itemIdList);
 
     TItem queryById(Integer id);
+
+    List<TItemType> queryItemType();
+
+    /**
+     * 更新操作
+     * @param item
+     * @return
+     */
+    boolean updateByItem(TItem item);
 }

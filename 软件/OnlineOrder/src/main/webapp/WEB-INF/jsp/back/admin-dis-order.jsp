@@ -84,14 +84,14 @@
               <tr>
                 <td><input type="checkbox"/></td>
                 <td>${order.id}</td>
-                <td><a href="/admin/orderDetail?orderId=${order.orderId}">${order.orderId}</a></td>
+                <td><a href="/admin/order/orderDetail?orderId=${order.orderId}">${order.orderId}</a></td>
                 <td>${order.orderPrice}</td>
                 <td>${order.userId}</td>
                 <td>${order.updateTime}</td>
                 <td>
                   <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                      <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                      <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="finish('${order.orderId}')"><span
                               class="am-icon-pencil-square-o"></span> 派送完成
                       </button>
                         <%--<button class="am-btn am-btn-default am-btn-xs am-text-danger"><span
@@ -147,5 +147,6 @@
 <script src="/css/back/js/amazeui.min.js"></script>
 <!--<![endif]-->
 <script src="/css/back/js/app.js"></script>
+<script src="/css/back/js/order.js"></script>
 </body>
 </html>
