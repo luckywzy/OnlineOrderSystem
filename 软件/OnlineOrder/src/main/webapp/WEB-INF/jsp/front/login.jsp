@@ -22,7 +22,7 @@
         <table class="login">
             <tr>
                 <td width="40%" align="right" class="FontW">账号：</td>
-                <td><input type="text" id="username" name="username" required autofocus placeholder="账号/电子邮件/手机号码"></td>
+                <td><input type="text" id="username" name="username" required autofocus placeholder="账号"></td>
             </tr>
             <tr>
                 <td width="40%" align="right" class="FontW">密码：</td>
@@ -32,7 +32,7 @@
             <tr>
                 <td width="40%" align="right"></td>
                 <td><input type="submit" id="login_btn" value="登 录" class="Submit_b">
-                    <a href="/register" class="Submit_b">注 册</a>
+                    <a href="/register.html" class="Submit_b">注 册</a>
                 </td>
             </tr>
         </table>

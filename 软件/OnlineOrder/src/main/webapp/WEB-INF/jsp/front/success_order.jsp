@@ -14,13 +14,13 @@
 </head>
 <body>
 <%@include file="topnav.jsp"%>
-<section class="Psection MT20 Textcenter" <%--style="display:none;"--%> id="Aflow">
+<section class="Psection MT20 Textcenter" id="Aflow">
     <!-- 订单提交成功后则显示如下 -->
     <p class="Font14 Lineheight35 FontW">恭喜你！订单提交成功！</p>
     <p class="Font14 Lineheight35 FontW">您的订单编号为：<span class="CorRed">${orderId}</span></p>
     <p class="Font14 Lineheight35 FontW">共计金额：<span class="CorRed">￥${orderPrice}</span></p>
     <p>
-        <button type="button" class="Lineheight35"><a href="#" target="_blank" disabled="true">支付宝立即支付</a></button>
+        <%--<button type="button" class="Lineheight35"><a href="#" target="_blank" disabled="true">支付宝立即支付</a></button>--%>
         <button type="button" class="Lineheight35"><a href="#" target="_blank">线下支付</a></button>
         <button type="button" class="Lineheight35"><a href="/user/user_center">进入用户中心</a></button>
     </p>

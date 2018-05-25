@@ -13,7 +13,7 @@
             </div>
             <div class="RightNav">
                 <a href="/user/user_center.html">用户中心</a> <a href="/user/user_orderlist" target="_blank"
-                                                             title="我的订单">我的订单</a> <a href="/user/cart">购物车</a> <a
+                                                             title="我的订单">我的订单</a> <a href="/user/tocart">购物车</a> <a
                     href="/user/user_favorites.html" target="_blank" title="我的收藏">我的收藏</a>
             </div>
         </div>

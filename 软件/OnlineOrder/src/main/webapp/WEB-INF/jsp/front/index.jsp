@@ -143,10 +143,20 @@
                             </c:forEach>
                         </div>
 
-                        <div>
+                        <%--<div>
                             <a href="/list">点击加载更多商家</a>
-                        </div>
+                        </div>--%>
                     </li>
+                    <div class="TurnPage">
+                        <a href="#">
+                            <span class="Prev"><i></i>首页</span>
+                        </a>
+                        <a href="#"><span class="PNumber">1</span></a>
+                        <a href="#"><span class="PNumber">2</span></a>
+                        <a href="#">
+                            <span class="Next">最后一页<i></i></span>
+                        </a>
+                    </div>
                 </ul>
             </div>
         </div>

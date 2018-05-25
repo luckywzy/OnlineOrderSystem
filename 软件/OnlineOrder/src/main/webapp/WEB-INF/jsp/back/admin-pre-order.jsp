@@ -30,8 +30,8 @@
   <div class="admin-content">
 
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">店铺准备中订单列表</strong> /
-        <small></small>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">订单列表</strong> /
+        <small>准备中</small>
       </div>
     </div>
 
@@ -105,16 +105,13 @@
             </tbody>
           </table>
           <div class="am-cf">
-            共 15 条记录
+            共 1 条记录
             <div class="am-fr">
               <ul class="am-pagination">
-                <li class="am-disabled"><a href="#">«</a></li>
-                <li class="am-active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
+                <li class="am-disabled"><a href="#">首页</a></li>
+                <li class="am-active"><a href="#">上一页</a></li>
+                <li><a href="#">下一页</a></li>
+                <li><a href="#">尾页</a></li>
               </ul>
             </div>
           </div>

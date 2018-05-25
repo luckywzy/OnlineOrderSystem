@@ -106,11 +106,11 @@
             <th width="40%">说明</th>
             <tr>
                 <td>送货上门</td>
-                <td>￥0.00</td>
-                <td>配送说明信息...</td>
+                <td>￥${dispatchPrice}</td>
+                <td>根据配送距离和每个订单来计算</td>
             </tr>
         </table>
-        <span class="flow_title">在线支付方式：</span>
+        <span class="flow_title">支付方式：</span>
         <form action="#">
             <ul>
                 <li><input type="radio" name="pay" id="alipay" value="alipay"/><label for="alipay"><i
