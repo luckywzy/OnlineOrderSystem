@@ -31,20 +31,27 @@ public class HomePageController {
     private EnterInfoForDispatchService enterInfoForDispatchService;
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String toIndex(@RequestParam(value = "curpage", required = false) Integer curpage, Model model) {
+    public String toIndex(@RequestParam(value = "curpage", required = false) Integer curpage, @RequestParam(value = "type", required = false) String type, Model model) {
         //分页数据
         Page page = new Page();
         page.vaildCurrentPageNum(curpage);
 
+        Page page2 = new Page();
+        page2.vaildCurrentPageNum(curpage);
+        page2.setPageNumber(3);
+
         //查询商品信息
         List<TItem> items = itemService.queryAllByPage(page.getCurrentPage(), page.getPageNumber());
         //查询店铺信息
-        List<TEnterInfoForDispatch> enterInfoForDispatchList = enterInfoForDispatchService.queryEnterInfoForDispatchByPage(page.getCurrentPage(), page.getPageNumber());
+        List<TEnterInfoForDispatch> enterInfoForDispatchList = enterInfoForDispatchService.queryEnterInfoForDispatchByPage(page2.getCurrentPage(), page2.getPageNumber());
 
         model.addAttribute("items", items);
-        model.addAttribute("enterInfoForDispatchList", enterInfoForDispatchList);
         page.updatePageInfo(items);
         model.addAttribute("page", page);
+
+        model.addAttribute("enterInfoForDispatchList", enterInfoForDispatchList);
+        page2.updatePageInfo(enterInfoForDispatchList);
+        model.addAttribute("page2", page2);
         return "front/index";
     }
 

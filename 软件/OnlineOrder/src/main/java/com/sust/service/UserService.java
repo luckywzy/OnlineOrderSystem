@@ -64,4 +64,8 @@ public interface UserService {
      * @return
      */
     boolean insertUser(TUser user);
+
+    TUser queryUserInfoByUserName(String username);
+
+    String queryUserEmailByEmail(String email);
 }

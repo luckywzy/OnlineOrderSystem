@@ -13,6 +13,8 @@ import com.sust.service.OrderService;
 import com.sust.service.UserService;
 import com.sust.utils.CookieUtils;
 import com.sust.utils.IdUtils;
+import com.sust.utils.JsonUtils;
+import com.sust.utils.Result;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +42,7 @@ public class UserController {
     OrderService orderService;
 
     @RequestMapping(value = "/register.do",method = RequestMethod.POST)
+    @ResponseBody
     public String registerDo(@RequestParam("username")String username,
                              @RequestParam("password")String password,
                              @RequestParam("email")String email,
@@ -52,11 +55,20 @@ public class UserController {
         user.setPhoneNum(phone_num);
         user.setRank(Byte.valueOf("2")); //普通用户
         user.setUsed(Byte.valueOf("1")); //可用
+        TUser selectUser = userService.queryUserInfoByUserName(username);
+        if(selectUser != null){
+            return JsonUtils.objectToJson(Result.build(1,"用户名已存在"));
+        }
+        String userEmail = userService.queryUserEmailByEmail(email);
+        if(userEmail != null){
+            return JsonUtils.objectToJson(Result.build(2,"邮箱已使用"));
+        }
         boolean ok = userService.insertUser(user);
+
         if(ok){
-            return "redirect:/home";
+            return JsonUtils.objectToJson(Result.build(0,"注册成功"));
         }else {
-            return "front/error";
+            return JsonUtils.objectToJson(Result.build(3,"注册失败"));
         }
     }
 
@@ -126,6 +138,7 @@ public class UserController {
         model.addAttribute("dispatchPrice",dispatchPrice);
         model.addAttribute("orderPrice",orderPrice);
         model.addAttribute("address",address);
+        model.addAttribute("orderStatus",order.getOrderStatus());
         return "front/user_orderdetail";
     }
 

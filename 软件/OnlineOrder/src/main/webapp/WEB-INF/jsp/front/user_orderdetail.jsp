@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<%@include file="topnav.jsp"%>
+<%@include file="topnav.jsp" %>
 <!--Start content-->
 <section class="Psection MT20">
     <nav class="U-nav Font14 FontW">
@@ -69,11 +69,13 @@
         <span class="Font14 FontW Lineheight35 Block">收件地址：${address.province} ${address.city} ${address.district} ${address.detailAddr}</span>
         <span class="Font14 FontW Lineheight35 Block">收件人：	&nbsp;&nbsp;${address.consignee}</span>
         <span class="Font14 FontW Lineheight35 Block">电话：	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${address.phoneNum}</span>
+        <c:if test="${orderStatus == 2}">
         <span class="Font14 FontW Lineheight35 Block">来给个评价吧：
-            <input type="text" id="access" class="input_addr" value="来说说你的感受"/>
+            <input type="text" id="access" class="input_addr" placeholder="来说说你的感受"/>
             <input type="hidden" id="orderId" value="${orderId}"/>
             <input type="button" id="access_sub_btn" class="Submit" value="评价" onclick="access_sub()"/>
         </span>
+        </c:if>
         <%--<form action="#">
             <table>
                 <tr>
@@ -118,6 +120,6 @@
 <!--End content-->
 <div class="F-link">
 </div>
-<%@include file="footer.jsp"%>
+<%@include file="footer.jsp" %>
 </body>
 </html>

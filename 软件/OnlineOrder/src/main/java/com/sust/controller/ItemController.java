@@ -89,7 +89,7 @@ public class ItemController {
                                 @RequestParam(value = "itemType", required = true) String itemType,
                                 @RequestParam(value = "itemPic", required = true) String itemPic,
                                 HttpServletRequest request) throws IOException {
-        //TODO : 未完成，前端的item类型还未显示
+
         TItem item = new TItem();
         String enterpriseid="00013000000000000001";
         item.setEnterpriseId(enterpriseid);

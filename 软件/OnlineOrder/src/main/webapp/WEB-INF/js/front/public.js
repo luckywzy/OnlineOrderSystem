@@ -29,10 +29,22 @@ function sub_search() {
 }
 
 //INDEX TAB LIST
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) {
+            return pair[1];
+        }
+    }
+    return (false);
+}
 
 window.onload = function () {
     var oLi = document.getElementById("Indextab").getElementsByTagName("li");
     var oUl = document.getElementById("Indexcontent").getElementsByTagName("ul");
+
     for (var i = 0; i < oLi.length; i++) {
         oLi[i].index = i;
         oLi[i].onclick = function () {
@@ -41,6 +53,10 @@ window.onload = function () {
             for (var n = 0; n < oUl.length; n++) oUl[n].style.display = "none";
             oUl[this.index].style.display = "block"
         }
+    }
+    if (2 == getQueryVariable("type")) {
+
+       oLi[1].click();
     }
 }
 
@@ -69,22 +85,22 @@ function changeColor(arg) {
 function login_f() {
     var username = $("#username").val();
     var password = $("#password").val();
-    var data = {"username":username,"password":password};
+    var data = {"username": username, "password": password};
     $("#login_btn").click(function () {
         $.ajax({
             url: "/userlogin",
             type:
                 "POST",
-            data:data,
-            dataType:"json",
-            success:function (data) {
-                if(data.status == 0){
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                if (data.status == 0) {
                     //成功跳转首页
-                    window.location.href="/home";
+                    window.location.href = "/home";
                 }
             },
-            error:function (data) {
-                if(data.status != 0){
+            error: function (data) {
+                if (data.status != 0) {
                     alert(data.msg);
                 }
             }
@@ -96,15 +112,40 @@ function login_f() {
  * 分页操作
  * @param currentPage
  */
-function changeCurrentPage(currentPage)
-{
+function changeCurrentPage(currentPage) {
     //var data={"curpage":currentPage};
-    window.location.href ="/home?curpage="+currentPage;
-   /* $.ajax({
-        url: "/home",
-        type:
-            "GET",
-        data:data
-    })*/
+    window.location.href = "/home?curpage=" + currentPage + "&type=1";
+
 }
 
+function changeCurrentPage2(currentPage) {
+    //var data={"curpage":currentPage};
+    window.location.href = "/home?curpage=" + currentPage + "&type=2";
+
+
+}
+
+function registerSub() {
+
+    $.ajax({
+        url: "/register.do",
+        type:
+            "POST",
+        data: $('#registerForm').serialize(),
+        dataType: "json",
+        success: function (data) {
+            if (data.status == 0) {
+                //成功跳转首页
+                window.location.href = "/login.html";
+            } else {
+                alert(data.msg);
+            }
+        },
+        error: function (data) {
+            if (data.status != 0) {
+                alert(data.msg);
+            }
+        }
+    })
+
+}

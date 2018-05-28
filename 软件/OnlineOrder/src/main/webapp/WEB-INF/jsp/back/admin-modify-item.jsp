@@ -32,7 +32,7 @@
 
         <div class="am-cf am-padding">
             <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">菜品</strong> /
-                <small>详情</small>
+                <small>详情/修改</small>
             </div>
         </div>
 

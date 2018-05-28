@@ -148,13 +148,15 @@
                         </div>--%>
                     </li>
                     <div class="TurnPage">
-                        <a href="#">
+                        <span>共计商品:${page2.totalNumber}</span>
+                        <span>当前位于第:${page2.currentPage }/${page2.totalPage }页</span>
+                        <a href="javascript:changeCurrentPage2('1')">
                             <span class="Prev"><i></i>首页</span>
                         </a>
-                        <a href="#"><span class="PNumber">1</span></a>
-                        <a href="#"><span class="PNumber">2</span></a>
-                        <a href="#">
-                            <span class="Next">最后一页<i></i></span>
+                        <a href="javascript:changeCurrentPage2('${page2.currentPage-1 }')"><span class="PNumber">上一页</span></a>
+                        <a href="javascript:changeCurrentPage2('${page2.currentPage+1 }')"><span class="PNumber">下一页</span></a>
+                        <a href="javascript:changeCurrentPage2('${page2.totalPage }')">
+                            <span class="Next">尾页<i></i></span>
                         </a>
                     </div>
                 </ul>

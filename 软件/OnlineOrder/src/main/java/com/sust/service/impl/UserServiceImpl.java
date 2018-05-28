@@ -66,6 +66,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public TUser queryUserInfoByUserName(String username) {
+
+        TUserExample example = new TUserExample();
+        TUserExample.Criteria criteria = example.createCriteria();
+        criteria.andUsernameEqualTo(username);
+        List<TUser> userList = userdao.selectByExample(example);
+
+        return userList.size() > 0 ? userList.get(0) : null;
+    }
+
+    @Override
+    public String queryUserEmailByEmail(String email) {
+        TUserExample example = new TUserExample();
+        TUserExample.Criteria criteria = example.createCriteria();
+        criteria.andEmailEqualTo(email);
+        List<TUser> userList = userdao.selectByExample(example);
+
+        return userList.size() > 0 ? userList.get(0).getEmail() : null;
+    }
+
+    @Override
     public TOrder queryOrderDetailByOrderId(String orderid) {
 
         TOrderExample example = new TOrderExample();
