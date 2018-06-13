@@ -96,7 +96,7 @@
                                     菜品配图
                                 </div>
                                 <div class="am-u-sm-4 am-u-end">
-                                    <input id="uploadimg" name="uploadimg" type="file"/>
+                                    <input id="uploadimg" name="uploadimg" type="file" accept="image/jpeg,image/png,image/gif"/>
 
                                 </div>
                                 <input id="imgbtn" type="button" value="上传图片" onclick="uploadFile()"/>
@@ -119,7 +119,7 @@
 
 <footer>
     <hr>
-    <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+    <p class="am-padding-left">© 版权所有 2018 SUST 技术支持：<a href="http://www.sust.edu.cn" title="SUST">SUST</a></p>
 </footer>
 
 <!--[if lt IE 9]>

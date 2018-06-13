@@ -1,7 +1,5 @@
 package com.sust.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 public class TLeaveWordsForOrder {
@@ -13,11 +11,11 @@ public class TLeaveWordsForOrder {
 
     private String leaveWords;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private String reply;
+
     private Date createTime;
 
     private Date updateTime;
-
     public TLeaveWordsForOrder() {
     }
 
@@ -57,6 +55,14 @@ public class TLeaveWordsForOrder {
 
     public void setLeaveWords(String leaveWords) {
         this.leaveWords = leaveWords == null ? null : leaveWords.trim();
+    }
+
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply == null ? null : reply.trim();
     }
 
     public Date getCreateTime() {

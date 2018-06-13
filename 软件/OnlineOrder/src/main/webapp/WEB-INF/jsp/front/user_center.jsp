@@ -22,10 +22,10 @@
             <li><i></i><a href="/user/user_orderlist.html">我的订单</a></li>
             <li><i></i><a href="/user/user_address.html">收货地址</a></li>
             <li><i></i><a href="/user/user_message.html">我的留言</a></li>
-            <li><i></i><a href="/user/user_coupon.html">我的优惠券</a></li>
-            <li><i></i><a href="/user/user_favorites.html">我的收藏</a></li>
+            <%--<li><i></i><a href="/user/user_coupon.html">我的优惠券</a></li>
+            <li><i></i><a href="/user/user_favorites.html">我的收藏</a></li>--%>
             <li><i></i><a href="/user/user_account.html">账户管理</a></li>
-            <li><i></i><a href="#">安全退出</a></li>
+            <li><i></i><a href="javascript:" onclick="quit()">安全退出</a></li>
         </ul>
     </nav>
     <article class="U-article Overflow">

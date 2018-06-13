@@ -25,10 +25,8 @@
             <li><i></i><a href="user_orderlist.html">我的订单</a></li>
             <li><i></i><a href="user_address.html">收货地址</a></li>
             <li><i></i><a href="user_message.html">我的留言</a></li>
-            <li><i></i><a href="user_coupon.html">我的优惠券</a></li>
-            <li><i></i><a href="user_favorites.html">我的收藏</a></li>
             <li><i></i><a href="user_account.html">账户管理</a></li>
-            <li><i></i><a href="#">安全退出</a></li>
+            <li><i></i><a href="javascript:" onclick="quit()">安全退出</a></li>
         </ul>
     </nav>
     <article class="U-article Overflow">
@@ -40,18 +38,6 @@
             <th>订购数量</th>
             <th>单价</th>
             <th>小计</th>
-            <%--<tr>
-                <td>201409243195</td>
-                <td><a href="detailsp.jsp" target="_blank" title="酸辣土豆丝">酸辣土豆丝</a></td>
-                <td>1</td>
-                <td>￥8.00</td>
-                <td>￥8.00</td>
-                <td>￥2.00</td>
-                <td>￥10.00</td>
-                <td>支付宝</td>
-                <!--如果未付款，则显示立即付款按钮-->
-                <td style="display:none;"><a href="#" target="_blank">立即付款</a></td>
-            </tr>--%>
             <c:forEach items="${orderContentDtoList}" var="orderContentDto">
                 <tr>
                     <td><a href="/todetailsp?itemId=${orderContentDto.itemId}" target="_blank"
@@ -69,52 +55,20 @@
         <span class="Font14 FontW Lineheight35 Block">收件地址：${address.province} ${address.city} ${address.district} ${address.detailAddr}</span>
         <span class="Font14 FontW Lineheight35 Block">收件人：	&nbsp;&nbsp;${address.consignee}</span>
         <span class="Font14 FontW Lineheight35 Block">电话：	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${address.phoneNum}</span>
-        <c:if test="${orderStatus == 2}">
+        <c:choose>
+            <c:when test="${orderStatus == 2}">
         <span class="Font14 FontW Lineheight35 Block">来给个评价吧：
-            <input type="text" id="access" class="input_addr" placeholder="来说说你的感受"/>
+            <input type="text" id="access" class="input_addr" placeholder="来说说你的感受" minlength="24" maxlength="300"
+                   required/>
             <input type="hidden" id="orderId" value="${orderId}"/>
             <input type="button" id="access_sub_btn" class="Submit" value="评价" onclick="access_sub()"/>
         </span>
-        </c:if>
-        <%--<form action="#">
-            <table>
-                <tr>
-                    <td width="30%" class="Font14 FontW Lineheight35" align="right">所在地：</td>
-                    <td>
-                        <input name="province" class="input_pri" value="${address.province}" required>
-                        <input name="city" class="input_pri" value="${address.city}" required>
-                        <input name="district" class="input_pri" value="${address.district}" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="30%" class="Font14 FontW Lineheight35" align="right">收件人姓名：</td>
-                    <td><input type="text" name="consignee" required value="${address.consignee}" class="input_name"></td>
-                </tr>
-                <tr>
-                    <td width="30%" class="Font14 FontW Lineheight35" align="right">街道地址：</td>
-                    <td><input type="text" name="detailAddr" size="50" value="${address.detailAddr}" class="input_addr" required></td>
-                </tr>
-                <tr>
-                    <td width="30%" class="Font14 FontW Lineheight35" align="right">邮政编码：</td>
-                    <td><input type="text" name="postCode" required size="10" pattern="[0-9]{6}" value="${address.postCode}"
-                               class="input_zipcode"></td>
-                </tr>
-                <tr>
-                    <td width="30%" class="Font14 FontW Lineheight35" align="right">手机号码：</td>
-                    <td><input type="text" name="phoneNum" required pattern="[0-9]{11}" value="${address.phoneNum}"
-                               class="input_tel"></td>
-                </tr>
-                <tr>
-                    <td align="right" width="30%" class="Font14 FontW Lineheight35"></td>
-                    <td class="Lineheight35"><input name="" type="submit" value="确认修改" class="Submit"><input
-                            name=""
-                            type="submit"
-                            value="删除"
-                            class="Submit">
-                    </td>
-                </tr>
-            </table>
-        </form>--%>
+            </c:when>
+            <c:when test="${orderStatus == 3}">
+                <span class="Font14 FontW Lineheight35 Block">你的评价：${orderaccess}
+                </span>
+            </c:when>
+        </c:choose>
     </article>
 </section>
 <!--End content-->

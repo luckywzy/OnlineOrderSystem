@@ -54,6 +54,10 @@ function odr_sub() {
  */
 function access_sub() {
     var msg = $("#access").val();
+    if(msg.length < 8){
+        showTips("再多写些吧");
+        return;
+    }
     var orderId = $("#orderId").val();
     var data = {"orderId":orderId,"access":msg};
     $.ajax({
@@ -65,14 +69,14 @@ function access_sub() {
         success:function (res) {
             if(res.status == 0){
                 //评论成功跳转到订单页面
-                alert(res.msg);
+                showTips(res.msg);
                 window.location.href="user_orderlist.html";
             }
 
         },
         error:function (res) {
             if(res.status != 0){
-                alert(res.msg);
+                showTips(res.msg);
             }
         }
     })

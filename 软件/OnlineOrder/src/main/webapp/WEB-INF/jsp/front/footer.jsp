@@ -9,12 +9,11 @@
         <aside>
             <div class="ewm-left">
                 <p>手机扫描二维码：</p>
-                <img src="images/Android_ico_d.gif">
-                <img src="images/iphone_ico_d.gif">
+                <img style="width: 110px;height: 110px;" src="/images/android_1.png">
             </div>
             <div class="tips">
                 <p>客服热线</p>
-                <p><i>1830927**73</i></p>
+                <p><i>18792470504</i></p>
                 <p>配送时间</p>
                 <p>
                     <time>09：00</time>
@@ -28,19 +27,19 @@
             <div>
                 <span><i class="i1"></i>配送支付</span>
                 <ul>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">支付方式</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">配送方式</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">配送效率</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">服务费用</a></li>
+                    <li><a href="/article_read.html" target="_blank" title="标题">支付方式</a></li>
+                    <li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>
+                    <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
+                    <li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>
                 </ul>
             </div>
             <div>
                 <span><i class="i2"></i>关于我们</span>
                 <ul>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">招贤纳士</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">网站介绍</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">配送效率</a></li>
-                    <li><a href="article_read.jsp" target="_blank" title="标题">商家加盟</a></li>
+                    <li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>
+                    <li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>
+                    <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
+                    <li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>
                 </ul>
             </div>
             <div>

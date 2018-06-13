@@ -102,6 +102,16 @@ public class ItemServiceImpl implements ItemService {
         return update > 0 ? true : false;
     }
 
+    @Override
+    public List<TItem> queryByPage(Integer currentPage, Integer pageNumber, String enterpriseid) {
+        PageHelper.startPage(currentPage,pageNumber);
+
+        TItemExample tItemExample = new TItemExample();
+        TItemExample.Criteria criteria = tItemExample.createCriteria();
+        criteria.andEnterpriseIdEqualTo(enterpriseid);
+        return itemDao.selectByExample(tItemExample);
+    }
+
     /**
      * 插入item
      * 

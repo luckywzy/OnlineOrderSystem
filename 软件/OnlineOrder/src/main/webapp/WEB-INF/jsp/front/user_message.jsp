@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -16,19 +16,16 @@
 
 </head>
 <body>
-<%@include file="topnav.jsp"%>
+<%@include file="topnav.jsp" %>
 <!--Start content-->
 <section class="Psection MT20">
     <nav class="U-nav Font14 FontW">
         <ul>
-            <li><i></i><a href="user_center.html">用户中心首页</a></li>
             <li><i></i><a href="user_orderlist.html">我的订单</a></li>
             <li><i></i><a href="user_address.html">收货地址</a></li>
             <li><i></i><a href="user_message.html">我的留言</a></li>
-            <li><i></i><a href="user_coupon.html">我的优惠券</a></li>
-            <li><i></i><a href="user_favorites.html">我的收藏</a></li>
             <li><i></i><a href="user_account.html">账户管理</a></li>
-            <li><i></i><a href="#">安全退出</a></li>
+            <li><i></i><a href="javascript:" onclick="quit()">安全退出</a></li>
         </ul>
     </nav>
     <article class="U-article Overflow">
@@ -36,15 +33,20 @@
         <section class="Mymessage Overflow">
             <span class="Mmtitle Block Font14 FontW Lineheight35">我的留言</span>
             <c:forEach items="${leaveWordsForOrderList}" var="leaveWordsForOrder">
-            <p class="FontW">
-                <time>${leaveWordsForOrder.createTime} </time>
-                <%--这是一个提问，网站是什么？--%> ${leaveWordsForOrder.leaveWords}
-            </p>
+                <p class="FontW">
+                    <%--<fmt:parseDate value="${param.date}" var="date" pattern="yyyy/MM/dd:HH:mm:ss>--%>
+                    <%--<time>${leaveWordsForOrder.createTime} </time>--%>
+                <time><fmt:formatDate value="${leaveWordsForOrder.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></time><span>我：</span>${leaveWordsForOrder.leaveWords}
+                </p>
+                <p class="CorRed">
+                    <time><fmt:formatDate value="${leaveWordsForOrder.updateTime}" pattern="yyyy-MM-dd HH:mm:ss" /></time>
+                    <span>店家回复：</span>${leaveWordsForOrder.reply}
+                </p>
             </c:forEach>
-           <%-- <p class="CorRed">
-                <time>2014-09-22 13:09</time>
-                <span>重庆川菜馆回复：</span>这这里回答，详情登录 http://www.deathghost.cn！
-            </p>--%>
+            <%-- <p class="CorRed">
+                 <time>2014-09-22 13:09</time>
+                 <span>重庆川菜馆回复：</span>这这里回答，详情登录 http://www.deathghost.cn！
+             </p>--%>
             <div class="TurnPage">
                 <a href="#">
                     <span class="Prev"><i></i>首页</span>
@@ -60,7 +62,7 @@
 </section>
 <!--End content-->
 <div class="F-link">
-    </div>
-<%@include file="footer.jsp"%>
+</div>
+<%@include file="footer.jsp" %>
 </body>
 </html>

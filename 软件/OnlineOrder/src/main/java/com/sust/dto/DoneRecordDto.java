@@ -1,10 +1,12 @@
 package com.sust.dto;
 
+import java.util.Date;
+
 public class DoneRecordDto {
 
     String buyer;
     String cnt;
-    String createTime;
+    Date createTime;
 
     public String getBuyer() {
         return buyer;
@@ -22,11 +24,11 @@ public class DoneRecordDto {
         this.cnt = cnt;
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 }

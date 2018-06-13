@@ -122,6 +122,11 @@ public class HomePageController {
     }
 
 
+    @RequestMapping("/article_read.html")
+    public String ToarticleRead() {
+        return "front/article_read";
+    }
+
     private boolean isLogin(HttpServletRequest request) {
         String userName = CookieUtils.getCookieValue(request, "userId");
         if (userName != null && userName.length() > 0) {

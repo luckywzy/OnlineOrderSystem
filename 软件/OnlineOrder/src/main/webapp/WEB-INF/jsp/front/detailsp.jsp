@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -46,8 +47,8 @@
         <div class="foodtext">
             <div class="foodname_a">
                 <h1>${item.itemName}</h1>
-                <%--TODO:需要加上餐厅的地址--%>
-                <p>西安市丈八路220号</p>
+
+                <p>${address}</p>
             </div>
             <div class="price_a">
                 <p class="price01">促销：￥<span>${item.itemPrice}</span></p>
@@ -55,8 +56,10 @@
             </div>
             <div class="Freight">
                 <span>配送费用：</span>
-                <span><i>未央区</i>至<i>莲湖区</i></span>
-                <span>10.00</span>
+                <%--<span><i>未央区</i>至<i>莲湖区</i></span>--%>
+                <span>${forDispatch.dispatchPrice}</span>
+                <span>起送价格：</span>
+                <span>${forDispatch.sendPrice}</span>
             </div>
             <ul class="Tran_infor">
                 <li>
@@ -88,12 +91,12 @@
             <span class="VHtitle">看了又看</span>
             <ul class="Fsulist">
                 <li>
-                    <a href="detailsp.jsp" target="_blank" title="酱爆茄子"><img src="upload/03.jpg"></a>
+                    <a href="#" title="酱爆茄子"><img src="upload/03.jpg"></a>
                     <p>酱爆茄子</p>
                     <p>￥12.80</p>
                 </li>
                 <li>
-                    <a href="detailsp.jsp" target="_blank" title="酱爆茄子"><img src="upload/02.jpg"></a>
+                    <a href="#" title="酱爆茄子"><img src="upload/02.jpg"></a>
                     <p>酱爆茄子</p>
                     <p>￥12.80</p>
                 </li>
@@ -132,7 +135,7 @@
                                         <td>
                                                 ${access.accessWords}
                                                 <%-- 还不错，速度倒是挺速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快速度倒是挺快快...--%>
-                                            <time>${access.createTime}</time>
+                                            <time><fmt:formatDate value="${access.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></time>
                                         </td>
                                         <td align="right">${access.userName}</td>
                                     </tr>
@@ -162,7 +165,7 @@
                                     <tr height="40">
                                         <td>${doneRecord.buyer}</td>
                                         <td>${doneRecord.cnt}</td>
-                                        <td>${doneRecord.createTime}</td>
+                                        <td><fmt:formatDate value="${doneRecord.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -185,7 +188,7 @@
         <!--ad&other infor-->
         <aside>
             <!--广告位或推荐位-->
-            <a href="#" title="广告位占位图片" target="_blank"><img src="upload/2014912.jpg"></a>
+            <a href="#" title="广告位占位图片"><img src="upload/2014912.jpg"></a>
         </aside>
     </section>
 </section>

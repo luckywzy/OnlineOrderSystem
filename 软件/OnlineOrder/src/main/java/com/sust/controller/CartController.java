@@ -1,13 +1,10 @@
 package com.sust.controller;
 
 import com.sust.constants.CookieConstant;
-import com.sust.constants.DisPatchPriceConstants;
-import com.sust.constants.TUserConstant;
+import com.sust.constants.UserConstant;
 import com.sust.dto.ItemDetailDto;
-import com.sust.model.ShoppingCart;
-import com.sust.model.TEnterpriseInfo;
-import com.sust.model.TItem;
-import com.sust.model.TUserAddress;
+import com.sust.model.*;
+import com.sust.service.EnterInfoForDispatchService;
 import com.sust.service.EnterpriseInfoService;
 import com.sust.service.ItemService;
 import com.sust.service.UserService;
@@ -30,7 +27,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @RequestMapping("/user")
@@ -45,6 +41,8 @@ public class CartController {
     private EnterpriseInfoService enterpriseInfoService;
     @Resource
     private UserService userService;
+    @Resource
+    private EnterInfoForDispatchService enterInfoForDispatchService;
 
     @RequestMapping(value = "/additemtocart", method = RequestMethod.POST)
     @ResponseBody
@@ -61,20 +59,36 @@ public class CartController {
         return JsonUtils.objectToJson(Result.build(0, "添加成功"));
     }
 
+    /**
+     * 删除在购物车中的item
+     * @param itemId
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/delitemfromcart",method = RequestMethod.POST)
+    @ResponseBody
+    public String delitemfromcart(@RequestParam("itemId") String itemId,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response){
+        removeItemFromCart(itemId,request,response);
+        return JsonUtils.objectToJson(Result.build(0, "删除成功"));
+    }
+
     @RequestMapping("/tocart")
     public String tocart(HttpServletRequest request,
                          HttpServletResponse response,
                          Model model) {
         String cookieVal = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
         List<ItemDetailDto> itemDetailDtos = null;
-        if(cookieVal != null) {
+        if (cookieVal != null ) {
             itemDetailDtos = getItemFromCart(cookieVal);
         }
         model.addAttribute("itemDetailDtos", itemDetailDtos);
         return "front/cart";
     }
 
-    @RequestMapping(value = "/toconfirm_order",method = RequestMethod.GET)
+    @RequestMapping(value = "/toconfirm_order", method = RequestMethod.GET)
     public String toconfirm_order() {
 
       /*  String cookieValue = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
@@ -90,7 +104,8 @@ public class CartController {
 
     /**
      * 生成订单信息，
-     *  包括获取地址信息，生成商品信息
+     * 包括获取地址信息，生成商品信息
+     *
      * @param request
      * @param response
      * @param model
@@ -104,25 +119,28 @@ public class CartController {
         String cookieValue = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
         //获取商品信息
         List<ItemDetailDto> itemDetailDtos = null;
-        if(cookieValue != null) {
+        if (cookieValue != null) {
             itemDetailDtos = getItemFromCart(cookieValue);
         }
         BigDecimal total = null;
+        double val = 0.0;
         //计算总价格
         for (ItemDetailDto itemDetailDto : itemDetailDtos) {
-            double val = 0.0;
             val += itemDetailDto.getItemPrice().doubleValue() * itemDetailDto.getCnt();
-            total = new BigDecimal(val);
         }
-
+        total = new BigDecimal(val);
         //获取地址信息
-        String userId = CookieUtils.getCookieValue(request,TUserConstant.USER_COOKIE_NAME);
+        String userId = CookieUtils.getCookieValue(request, UserConstant.USER_ID);
         List<TUserAddress> userAddressList = userService.queryAddressByUserId(userId);
+        //获取配送价格信息
+        TEnterInfoForDispatch infoForDispatch = enterInfoForDispatchService.queryEnterInfoForDispatchByenterpriseId(itemDetailDtos.get(0).getEnterpriseId());
+        Short dispatchPrice = infoForDispatch.getDispatchPrice();
+
 
         model.addAttribute("userAddressList", userAddressList);
         model.addAttribute("total", total);
         model.addAttribute("itemDetailDtos", itemDetailDtos);
-        model.addAttribute("dispatchPrice",DisPatchPriceConstants.DISPATCH_PRICE);
+        model.addAttribute("dispatchPrice", dispatchPrice);
 
         return "front/confirm_order";
     }
@@ -134,7 +152,7 @@ public class CartController {
 
         String CartCk = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
         //cookie 不存在
-        if (CartCk == null) {
+        if (CartCk == null || "".equals(CartCk)) {
             Map<String, Integer> shoppingCart = new HashMap<>();
             this.addGoods(shoppingCart, itemId, cnt);
             String s = JsonUtils.objectToJson(shoppingCart);
@@ -146,6 +164,7 @@ public class CartController {
             Map<String, Integer> shoppingCart = JsonUtils.jsonToPojo(cookieVal, HashMap.class);
             this.addGoods(shoppingCart, itemId, cnt);
             CookieUtils.setCookie(request, response, CookieConstant.SHOPPING_CART_NAME, JsonUtils.objectToJson(shoppingCart));
+
         }
     }
 
@@ -154,15 +173,17 @@ public class CartController {
                                     HttpServletResponse response) {
 
         String cookieVal = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
-        ShoppingCart shoppingCart = JsonUtils.jsonToPojo(cookieVal, ShoppingCart.class);
-        shoppingCart.removeGoods(itemId);
-        CookieUtils.setCookie(request, response, CookieConstant.SHOPPING_CART_NAME, JsonUtils.objectToJson(shoppingCart));
+        Map<String, Integer> cart = JsonUtils.jsonToPojo(cookieVal, HashMap.class);
+        if(cart.containsKey(itemId)){
+            cart.remove(itemId);
+        }
+        CookieUtils.setCookie(request, response, CookieConstant.SHOPPING_CART_NAME, JsonUtils.objectToJson(cart));
     }
 
 
     private void addGoods(Map<String, Integer> cart, String itemId, Integer cnt) {
         if (cart.containsKey(itemId)) {
-            cart.put(itemId, cart.get(itemId) + cnt);
+            cart.put(itemId, cnt);
             return;
         }
         cart.put(itemId, cnt);
@@ -170,25 +191,39 @@ public class CartController {
 
     /**
      * 从cookie中得到商品数据
+     *
      * @param cookieVal
      */
-    public List<ItemDetailDto> getItemFromCart(String cookieVal){
+    public List<ItemDetailDto> getItemFromCart(String cookieVal) {
         List<ItemDetailDto> itemDetailDtos = new ArrayList<>();
         Map<String, Integer> cart = JsonUtils.jsonToPojo(cookieVal, HashMap.class);
-        List<String> itemIdList = cart.keySet().stream().collect(Collectors.toList());
-        List<TItem> itemList = itemService.BatchQueryByitemId(itemIdList);
+        if (cart != null && cart.size() > 0) {
+            List<String> itemIdList = cart.keySet().stream().collect(Collectors.toList());
+            List<TItem> itemList = itemService.BatchQueryByitemId(itemIdList);
 
-        for (TItem item : itemList) {
-            // 属性设置
-            ItemDetailDto itemDetailDto = new ItemDetailDto();
-            TEnterpriseInfo tEnterpriseInfo = enterpriseInfoService.queryById(item.getEnterpriseId());
-            itemDetailDto.setItemDetailDto(item, tEnterpriseInfo);
-            // 数量设置
-            itemDetailDto.setCnt(cart.get(item.getItemId()));
+            for (TItem item : itemList) {
+                // 属性设置
+                ItemDetailDto itemDetailDto = new ItemDetailDto();
+                TEnterpriseInfo tEnterpriseInfo = enterpriseInfoService.queryById(item.getEnterpriseId());
+                itemDetailDto.setItemDetailDto(item, tEnterpriseInfo);
+                // 数量设置
+                itemDetailDto.setCnt(cart.get(item.getItemId()));
 
-            itemDetailDtos.add(itemDetailDto);
+                itemDetailDtos.add(itemDetailDto);
+            }
         }
 
         return itemDetailDtos;
+    }
+
+    @RequestMapping(value = "changeCookie", method = RequestMethod.POST)
+    public void changeCookie(@RequestParam("itemId") String itemId,
+                             @RequestParam("cnt") String cnt,
+                             HttpServletRequest request,
+                             HttpServletResponse response) {
+        String cookieVal = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
+        Map<String, Integer> shoppingCart = JsonUtils.jsonToPojo(cookieVal, HashMap.class);
+        this.addGoods(shoppingCart, itemId, Integer.valueOf(cnt));
+        CookieUtils.setCookie(request, response, CookieConstant.SHOPPING_CART_NAME, JsonUtils.objectToJson(shoppingCart));
     }
 }

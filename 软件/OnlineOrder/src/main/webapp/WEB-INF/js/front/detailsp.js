@@ -12,7 +12,7 @@ function addItemToCart() {
         },*/
         success: function (data) {
             if (data.status == 0) {
-                alert(data.msg);
+                showTips(data.msg);
             } else {
                 //alert(data.Msg);
             }

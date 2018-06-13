@@ -1,10 +1,12 @@
 package com.sust.dto;
 
+import java.util.Date;
+
 public class OrderAccessDto {
 
     private String accessWords;
     private String userName;
-    private String createTime;
+    private Date createTime;
 
     public String getAccessWords() {
         return accessWords;
@@ -22,11 +24,11 @@ public class OrderAccessDto {
         this.userName = userName;
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 }

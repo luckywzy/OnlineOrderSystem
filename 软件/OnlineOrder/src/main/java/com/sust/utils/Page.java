@@ -16,6 +16,11 @@ public class Page
 
     private int pageNumber = 6; //每页显示条数
 
+    public Page(){}
+    public Page(int pageNumber){
+        this.pageNumber = pageNumber;
+    }
+
     public void vaildCurrentPageNum(Integer curpage){
         int curpagetmp = 1;
         if (curpage == null) {

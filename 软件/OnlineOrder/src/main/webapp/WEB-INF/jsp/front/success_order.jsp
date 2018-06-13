@@ -22,7 +22,7 @@
     <p>
         <%--<button type="button" class="Lineheight35"><a href="#" target="_blank" disabled="true">支付宝立即支付</a></button>--%>
         <button type="button" class="Lineheight35"><a href="#" target="_blank">线下支付</a></button>
-        <button type="button" class="Lineheight35"><a href="/user/user_center">进入用户中心</a></button>
+        <button type="button" class="Lineheight35"><a href="/user/user_center.html">进入用户中心</a></button>
     </p>
 </section>
 <!--End content-->

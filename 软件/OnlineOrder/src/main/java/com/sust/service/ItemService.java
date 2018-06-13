@@ -54,4 +54,6 @@ public interface ItemService {
      * @return
      */
     boolean updateByItem(TItem item);
+
+    List<TItem> queryByPage(Integer currentPage, Integer pageNumber, String enterpriseid);
 }

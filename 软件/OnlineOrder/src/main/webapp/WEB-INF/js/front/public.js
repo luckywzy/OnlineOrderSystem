@@ -1,6 +1,28 @@
 /*public js xianhuachneg.com*/
+/**
+ * @param txt 字符串 为所提示的信息文字
+ * @param time 整数 为自动消失的时间 单位为毫秒，如：1000
+ * @param status 整数 1和0 为1时为正确信息提示，背景绿色，图片标示为✔符号，为0时，背景红色，标示为✘红叉
+ */
+function showTips(txt, time, status) {
+    var htmlCon = '';
+    if (txt != '') {
+        if (status != 0 && status != undefined) {
+            htmlCon = '<div class="tipsBox" style="width:220px;padding:10px;background-color:rgba(111,73,253,0);border-radius:4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;box-shadow:0 0 3px #ddd inset;-webkit-box-shadow: 0 0 3px #ddd inset;text-align:center;color:#FFF;position:fixed;top:35%;left:50%;z-index:999999;margin-left:-120px;">' + txt + '</div>'; /*<img src="images/ok.png" style="vertical-align: middle;margin-right:5px;" alt="OK，"/>*/
+        } else {
+            htmlCon = '<div class="tipsBox" style="width:220px;padding:10px;background-color:#000000;border-radius:4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;box-shadow:0 0 3px #ddd inset;-webkit-box-shadow: 0 0 3px #ddd inset;text-align:center;position:fixed;top:35%;left:50%;z-index:999999;margin-left:-120px;color:#FFF">' + txt + '</div>'; /*<img src="images/err.png" style="vertical-align: middle;margin-right:5px;" alt="Error，"/>*/
+        }
+        $('body').prepend(htmlCon);
+        if (time == '' || time == undefined) {
+            time = 1500;
+        }
+        setTimeout(function () {
+            $('.tipsBox').remove();
+        }, time);
+    }
+}
 
-/*Tab Search style*/
+    /*Tab Search style*/
 function selectsearch(theA, word) {
     obj = document.getElementById("selectsearch").getElementsByTagName("a");
     $("#search_type").val(word);
@@ -101,7 +123,7 @@ function login_f() {
             },
             error: function (data) {
                 if (data.status != 0) {
-                    alert(data.msg);
+                    showTips(data.msg);
                 }
             }
         })
@@ -136,16 +158,75 @@ function registerSub() {
         success: function (data) {
             if (data.status == 0) {
                 //成功跳转首页
+                showTips(data.msg);
                 window.location.href = "/login.html";
             } else {
-                alert(data.msg);
+                showTips(data.msg);
+
             }
         },
         error: function (data) {
             if (data.status != 0) {
-                alert(data.msg);
+                showTips(data.msg);
             }
         }
     })
+}
 
+/**
+ * 登录提交
+ */
+function doLogin() {
+    $.ajax({
+        url: "/userlogin",
+        type:
+            "POST",
+        data: $('#user_form').serialize(),
+        dataType: "json",
+        success: function (data) {
+            if (data.status == 0) {
+                //成功跳转首页
+                showTips(data.msg,5000,1);
+                window.location.href = "/home";
+            } else {
+                //alert(data.msg);
+                showTips(data.msg,1000,0);
+            }
+        },
+        error: function (data) {
+            if (data.status != 0) {
+                showTips(data.msg,1000,0);
+            }
+        }
+    })
+}
+
+/**
+ * 注销用户
+ */
+function quit() {
+    var con = confirm("确定注销用户？");
+    if(con == false){
+        return;
+    }
+    $.ajax({
+        url: "/quit",
+        type:
+            "POST",
+        dataType: "json",
+        success: function (data) {
+            if (data.status == 0) {
+                //成功跳转首页
+                window.location.href = "/";
+            } else {
+                //alert(data.msg);
+                showTips(data.msg,1000,1);
+            }
+        },
+        error: function (data) {
+            if (data.status != 0) {
+                showTips(data.msg,1000,0);
+            }
+        }
+    })
 }

@@ -159,6 +159,17 @@
                             </div>
                         </div>
                     </div>
+                        <div class="am-g am-margin-top-sm">
+                            <div class="am-u-sm-2 am-text-right">
+                                回复订单留言
+                            </div>
+                            <div class="am-u-sm-4 am-u-end">
+                                <input id="reply" name="reply" type="text"  class="am-input-sm"
+                                       required>
+                                <input name="sub_orderleaves_btn" type="button"  class="am-input-sm" value="提交" onclick="sub_leaveWordsReply('${orderId}')"
+                                       required>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -175,7 +186,7 @@
 
 <footer>
     <hr>
-    <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+    <p class="am-padding-left">© 版权所有 2018 SUST 技术支持：<a href="http://www.sust.edu.cn" title="SUST">SUST</a></p>
 </footer>
 
 <!--[if lt IE 9]>

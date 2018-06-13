@@ -1,5 +1,6 @@
 package com.sust.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.sust.dao.TLeaveWordsForOrderMapper;
 import com.sust.dao.TOrderAccessMapper;
 import com.sust.dao.TOrderMapper;
@@ -31,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean insertLeaveWords(TLeaveWordsForOrder leaveWords) {
 
-        int insert = leaveWordsForOrderdao.insert(leaveWords);
+        int insert = leaveWordsForOrderdao.insertSelective(leaveWords);
 
         return insert > 0 ? true : false;
     }
@@ -71,9 +72,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<TOrder> queryOrderByStatus(Byte status) {
+    public List<TOrder> queryOrderByStatus(Integer currentPage, Integer pageNumber,Byte status) {
+        //分页处理
+        PageHelper.startPage(currentPage, pageNumber);
 
         TOrderExample example = new TOrderExample();
+        example.setOrderByClause("create_time desc");
         TOrderExample.Criteria criteria = example.createCriteria();
         criteria.andOrderStatusEqualTo(status);
         List<TOrder> orderList = orderMapper.selectByExample(example);
@@ -100,6 +104,18 @@ public class OrderServiceImpl implements OrderService {
         List<TLeaveWordsForOrder> leaveWordsForOrderList = leaveWordsForOrderdao.selectByExample(example);
 
         return leaveWordsForOrderList.size() > 0 ? leaveWordsForOrderList.get(0): null;
+    }
+
+    @Override
+    public boolean insertReplywords(String orderid, String reply) {
+        TLeaveWordsForOrder leaveWordsForOrder = new TLeaveWordsForOrder();
+        leaveWordsForOrder.setReply(reply);
+        TLeaveWordsForOrderExample example = new TLeaveWordsForOrderExample();
+        TLeaveWordsForOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderIdEqualTo(orderid);
+        int update = leaveWordsForOrderdao.updateByExampleSelective(leaveWordsForOrder,example);
+
+        return update>0 ? true : false;
     }
 
     @Override

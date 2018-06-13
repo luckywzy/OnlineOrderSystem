@@ -44,12 +44,22 @@
     <aside class="N-right">
         <div class="login-container">
             <div class="default" style="display:block">
-                <div class="head-img-row"><img src="//s0.meituan.net/bs/fe-web-meituan/2d05c2b/img/avatar.jpg" alt="">
+                <div class="head-img-row"><img src="/images/avatar.jpg" alt="">
                 </div>
-                <p class="user-name">Hi！你好</p><a class="btn-login"
-                                                 href="/register.html">注册</a><a
-                    class="btn-login"
-                    href="/login.html">立即登录</a>
+                <p class="user-name">Hi！你好</p>
+                <c:choose>
+                    <c:when test="${cookie.userId == null || cookie.userId.value == ''}">
+                        <a class="btn-login"
+                           href="/register.html">注册</a>
+                        <a class="btn-login"
+                           href="/login.html">立即登录</a>
+                    </c:when>
+                    <c:when test="${cookie.userId != null && cookie.userId.value != ''}">
+                        <p class="user-other"><%=CookieUtils.getCookieValue(request, UserConstant.USER_NAME, true) %><%--${cookie.username.value}--%></p>
+                        <p class="user-other">来点些什么吧</p>
+                    </c:when>
+
+                </c:choose>
             </div>
         </div>
 
@@ -59,7 +69,8 @@
     <article class="Sflist">
         <div id="Indexouter">
 
-            <ul id="Indextab" style="background-color: rgb(190, 164, 116); background-image: linear-gradient(to right, rgb(255, 113, 74) 2%, rgb(252, 66, 66) 97%);">
+            <ul id="Indextab"
+                style="background-color: rgb(190, 164, 116); background-image: linear-gradient(to right, rgb(255, 113, 74) 2%, rgb(252, 66, 66) 97%);">
                 <li class="current">点菜</li>
                 <li>餐馆</li>
                 <p class="class_B">
@@ -98,8 +109,10 @@
                             <a href="javascript:changeCurrentPage('1')">
                                 <span class="Prev"><i></i>首页</span>
                             </a>
-                            <a href="javascript:changeCurrentPage('${page.currentPage-1 }')"><span class="PNumber">上一页</span></a>
-                            <a href="javascript:changeCurrentPage('${page.currentPage+1 }')"><span class="PNumber">下一页</span></a>
+                            <a href="javascript:changeCurrentPage('${page.currentPage-1 }')"><span
+                                    class="PNumber">上一页</span></a>
+                            <a href="javascript:changeCurrentPage('${page.currentPage+1 }')"><span
+                                    class="PNumber">下一页</span></a>
                             <a href="javascript:changeCurrentPage('${page.totalPage }')">
                                 <span class="Next">尾页<i></i></span>
                             </a>
@@ -153,8 +166,10 @@
                         <a href="javascript:changeCurrentPage2('1')">
                             <span class="Prev"><i></i>首页</span>
                         </a>
-                        <a href="javascript:changeCurrentPage2('${page2.currentPage-1 }')"><span class="PNumber">上一页</span></a>
-                        <a href="javascript:changeCurrentPage2('${page2.currentPage+1 }')"><span class="PNumber">下一页</span></a>
+                        <a href="javascript:changeCurrentPage2('${page2.currentPage-1 }')"><span
+                                class="PNumber">上一页</span></a>
+                        <a href="javascript:changeCurrentPage2('${page2.currentPage+1 }')"><span
+                                class="PNumber">下一页</span></a>
                         <a href="javascript:changeCurrentPage2('${page2.totalPage }')">
                             <span class="Next">尾页<i></i></span>
                         </a>

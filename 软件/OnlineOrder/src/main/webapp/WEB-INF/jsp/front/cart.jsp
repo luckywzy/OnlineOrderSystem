@@ -9,6 +9,7 @@
     <link href="/css/front/style.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="/js/front/public.js"></script>
     <script type="text/javascript" src="/js/front/jquery.js"></script>
+    <script type="text/javascript" src="/js/front/jquery.cookie.js"></script>
     <script type="text/javascript" src="/js/front/jqpublic.js"></script>
     <script type="text/javascript" src="/js/front/cart.js"></script>
 </head>
@@ -37,21 +38,21 @@
                 </tr>
                 <tr>
                     <td class="tb2_td1"><input type="checkbox" value="${itemDetailDto.itemPrice}" name="newslist" id="newslist-1"/></td>
-                    <td class="tb2_td2"><a href="detailsp.jsp" target="_blank"><img src="${itemDetailDto.itemPic}"/></a>
+                    <td class="tb2_td2"><a href="/todetailsp?itemId=${itemDetailDto.itemId}" target="_blank"><img src="${itemDetailDto.itemPic}"/></a>
                     </td>
-                    <td class="tb2_td3"><a href="detailsp.jsp" target="_blank">${itemDetailDto.itemName}</a></td>
+                    <td class="tb2_td3"><a href="/todetailsp?itemId=${itemDetailDto.itemId}" target="_blank">${itemDetailDto.itemName}</a></td>
                     <td class="tb1_td4"><s>￥${itemDetailDto.itemPrice}</s></td>
-                    <td class="tb1_td5"><input id="min1" name="" style="width:30px; height:30px;border:1px solid #ccc;"
+                    <td class="tb1_td5"><input name="min1" style="width:30px; height:30px;border:1px solid #ccc;"
                                                type="button" value="-"/>
-                        <input id="text_box1" name="" type="text" value="${itemDetailDto.cnt}"
+                        <input name="selectCnt" type="text" value="${itemDetailDto.cnt}"
                                style=" width:40px;height:28px; text-align:center; border:1px solid #ccc;"/>
-                        <input id="add1" name="" style="width:30px; height:30px;border:1px solid #ccc;" type="button"
+                        <input name="add1" style="width:30px; height:30px;border:1px solid #ccc;" type="button"
                                value="+"/>
                     </td>
                     <td class="tb1_td6"><label id="total1" class="tot"
                                                style="color:#ff5500;font-size:14px; font-weight:bold;">${itemDetailDto.itemPrice}</label>
                     </td>
-                    <td class="tb1_td7"><a href="#" id="delcart1">删除</a></td>
+                    <td class="tb1_td7"><a href="#" id="delcart1" onclick="del_item_from_cart('${itemDetailDto.itemId}')">删除</a></td>
                 </tr>
             </table>
         </c:forEach>

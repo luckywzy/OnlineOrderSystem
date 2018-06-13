@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -6,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Amaze UI Admin user Examples</title>
+  <title>准备着中的订单</title>
   <meta name="description" content="这是一个 user 页面">
   <meta name="keywords" content="user">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,7 +88,7 @@
                 <td><a href="/admin/order/orderDetail?orderId=${order.orderId}">${order.orderId}</a></td>
                 <td>${order.orderPrice}</td>
                 <td>${order.userId}</td>
-                <td>${order.updateTime}</td>
+                <td><fmt:formatDate value="${order.updateTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                 <td>
                   <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
@@ -105,13 +106,14 @@
             </tbody>
           </table>
           <div class="am-cf">
-            共 1 条记录
+            共 ${page.totalNumber} 条记录 &nbsp;&nbsp;&nbsp;<span>当前位于第:${page.currentPage }/${page.totalPage }页</span>
             <div class="am-fr">
+
               <ul class="am-pagination">
-                <li class="am-disabled"><a href="#">首页</a></li>
-                <li class="am-active"><a href="#">上一页</a></li>
-                <li><a href="#">下一页</a></li>
-                <li><a href="#">尾页</a></li>
+                <li <%--class="am-disabled"--%>><a href="javascript:changeCurrentPage('1')">首页</a></li>
+                <li <%--class="am-active"--%>><a href="javascript:changeCurrentPage('${page.currentPage-1 }')">上一页</a></li>
+                <li><a href="javascript:changeCurrentPage('${page.currentPage+1 }')">下一页</a></li>
+                <li><a href="javascript:changeCurrentPage('${page.totalPage }')">尾页</a></li>
               </ul>
             </div>
           </div>
@@ -235,7 +237,7 @@
 
 <footer>
   <hr>
-  <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+  <p class="am-padding-left">© 版权所有 2018 SUST 技术支持：<a href="http://www.sust.edu.cn" title="SUST">SUST</a></p>
 </footer>
 
 <!--[if lt IE 9]>

@@ -1,14 +1,13 @@
 package com.sust.controller;
 
-import com.google.common.base.Splitter;
 import com.sust.constants.DisPatchPriceConstants;
-import com.sust.constants.OrderContentConstant;
-import com.sust.constants.TUserConstant;
+import com.sust.constants.UserConstant;
 import com.sust.dto.OrderContentDto;
 import com.sust.dto.UserOrderDto;
 import com.sust.enumeration.OrderStatusEnum;
 import com.sust.model.*;
 import com.sust.service.ItemService;
+import com.sust.service.OrderAccessService;
 import com.sust.service.OrderService;
 import com.sust.service.UserService;
 import com.sust.utils.CookieUtils;
@@ -40,6 +39,8 @@ public class UserController {
     ItemService itemService;
     @Resource
     OrderService orderService;
+    @Resource
+    OrderAccessService orderAccessService;
 
     @RequestMapping(value = "/register.do",method = RequestMethod.POST)
     @ResponseBody
@@ -78,6 +79,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/userlogin",method = RequestMethod.POST)
+    @ResponseBody
     public String loginAction(@RequestParam("username") String username,
                               @RequestParam("password") String password,
                              /* @RequestBody UserDto userDto,*/
@@ -89,10 +91,11 @@ public class UserController {
 
         TUser user = userService.queryUserInfoByNameAndPwd(username,password);
         if (user != null){
-            CookieUtils.setCookie(request,response,"userId",user.getUserId());
-            return "redirect:/home";
+            CookieUtils.setCookie(request,response,UserConstant.USER_ID,user.getUserId());
+            CookieUtils.setCookie(request,response,UserConstant.USER_NAME,user.getUsername(),true);
+            return JsonUtils.objectToJson(Result.build(0,"登陆成功"));
         }else {
-            return "redirect:/error";
+            return JsonUtils.objectToJson(Result.build(1,"用户名或密码不正确请确认后再重试"));
         }
     }
 
@@ -115,10 +118,16 @@ public class UserController {
 
         Map<String,String> itemIdAndCnt = splitOrderContent(order.getOrderContent());
 
+
+        String orderaccess = null;
+
         List<OrderContentDto> orderContentDtoList = new ArrayList<>();
         for (Map.Entry<String, String> entry : itemIdAndCnt.entrySet()) {
             String key = entry.getKey();
             TItem item =itemService.queryById(Integer.valueOf(key));
+            if(orderaccess == null){
+                orderaccess = orderAccessService.queryAccessByUserAndItemId(order.getUserId(),key);
+            }
             OrderContentDto contentDto = new OrderContentDto();
 
             contentDto.setItemId(item.getItemId());
@@ -132,6 +141,7 @@ public class UserController {
         String orderId = order.getOrderId();
         BigDecimal dispatchPrice = DisPatchPriceConstants.DISPATCH_PRICE;
         TUserAddress address = userService.queryAddressById(order.getDispatchAddress(), order.getUserId());
+
         BigDecimal orderPrice = order.getOrderPrice();
         model.addAttribute("orderId",orderId);
         model.addAttribute("orderContentDtoList",orderContentDtoList);
@@ -139,6 +149,7 @@ public class UserController {
         model.addAttribute("orderPrice",orderPrice);
         model.addAttribute("address",address);
         model.addAttribute("orderStatus",order.getOrderStatus());
+        model.addAttribute("orderaccess",orderaccess);
         return "front/user_orderdetail";
     }
 
@@ -149,7 +160,7 @@ public class UserController {
     @RequestMapping("/user/user_orderlist.html")
     public String touser_orderlist(HttpServletRequest request,Model model){
 
-        String userId = CookieUtils.getCookieValue(request, TUserConstant.USER_COOKIE_NAME);
+        String userId = CookieUtils.getCookieValue(request, UserConstant.USER_ID);
         //获取订单信息
         List<TOrder> orderList = userService.queryOrderListByUserId(userId);
 
@@ -200,10 +211,9 @@ public class UserController {
     @RequestMapping("/user/user_message.html")
     public String touser_message(HttpServletRequest request, HttpServletResponse response, Model model){
         //添加留言信息
-        String userId = CookieUtils.getCookieValue(request, TUserConstant.USER_COOKIE_NAME);
+        String userId = CookieUtils.getCookieValue(request, UserConstant.USER_ID);
         List<TLeaveWordsForOrder> leaveWordsForOrderList = orderService.queryLeaveWordsByUserId(userId);
         model.addAttribute("leaveWordsForOrderList", leaveWordsForOrderList);
-        //TODO : 添加店家回复消息
 
         return "front/user_message";
     }
@@ -237,12 +247,22 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/user/add_address",method = RequestMethod.POST)
-    public String addAddress(@ModelAttribute("address_form")TUserAddress/*AddressDto*/ address_form){
+    public String addAddress(@ModelAttribute("address_form")TUserAddress/*AddressDto*/ address_form,
+                             HttpServletRequest request,
+                             HttpServletResponse response){
 
         logger.info("model:{}",address_form);
-
+        address_form.setUserId(CookieUtils.getCookieValue(request,UserConstant.USER_ID));
         boolean ok = userService.insertAddress(address_form);
         return "redirect:/user/confirm_order";
+    }
+
+    @RequestMapping("/quit")
+    @ResponseBody
+    public String userQuit(HttpServletRequest request, HttpServletResponse response){
+        CookieUtils.deleteCookie(request,response,UserConstant.USER_ID);
+        CookieUtils.deleteCookie(request,response,UserConstant.USER_NAME);
+        return JsonUtils.objectToJson(Result.build(0, "注销成功"));
     }
 
 }

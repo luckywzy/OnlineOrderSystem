@@ -2,7 +2,7 @@ package com.sust.controller;
 
 import com.google.common.base.Preconditions;
 import com.sust.constants.DisPatchPriceConstants;
-import com.sust.constants.TUserConstant;
+import com.sust.constants.UserConstant;
 import com.sust.dto.OrderContentDto;
 import com.sust.model.TItem;
 import com.sust.model.TLeaveWordsForOrder;
@@ -96,7 +96,7 @@ public class AdminOrderController {
          TLeaveWordsForOrder orderleaveWords= orderService.queryLeaveWordsByOrderId(orderId);
         String leaveWords = null;
         if(orderleaveWords == null) {
-            leaveWords = TUserConstant.DEFAULT_LEAVE_WORDS;
+            leaveWords = UserConstant.DEFAULT_LEAVE_WORDS;
         }else {
             leaveWords = orderleaveWords.getLeaveWords();
         }
@@ -109,5 +109,15 @@ public class AdminOrderController {
         model.addAttribute("address",address);
         return "back/admin-order-detail";
 
+    }
+
+    @RequestMapping("/replyleavewords")
+    @ResponseBody
+    public String replyleavewords(@RequestParam("orderid")String orderid,
+                                  @RequestParam("reply")String reply){
+        boolean ok = orderService.insertReplywords(orderid,reply);
+
+        return ok ? JsonUtils.objectToJson(Result.build(0,"回复成功")) :
+                JsonUtils.objectToJson(Result.build(1,"回复失败"));
     }
 }

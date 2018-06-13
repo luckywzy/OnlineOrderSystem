@@ -25,4 +25,14 @@ public class OrderAccessServiceImpl implements OrderAccessService {
 
         return accessList;
     }
+
+    @Override
+    public String queryAccessByUserAndItemId(String userId, String item_id) {
+        TOrderAccessExample example = new TOrderAccessExample();
+        TOrderAccessExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(userId).andItemIdEqualTo(item_id);
+        List<TOrderAccess> accessList = accessdao.selectByExample(example);
+
+        return accessList.size() > 0 ? accessList.get(0).getAccessWords():"";
+    }
 }

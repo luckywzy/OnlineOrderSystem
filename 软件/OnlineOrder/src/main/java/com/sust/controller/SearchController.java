@@ -20,7 +20,7 @@ public class SearchController {
 
     @RequestMapping("/search_food.html")
     public String toSearchFoodPage() {
-        return "search_food";
+        return "front/search_food";
     }
 
     @RequestMapping(value = "/search_restaurant.html",method = RequestMethod.POST,produces = "text/html;charset=UTF-8")

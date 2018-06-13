@@ -8,7 +8,7 @@ Author: DeathGhost
 Author URI: http://www.xianhuachneg.com/
 */
 /* CSS PUBLIK*/
-body{margin:0 auto;padding:0;color:#333333;font-family:"Microsoft YaHei";font-size:12px;overflow-x:hidden;position:relative;}
+body{margin:0 auto;padding:0;color:#333333;font-family:"Microsoft YaHei";font-size:16px;overflow-x:hidden;position:relative;}
 a,input{ text-decoration:none;color:#333333;outline: none;border:none;}
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {margin:0;padding:0;}
 table {border-collapse:collapse;border-spacing:0;}
@@ -110,6 +110,7 @@ code::selection {background:#dddddd;}
 .Cfn .N-right .login-container .default{ padding-top: 30px;position: relative; text-align: center;}
 .Cfn .N-right .login-container .user-name{ font-size: 16px;color: #222;text-align: center;font-weight: 500;white-space: nowrap;width: 6em;overflow: hidden;text-overflow: ellipsis;margin: 0 auto;}
 .Cfn .N-right .login-container .btn-login{ width: 118px;text-align: center;margin: 10px auto 15px;background: #fff;border: 1px solid #e5e5e5;border-radius: 40px;font-size: 14px;color: #333;transition: background-color .5s;display: block;line-height: 38px;}
+.Cfn .N-right .login-container .user-other{font-size: 16px;color: #222;text-align: center;font-weight: 500;white-space: nowrap;width: 6em;overflow: hidden;text-overflow: ellipsis;margin-top: 20px;margin-left: 85px;}
 /*Category list*/
 .CateL{width:900px;height:auto;margin-top:8px;float:left;}
 .CateL li{width:280px;border:2px #f8f8f8 solid;height:auto;overflow:hidden;float:left; margin:8px;box-sizing:border-box;text-align:center;}
@@ -350,7 +351,7 @@ code::selection {background:#dddddd;}
  .AAlist .AAlt{border-bottom:1px #dddddd solid;line-height:45px;}
  .AAlist li{border-bottom:1px #f1f1f1 dotted; line-height:35px;}
 
- .A-read{border:1px #dddddd solid;border-top:none;padding:8px;line-height:28px;font-size:13px;}
+ .A-read{border:1px #dddddd solid;border-top:none;padding:8px;line-height:28px;font-size:16px;text-align: center;}
 /*Delivery*/
 .Sender{float:left;width:598px;background:#f1f1f1;border-right:2px #fff solid;}
 .Sender input{border:1px #dddddd solid;padding:8px;}

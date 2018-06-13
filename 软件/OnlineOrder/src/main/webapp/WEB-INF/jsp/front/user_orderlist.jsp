@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -20,14 +21,11 @@
 <section class="Psection MT20">
     <nav class="U-nav Font14 FontW">
         <ul>
-            <li><i></i><a href="user_center.html">用户中心首页</a></li>
             <li><i></i><a href="user_orderlist.html">我的订单</a></li>
             <li><i></i><a href="user_address.html">收货地址</a></li>
             <li><i></i><a href="user_message.html">我的留言</a></li>
-            <li><i></i><a href="user_coupon.html">我的优惠券</a></li>
-            <li><i></i><a href="user_favorites.html">我的收藏</a></li>
             <li><i></i><a href="user_account.html">账户管理</a></li>
-            <li><i></i><a href="#">安全退出</a></li>
+            <li><i></i><a href="javascript:" onclick="quit()">安全退出</a></li>
         </ul>
     </nav>
     <article class="U-article Overflow">
@@ -50,7 +48,7 @@
                 <c:forEach items="${userOrderDtoList}" var="order" varStatus="status">
                     <tr  <c:if test="${status.index % 2 != 0 }">style='background-color:#ECF6EE;'</c:if>>
                         <td class="FontW"><a href="user_orderdetail.html?orderid=${order.orderId}">${order.orderId}</a></td>
-                        <td>${order.createTime}</td>
+                        <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                         <td>${order.consignee}</td>
                         <td>${order.orderPrice}</td>
                         <td>${order.orderStatus}</td>

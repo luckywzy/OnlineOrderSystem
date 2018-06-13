@@ -66,9 +66,31 @@
                         <p><em>*</em><select name="province">
                             <option>陕西省</option>
                         </select> <select name="city">
-                            <option>西安市</option>
+                            <option value="西安市">西安市</option>
+                            <%--<option value="铜川市">铜川市</option>
+                            <option value="宝鸡市">宝鸡市</option>
+                            <option value="咸阳市">咸阳市</option>
+                            <option value="渭南市">渭南市</option>
+                            <option value="延安市">延安市</option>
+                            <option value="汉中市">汉中市</option>
+                            <option value="榆林市">榆林市</option>
+                            <option value="安康市">安康市</option>
+                            <option value="商洛市">商洛市</option>
+                            <option value="兴平市">兴平市</option>
+                            <option value="韩城市">韩城市</option>
+                            <option value="华阴市">华阴市</option>--%>
                         </select> <select name="district">
-                            <option>雁塔区</option>
+                            <option value="雁塔区">雁塔区</option>
+                            <option value="新城区">新城区</option>
+                            <option value="碑林区">碑林区</option>
+                            <option value="莲湖区">莲湖区</option>
+                            <option value="灞桥区">灞桥区</option>
+                            <option value="未央区">未央区</option>
+                            <option value="雁塔区">雁塔区</option>
+                            <option value="阎良区">阎良区</option>
+                            <option value="临潼区">临潼区</option>
+                            <option value="长安区">长安区</option>
+                            <option value="高陵区">高陵区</option>
                         </select></p>
                     </li>
                     <li><span><label for="">邮政编码：</label></span>
@@ -113,8 +135,9 @@
         <span class="flow_title">支付方式：</span>
         <form action="#">
             <ul>
-                <li><input type="radio" name="pay" id="alipay" value="alipay"/><label for="alipay"><i
-                        class="alipay"></i></label></li>
+                <%--<li><input type="radio" name="pay" id="alipay" value="alipay"/><label for="alipay"><i
+                    class="alipay"></i></label></li>--%>
+                <li><input type="radio" name="pay" id="xianxia" value="xianxia"/><label for="xianxia"><i>线下支付</i></label></li>
             </ul>
         </form>
     </div>

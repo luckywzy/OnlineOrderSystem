@@ -1,8 +1,7 @@
 package com.sust.controller;
 
-import com.google.common.base.Preconditions;
 import com.sust.constants.CookieConstant;
-import com.sust.constants.TUserConstant;
+import com.sust.constants.UserConstant;
 import com.sust.dto.ItemDetailDto;
 import com.sust.model.*;
 import com.sust.process.CookieProcess;
@@ -24,10 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * 关于订单操作的controller
@@ -60,7 +57,7 @@ public class OrderController {
         //BigDecimal total = cookieProcess.getTotal(request, response);
 
         List<ItemDetailDto> itemFromCart = cookieProcess.getItemFromCart(CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME));
-        String userId = CookieUtils.getCookieValue(request, TUserConstant.USER_COOKIE_NAME);
+        String userId = CookieUtils.getCookieValue(request, UserConstant.USER_ID);
         StringBuilder buf = new StringBuilder();
         for (ItemDetailDto itemDetailDto : itemFromCart) {
             TItem item = itemService.queryByitemId(itemDetailDto.getItemId());
@@ -87,7 +84,11 @@ public class OrderController {
     @RequestMapping("/success_order")
     public String tosuccess_order(@ModelAttribute("orderId")String orderId,
                                   @ModelAttribute("orderPrice")BigDecimal orderPrice,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response,
                                   Model model){
+
+        CookieUtils.deleteCookie(request,response,CookieConstant.SHOPPING_CART_NAME);
         model.addAttribute("orderId",orderId);
         model.addAttribute("orderPrice",orderPrice);
         return "front/success_order";
@@ -109,8 +110,9 @@ public class OrderController {
 
         List<TOrderAccess> accessList = new ArrayList<>();
 
-        String userId = CookieUtils.getCookieValue(request, TUserConstant.USER_COOKIE_NAME);
+        String userId = CookieUtils.getCookieValue(request, UserConstant.USER_ID);
         TOrder order = orderService.queryOrderByOrderId(orderId);
+        orderService.updateOrderStatus(orderId,"3"); //已评价状态
         Map<String, String> orderContentMap = OrderProcess.splitOrderContent(order.getOrderContent());
         for (Map.Entry<String, String> entry : orderContentMap.entrySet()) {
             TOrderAccess orderAccess = new TOrderAccess();
