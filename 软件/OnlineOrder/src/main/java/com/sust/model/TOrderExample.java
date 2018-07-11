@@ -236,6 +236,76 @@ public class TOrderExample {
             return (Criteria) this;
         }
 
+        public Criteria andUserIdIsNull() {
+            addCriterion("user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdEqualTo(String value) {
+            addCriterion("user_id =", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotEqualTo(String value) {
+            addCriterion("user_id <>", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdGreaterThan(String value) {
+            addCriterion("user_id >", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdGreaterThanOrEqualTo(String value) {
+            addCriterion("user_id >=", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdLessThan(String value) {
+            addCriterion("user_id <", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdLessThanOrEqualTo(String value) {
+            addCriterion("user_id <=", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdLike(String value) {
+            addCriterion("user_id like", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotLike(String value) {
+            addCriterion("user_id not like", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdIn(List<String> values) {
+            addCriterion("user_id in", values, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotIn(List<String> values) {
+            addCriterion("user_id not in", values, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdBetween(String value1, String value2) {
+            addCriterion("user_id between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotBetween(String value1, String value2) {
+            addCriterion("user_id not between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
         public Criteria andOrderContentIsNull() {
             addCriterion("order_content is null");
             return (Criteria) this;
@@ -376,62 +446,52 @@ public class TOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andDispatchAddressEqualTo(String value) {
+        public Criteria andDispatchAddressEqualTo(Integer value) {
             addCriterion("dispatch_address =", value, "dispatchAddress");
             return (Criteria) this;
         }
 
-        public Criteria andDispatchAddressNotEqualTo(String value) {
+        public Criteria andDispatchAddressNotEqualTo(Integer value) {
             addCriterion("dispatch_address <>", value, "dispatchAddress");
             return (Criteria) this;
         }
 
-        public Criteria andDispatchAddressGreaterThan(String value) {
+        public Criteria andDispatchAddressGreaterThan(Integer value) {
             addCriterion("dispatch_address >", value, "dispatchAddress");
             return (Criteria) this;
         }
 
-        public Criteria andDispatchAddressGreaterThanOrEqualTo(String value) {
+        public Criteria andDispatchAddressGreaterThanOrEqualTo(Integer value) {
             addCriterion("dispatch_address >=", value, "dispatchAddress");
             return (Criteria) this;
         }
 
-        public Criteria andDispatchAddressLessThan(String value) {
+        public Criteria andDispatchAddressLessThan(Integer value) {
             addCriterion("dispatch_address <", value, "dispatchAddress");
             return (Criteria) this;
         }
 
-        public Criteria andDispatchAddressLessThanOrEqualTo(String value) {
+        public Criteria andDispatchAddressLessThanOrEqualTo(Integer value) {
             addCriterion("dispatch_address <=", value, "dispatchAddress");
             return (Criteria) this;
         }
 
-        public Criteria andDispatchAddressLike(String value) {
-            addCriterion("dispatch_address like", value, "dispatchAddress");
-            return (Criteria) this;
-        }
-
-        public Criteria andDispatchAddressNotLike(String value) {
-            addCriterion("dispatch_address not like", value, "dispatchAddress");
-            return (Criteria) this;
-        }
-
-        public Criteria andDispatchAddressIn(List<String> values) {
+        public Criteria andDispatchAddressIn(List<Integer> values) {
             addCriterion("dispatch_address in", values, "dispatchAddress");
             return (Criteria) this;
         }
 
-        public Criteria andDispatchAddressNotIn(List<String> values) {
+        public Criteria andDispatchAddressNotIn(List<Integer> values) {
             addCriterion("dispatch_address not in", values, "dispatchAddress");
             return (Criteria) this;
         }
 
-        public Criteria andDispatchAddressBetween(String value1, String value2) {
+        public Criteria andDispatchAddressBetween(Integer value1, Integer value2) {
             addCriterion("dispatch_address between", value1, value2, "dispatchAddress");
             return (Criteria) this;
         }
 
-        public Criteria andDispatchAddressNotBetween(String value1, String value2) {
+        public Criteria andDispatchAddressNotBetween(Integer value1, Integer value2) {
             addCriterion("dispatch_address not between", value1, value2, "dispatchAddress");
             return (Criteria) this;
         }

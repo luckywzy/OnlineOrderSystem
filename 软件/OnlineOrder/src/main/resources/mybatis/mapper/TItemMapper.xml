@@ -106,21 +106,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sust.model.TItem" >
-    insert into t_item (id, enterprise_id, item_id, 
+    insert into t_item (enterprise_id, item_id,
       item_name, item_price, item_pic, 
-      item_desc, item_type, create_time, 
-      update_time)
-    values (#{id,jdbcType=INTEGER}, #{enterpriseId,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, 
+      item_desc, item_type)
+    values (#{enterpriseId,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR},
       #{itemName,jdbcType=VARCHAR}, #{itemPrice,jdbcType=DECIMAL}, #{itemPic,jdbcType=VARCHAR}, 
-      #{itemDesc,jdbcType=VARCHAR}, #{itemType,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{itemDesc,jdbcType=VARCHAR}, #{itemType,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.sust.model.TItem" >
     insert into t_item
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="enterpriseId != null" >
         enterprise_id,
       </if>
@@ -142,17 +137,8 @@
       <if test="itemType != null" >
         item_type,
       </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="enterpriseId != null" >
         #{enterpriseId,jdbcType=VARCHAR},
       </if>
@@ -173,12 +159,6 @@
       </if>
       <if test="itemType != null" >
         #{itemType,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>

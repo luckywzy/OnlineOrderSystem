@@ -7,9 +7,10 @@
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="rank" property="rank" jdbcType="TINYINT" />
-    <result column="age" property="age" jdbcType="TINYINT" />
     <result column="birth" property="birth" jdbcType="DATE" />
-    <result column="use" property="use" jdbcType="TINYINT" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
+    <result column="used" property="used" jdbcType="TINYINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -72,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, username, password, rank, age, birth, use, create_time, update_time
+    id, user_id, username, password, rank, birth, email, phone_num, used, create_time, 
+    update_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sust.model.TUserExample" >
     select
@@ -106,13 +108,13 @@
   </delete>
   <insert id="insert" parameterType="com.sust.model.TUser" >
     insert into t_user (id, user_id, username, 
-      password, rank, age, 
-      birth, use, create_time, 
-      update_time)
+      password, rank, birth, 
+      email, phone_num, used, 
+      create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{rank,jdbcType=TINYINT}, #{age,jdbcType=TINYINT}, 
-      #{birth,jdbcType=DATE}, #{use,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{password,jdbcType=VARCHAR}, #{rank,jdbcType=TINYINT}, #{birth,jdbcType=DATE}, 
+      #{email,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, #{used,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.sust.model.TUser" >
     insert into t_user
@@ -132,14 +134,17 @@
       <if test="rank != null" >
         rank,
       </if>
-      <if test="age != null" >
-        age,
-      </if>
       <if test="birth != null" >
         birth,
       </if>
-      <if test="use != null" >
-        use,
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="phoneNum != null" >
+        phone_num,
+      </if>
+      <if test="used != null" >
+        used,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -164,14 +169,17 @@
       <if test="rank != null" >
         #{rank,jdbcType=TINYINT},
       </if>
-      <if test="age != null" >
-        #{age,jdbcType=TINYINT},
-      </if>
       <if test="birth != null" >
         #{birth,jdbcType=DATE},
       </if>
-      <if test="use != null" >
-        #{use,jdbcType=TINYINT},
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null" >
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="used != null" >
+        #{used,jdbcType=TINYINT},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -205,14 +213,17 @@
       <if test="record.rank != null" >
         rank = #{record.rank,jdbcType=TINYINT},
       </if>
-      <if test="record.age != null" >
-        age = #{record.age,jdbcType=TINYINT},
-      </if>
       <if test="record.birth != null" >
         birth = #{record.birth,jdbcType=DATE},
       </if>
-      <if test="record.use != null" >
-        use = #{record.use,jdbcType=TINYINT},
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNum != null" >
+        phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.used != null" >
+        used = #{record.used,jdbcType=TINYINT},
       </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -232,9 +243,10 @@
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       rank = #{record.rank,jdbcType=TINYINT},
-      age = #{record.age,jdbcType=TINYINT},
       birth = #{record.birth,jdbcType=DATE},
-      use = #{record.use,jdbcType=TINYINT},
+      email = #{record.email,jdbcType=VARCHAR},
+      phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+      used = #{record.used,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -256,14 +268,17 @@
       <if test="rank != null" >
         rank = #{rank,jdbcType=TINYINT},
       </if>
-      <if test="age != null" >
-        age = #{age,jdbcType=TINYINT},
-      </if>
       <if test="birth != null" >
         birth = #{birth,jdbcType=DATE},
       </if>
-      <if test="use != null" >
-        use = #{use,jdbcType=TINYINT},
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null" >
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="used != null" >
+        used = #{used,jdbcType=TINYINT},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -280,9 +295,10 @@
       username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       rank = #{rank,jdbcType=TINYINT},
-      age = #{age,jdbcType=TINYINT},
       birth = #{birth,jdbcType=DATE},
-      use = #{use,jdbcType=TINYINT},
+      email = #{email,jdbcType=VARCHAR},
+      phone_num = #{phoneNum,jdbcType=VARCHAR},
+      used = #{used,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

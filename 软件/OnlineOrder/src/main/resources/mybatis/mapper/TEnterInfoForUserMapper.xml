@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sust.dao.TEnterInfoForUserMapper" >
+  <resultMap id="BaseResultMap" type="com.sust.model.TEnterInfoForUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="enterprise_id" property="enterpriseId" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
+    <result column="feature_items" property="featureItems" jdbcType="VARCHAR" />
+    <result column="preferential_activities" property="preferentialActivities" jdbcType="VARCHAR" />
+    <result column="parking_space" property="parkingSpace" jdbcType="VARCHAR" />
+    <result column="business_hours" property="businessHours" jdbcType="VARCHAR" />
+    <result column="wifi" property="wifi" jdbcType="VARCHAR" />
+    <result column="average_price" property="averagePrice" jdbcType="VARCHAR" />
+    <result column="enter_img" property="enterImg" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, enterprise_id, company_name, address, phone_num, feature_items, preferential_activities, 
+    parking_space, business_hours, wifi, average_price, enter_img, create_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sust.model.TEnterInfoForUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_enter_info_for_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_enter_info_for_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_enter_info_for_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sust.model.TEnterInfoForUserExample" >
+    delete from t_enter_info_for_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sust.model.TEnterInfoForUser" >
+    insert into t_enter_info_for_user (id, enterprise_id, company_name, 
+      address, phone_num, feature_items, 
+      preferential_activities, parking_space, business_hours, 
+      wifi, average_price, enter_img, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{enterpriseId,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, #{featureItems,jdbcType=VARCHAR}, 
+      #{preferentialActivities,jdbcType=VARCHAR}, #{parkingSpace,jdbcType=VARCHAR}, #{businessHours,jdbcType=VARCHAR}, 
+      #{wifi,jdbcType=VARCHAR}, #{averagePrice,jdbcType=VARCHAR}, #{enterImg,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sust.model.TEnterInfoForUser" >
+    insert into t_enter_info_for_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="phoneNum != null" >
+        phone_num,
+      </if>
+      <if test="featureItems != null" >
+        feature_items,
+      </if>
+      <if test="preferentialActivities != null" >
+        preferential_activities,
+      </if>
+      <if test="parkingSpace != null" >
+        parking_space,
+      </if>
+      <if test="businessHours != null" >
+        business_hours,
+      </if>
+      <if test="wifi != null" >
+        wifi,
+      </if>
+      <if test="averagePrice != null" >
+        average_price,
+      </if>
+      <if test="enterImg != null" >
+        enter_img,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseId != null" >
+        #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null" >
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="featureItems != null" >
+        #{featureItems,jdbcType=VARCHAR},
+      </if>
+      <if test="preferentialActivities != null" >
+        #{preferentialActivities,jdbcType=VARCHAR},
+      </if>
+      <if test="parkingSpace != null" >
+        #{parkingSpace,jdbcType=VARCHAR},
+      </if>
+      <if test="businessHours != null" >
+        #{businessHours,jdbcType=VARCHAR},
+      </if>
+      <if test="wifi != null" >
+        #{wifi,jdbcType=VARCHAR},
+      </if>
+      <if test="averagePrice != null" >
+        #{averagePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="enterImg != null" >
+        #{enterImg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sust.model.TEnterInfoForUserExample" resultType="java.lang.Integer" >
+    select count(*) from t_enter_info_for_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_enter_info_for_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseId != null" >
+        enterprise_id = #{record.enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyName != null" >
+        company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNum != null" >
+        phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.featureItems != null" >
+        feature_items = #{record.featureItems,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preferentialActivities != null" >
+        preferential_activities = #{record.preferentialActivities,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parkingSpace != null" >
+        parking_space = #{record.parkingSpace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessHours != null" >
+        business_hours = #{record.businessHours,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wifi != null" >
+        wifi = #{record.wifi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.averagePrice != null" >
+        average_price = #{record.averagePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterImg != null" >
+        enter_img = #{record.enterImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_enter_info_for_user
+    set id = #{record.id,jdbcType=INTEGER},
+      enterprise_id = #{record.enterpriseId,jdbcType=VARCHAR},
+      company_name = #{record.companyName,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+      feature_items = #{record.featureItems,jdbcType=VARCHAR},
+      preferential_activities = #{record.preferentialActivities,jdbcType=VARCHAR},
+      parking_space = #{record.parkingSpace,jdbcType=VARCHAR},
+      business_hours = #{record.businessHours,jdbcType=VARCHAR},
+      wifi = #{record.wifi,jdbcType=VARCHAR},
+      average_price = #{record.averagePrice,jdbcType=VARCHAR},
+      enter_img = #{record.enterImg,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sust.model.TEnterInfoForUser" >
+    update t_enter_info_for_user
+    <set >
+      <if test="enterpriseId != null" >
+        enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null" >
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="featureItems != null" >
+        feature_items = #{featureItems,jdbcType=VARCHAR},
+      </if>
+      <if test="preferentialActivities != null" >
+        preferential_activities = #{preferentialActivities,jdbcType=VARCHAR},
+      </if>
+      <if test="parkingSpace != null" >
+        parking_space = #{parkingSpace,jdbcType=VARCHAR},
+      </if>
+      <if test="businessHours != null" >
+        business_hours = #{businessHours,jdbcType=VARCHAR},
+      </if>
+      <if test="wifi != null" >
+        wifi = #{wifi,jdbcType=VARCHAR},
+      </if>
+      <if test="averagePrice != null" >
+        average_price = #{averagePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="enterImg != null" >
+        enter_img = #{enterImg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sust.model.TEnterInfoForUser" >
+    update t_enter_info_for_user
+    set enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      phone_num = #{phoneNum,jdbcType=VARCHAR},
+      feature_items = #{featureItems,jdbcType=VARCHAR},
+      preferential_activities = #{preferentialActivities,jdbcType=VARCHAR},
+      parking_space = #{parkingSpace,jdbcType=VARCHAR},
+      business_hours = #{businessHours,jdbcType=VARCHAR},
+      wifi = #{wifi,jdbcType=VARCHAR},
+      average_price = #{averagePrice,jdbcType=VARCHAR},
+      enter_img = #{enterImg,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

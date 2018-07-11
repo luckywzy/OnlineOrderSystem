@@ -10,19 +10,88 @@
                         http://www.springframework.org/schema/context 
                         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
     <!-- 配置包扫描器 -->
-    <context:component-scan base-package="com.sust.controller" />
+    <context:component-scan base-package="com.sust.controller"/>
     <!-- 配置注解驱动 -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
+
+    <!--<bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+        <property name="prefix" value="/WEB-INF/jsp/back/"></property>
+        <property name="suffix" value=".jsp"></property>
+        <property name="viewNames" value="*"></property>
+
+        <property name="order" value="2"></property>
+    </bean>
+
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+        <property name="viewNames" value="*"></property>
+        <property name="order" value="1"></property>
+    </bean>-->
+
     <!-- 配置视图解析器 -->
     <bean
-        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/back/" />
-        <property name="suffix" value=".jsp" />
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+        <property name="order" value="1"></property>
     </bean>
+
     <!-- 由于在web.xml中定义的url拦截形式为“/”表示拦截所有的url请求，
                     包括静态资源例如css、js等。所以需要在springmvc.xml中添加资源映射标签： -->
-    <mvc:resources location="/WEB-INF/css/back/" mapping="/css/**"/>
-    <mvc:resources location="/WEB-INF/js/back/" mapping="/js/**"/>
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
+    <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
+
+    <!-- 需要文件上传功能时，启用以下配置 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxInMemorySize">
+            <value>1638400</value>
+        </property>
+    </bean>
+
+
+    <!--配置拦截器，未登录的用户限制访问-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/home/**"/>
+            <mvc:exclude-mapping path="/login**"/>
+            <mvc:exclude-mapping path="/userlogin"/>
+            <mvc:exclude-mapping path="/register**"/>
+            <mvc:exclude-mapping path="/admin/admin-login.html"/>
+            <mvc:exclude-mapping path="/admin/login"/>
+            <mvc:exclude-mapping path="/**/*.css"/>
+            <mvc:exclude-mapping path="/**/*.js"/>
+            <mvc:exclude-mapping path="/**/*.png"/>
+            <mvc:exclude-mapping path="/**/*.gif"/>
+            <mvc:exclude-mapping path="/**/*.jpg"/>
+            <mvc:exclude-mapping path="/**/*.jpeg"/>
+            <mvc:exclude-mapping path="/**/*.map"/>
+            <bean class="com.sust.handler.AuthorityHandlerInterruptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
 </beans>

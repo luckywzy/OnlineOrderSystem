@@ -1,7 +1,7 @@
 package com.sust.utils;
 
 import com.sust.constants.ResultConstant;
-import com.sust.constants.TUserConstant;
+import com.sust.constants.UserConstant;
 import com.sust.model.Result;
 import com.sust.model.TUser;
 
@@ -17,7 +17,7 @@ public class ResultUtil {
         // 创建通过密码登录是否成功的Result
         public static Result buildForPasswordLogin(TUser user) {
             if (user == null) {
-                return Result.createStatusAndMsg(ResultConstant.FAIL_STATUS, TUserConstant.PASSWORD_LOGIN_FAIL_MESSAGE);
+                return Result.createStatusAndMsg(ResultConstant.FAIL_STATUS, UserConstant.PASSWORD_LOGIN_FAIL_MESSAGE);
             } else {
                 return Result.createStatusAndData(ResultConstant.SUCCESS_STATUS, user);
             }

@@ -2,6 +2,7 @@ package com.sust.service;
 
 import com.sust.model.TEnterpriseInfo;
 import com.sust.model.TItem;
+import com.sust.model.TItemType;
 
 import java.util.List;
 
@@ -15,10 +16,10 @@ public interface ItemService {
 
     /**
      * 根据 item  Id  查询
-     * @param id
+     * @param itemIid
      * @return
      */
-    TItem queryByid(String id);
+    TItem queryByitemId(String itemIid);
 
     /**
      * 增加菜品
@@ -26,4 +27,33 @@ public interface ItemService {
      * @return
      */
     boolean insertByItem(TItem item);
+
+    /**
+     *  根据Id 删除item
+     * @param itemId
+     * @return
+     */
+    boolean deleteItemById(String itemId);
+
+    List<TItem> queryAllByPage(int curpagetmp, int pageNumber);
+
+    /**
+     * 根据itemIdList 批量查询
+     * @param itemIdList
+     * @return
+     */
+    List<TItem> BatchQueryByitemId(List<String> itemIdList);
+
+    TItem queryById(Integer id);
+
+    List<TItemType> queryItemType();
+
+    /**
+     * 更新操作
+     * @param item
+     * @return
+     */
+    boolean updateByItem(TItem item);
+
+    List<TItem> queryByPage(Integer currentPage, Integer pageNumber, String enterpriseid);
 }

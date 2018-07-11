@@ -8,11 +8,13 @@ public class TOrder {
 
     private String orderId;
 
+    private String userId;
+
     private String orderContent;
 
     private BigDecimal orderPrice;
 
-    private String dispatchAddress;
+    private Integer dispatchAddress;
 
     private String expectTime;
 
@@ -38,6 +40,14 @@ public class TOrder {
         this.orderId = orderId == null ? null : orderId.trim();
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
+    }
+
     public String getOrderContent() {
         return orderContent;
     }
@@ -54,12 +64,12 @@ public class TOrder {
         this.orderPrice = orderPrice;
     }
 
-    public String getDispatchAddress() {
+    public Integer getDispatchAddress() {
         return dispatchAddress;
     }
 
-    public void setDispatchAddress(String dispatchAddress) {
-        this.dispatchAddress = dispatchAddress == null ? null : dispatchAddress.trim();
+    public void setDispatchAddress(Integer dispatchAddress) {
+        this.dispatchAddress = dispatchAddress;
     }
 
     public String getExpectTime() {

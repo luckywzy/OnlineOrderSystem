@@ -92,4 +92,12 @@ public class TEnterpriseInfo {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override public String toString() {
+        return "TEnterpriseInfo{" + "id=" + id + ", enterpriseId='" + enterpriseId + '\'' + ", enterpriseCompanyName='"
+                + enterpriseCompanyName + '\'' + ", enterpriseLinkMan='" + enterpriseLinkMan + '\''
+                + ", enterprisePhoneNum='" + enterprisePhoneNum + '\'' + ", enterpriseAddress='" + enterpriseAddress
+                + '\'' + ", enterpriseEmail='" + enterpriseEmail + '\'' + ", createTime=" + createTime + ", updateTime="
+                + updateTime + '}';
+    }
 }

@@ -16,8 +16,9 @@ CREATE TABLE `t_user`(
 	`password` varchar(32) NOT NULL DEFAULT '' COMMENT "密码",
 	`rank` tinyint NOT NULL DEFAULT 1 COMMENT "用户级别：1 游客， 2 普通用户， 3 高级用户， 4 特殊用户，5 管理员，6 超级管理员",
 	`age` tinyint unsigned NOT NULL DEFAULT 0 COMMENT "年龄",
-	`birth` date NOT NULL DEFAULT '1001:01:01' COMMENT "生日",
-	`use` tinyint NOT NULL DEFAULT 1 COMMENT "iscan use: 0 cannot use, 1 can use",
+  `email` varchar(30) NOT NULL DEFAULT '' COMMENT "邮箱",
+  `phone_num` varchar(20) NOT NULL DEFAULT '' COMMENT "电话",
+	`used` tinyint NOT NULL DEFAULT 1 COMMENT "iscan use: 0 cannot use, 1 can use",
 	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "create_time",
 	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "update_time",
 	primary key(id),
@@ -54,6 +55,50 @@ CREATE TABLE `t_enterprise_info`(
 	primary key(id),
 	unique(enterprise_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商户表';
+
+
+###################################################
+#########      用户展示的商家表		  #################
+###################################################
+DROP TABLE IF EXISTS `t_enter_info_for_user`;
+CREATE TABLE `t_enter_info_for_user`(
+	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+	`enterprise_id` varchar(20) NOT NULL DEFAULT '00000000000000000000' COMMENT '企业ID',
+	`company_name` varchar(50) NOT NULL DEFAULT '' COMMENT '餐厅名称',
+	`address` varchar(100) NOT NULL DEFAULT '' COMMENT '餐厅地址',
+	`phone_num` varchar(20) NOT NULL DEFAULT '' COMMENT '餐厅电话',
+	`feature_items` VARCHAR(200) NOT NULL DEFAULT '' COMMENT '特色菜品',
+	`preferential_activities` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '优惠活动',
+	`parking_space` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '停车位',
+	`business_hours` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '营业时间',
+	`wifi` VARCHAR(10) NOT NULL DEFAULT '' COMMENT '是否有wifi',
+	`average_price` VARCHAR(5) NOT NULL DEFAULT '' COMMENT '人均价格',
+	`enter_img` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '商家门面图',
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+	primary key(id),
+	unique(enterprise_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户展示的商家表';
+
+###################################################
+#########      商家配送安排表		  #################
+###################################################
+DROP TABLE IF EXISTS `t_enter_info_for_dispatch`;
+CREATE TABLE `t_enter_info_for_dispatch`(
+	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+	`enterprise_id` varchar(20) NOT NULL DEFAULT '00000000000000000000' COMMENT '企业ID',
+	`company_name` varchar(50) NOT NULL DEFAULT '' COMMENT '餐厅名称',
+	`enter_img` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '商家门面图',
+	`rank` tinyint unsigned NOT NULL DEFAULT 5 COMMENT '餐厅评价分数 1-5分',
+	`send_price` smallint unsigned NOT NULL DEFAULT 20 COMMENT '起送价格',
+	`dispatch_price` smallint unsigned NOT NULL DEFAULT 3 COMMENT '配送费',
+	`dispatch_time` VARCHAR(10) NOT NULL DEFAULT '20分钟' COMMENT '配送时间',
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+	primary key(id),
+	unique(enterprise_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商家配送安排表';
+
 
 ###################################################
 #########      菜品分类表		  #################
@@ -97,15 +142,17 @@ DROP TABLE IF EXISTS `t_order`;
 CREATE TABLE `t_order` (
 	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
 	`order_id` VARCHAR(16) NOT NULL DEFAULT '' COMMENT '订单号码',
-	`order_content` VARCHAR(100)  NOT NULL DEFAULT '' COMMENT '订单内容：填入的是商品Id,以逗号分隔',
+	`user_id` varchar(20) NOT NULL DEFAULT  '' COMMENT '用户ID',
+	`order_content` VARCHAR(500)  NOT NULL DEFAULT '' COMMENT '订单内容：填入的是商品Id,数量,以逗号分隔,每个商品之间以分号分隔',
 	`order_price` DECIMAL(5,2) NOT NULL DEFAULT 0.01 COMMENT '订单价格',
-	`dispatch_address` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '配送地址',
+	`dispatch_address` int unsigned NOT NULL DEFAULT 0 COMMENT '配送地址编号',
 	`expect_time` VARCHAR(20) NOT NULL DEFAULT '立即送达' COMMENT '期望送达时间',
 	`order_status` tinyint NOT NULL DEFAULT -1  COMMENT '订单状态：-1 默认，0 准备中，1 派送中，2 已完成',
 	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '订单创建时间',
 	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '订单修改时间',
 	primary key(id),
-	unique(order_id)
+	unique(order_id),
+	FOREIGN KEY(user_id) REFERENCES `t_user`(user_id),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
 
 ###################################################
@@ -124,5 +171,57 @@ CREATE TABLE `t_user_and_order_relation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户与订单关系表';
 
 
+###################################################
+########### 用户地址表					###############
+###################################################
+DROP TABLE IF EXISTS `t_user_address`;
+CREATE TABLE `t_user_address` (
+	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+	`user_id` varchar(20)  NOT NULL DEFAULT '00000000000000000000' COMMENT "用户ID",
+	`province` VARCHAR(10) NOT NULL DEFAULT '' COMMENT 'XX省',
+	`city` VARCHAR(10) NOT NULL DEFAULT '' COMMENT 'XX市',
+	`district` VARCHAR(10) NOT NULL DEFAULT '' COMMENT 'XX区/县',
+	`post_code` VARCHAR(8) NOT NULL DEFAULT '' COMMENT '邮政编码',
+	`detail_addr` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '详细地址',
+	`consignee` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '收货人',
+	`phone_num` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '收货人手机号码',
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+	primary key(id),
+  FOREIGN KEY(user_id) REFERENCES `t_user`(user_id),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户地址表';
 
+###################################################
+########### 订单留言表					###############
+###################################################
 
+DROP TABLE IF EXISTS `t_leave_words_for_order`;
+CREATE TABLE `t_leave_words_for_order` (
+	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+	`user_id` varchar(20)  NOT NULL DEFAULT '00000000000000000000' COMMENT "用户ID",
+	`order_id` VARCHAR(16) NOT NULL DEFAULT '' COMMENT '订单号码',
+	`leave_words` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '用户留言',
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+	primary key(id),
+  FOREIGN KEY(user_id) REFERENCES `t_user`(user_id),
+  FOREIGN KEY(order_id) REFERENCES `t_order`(order_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单留言表';
+
+###################################################
+########### 订单评价表					###############
+###################################################
+
+DROP TABLE IF EXISTS `t_order_access`;
+CREATE TABLE `t_order_access` (
+	`id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+	`user_id` varchar(20)  NOT NULL DEFAULT '00000000000000000000' COMMENT "用户ID",
+	`item_id` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '所购商品ID',
+	`pay_count` SMALLINT NOT NULL DEFAULT 0 COMMENT '所购商品数量',
+	`access_words` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '评价内容',
+	`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+	primary key(id),
+  FOREIGN KEY(user_id) REFERENCES `t_user`(user_id),
+  FOREIGN KEY(order_id) REFERENCES `t_order`(order_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单评价表';

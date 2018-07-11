@@ -52,4 +52,9 @@ public class TItemType {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override public String toString() {
+        return "TItemType{" + "id=" + id + ", itemTypeId=" + itemTypeId + ", itemTypeDesc='" + itemTypeDesc + '\''
+                + ", createTime=" + createTime + ", updateTime=" + updateTime + '}';
+    }
 }

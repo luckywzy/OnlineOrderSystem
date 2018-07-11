@@ -13,11 +13,13 @@ public class TUser {
 
     private Byte rank;
 
-    private Byte age;
-
     private Date birth;
 
-    private Byte use;
+    private String email;
+
+    private String phoneNum;
+
+    private Byte used;
 
     private Date createTime;
 
@@ -63,14 +65,6 @@ public class TUser {
         this.rank = rank;
     }
 
-    public Byte getAge() {
-        return age;
-    }
-
-    public void setAge(Byte age) {
-        this.age = age;
-    }
-
     public Date getBirth() {
         return birth;
     }
@@ -79,12 +73,28 @@ public class TUser {
         this.birth = birth;
     }
 
-    public Byte getUse() {
-        return use;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUse(Byte use) {
-        this.use = use;
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum == null ? null : phoneNum.trim();
+    }
+
+    public Byte getUsed() {
+        return used;
+    }
+
+    public void setUsed(Byte used) {
+        this.used = used;
     }
 
     public Date getCreateTime() {

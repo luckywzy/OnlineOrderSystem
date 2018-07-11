@@ -14,7 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -45,7 +46,7 @@ public class ItemControllerTest {
     @Test
     public void list() throws Exception {
         MvcResult result = mockMvc.perform(
-                MockMvcRequestBuilders.get("/item/itemOfEnterprise")
+                get("/item/itemOfEnterprise")
                         .param("enterpriseid", "00013000000000000001"))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -72,17 +73,30 @@ public class ItemControllerTest {
         item.setItemId(String.valueOf(id));
         item.setItemPic("http://recipe0.hoto.cn/pic/recipe/l/10/8d/232720_7e3444.jpg");
         item.setItemPrice(new BigDecimal(25.5));
-        item.setItemDesc("京酱肉丝是一道知名度很高的京菜，北京菜中的经典名菜之一，选用猪瘦肉为主料，辅以甜面酱、葱、姜及其它调料，用北方特有烹调技法“六爆”之一的“酱爆”烹制而成。成菜后，咸甜适中，酱香浓郁，风味独特。");
+        item.setItemDesc(
+                "京酱肉丝是一道知名度很高的京菜，北京菜中的经典名菜之一，选用猪瘦肉为主料，辅以甜面酱、葱、姜及其它调料，用北方特有烹调技法“六爆”之一的“酱爆”烹制而成。成菜后，咸甜适中，酱香浓郁，风味独特。");
         item.setItemType(new Byte("2"));
 
         MvcResult result = mockMvc.perform(
-                MockMvcRequestBuilders.post("/item/add")
-                        .requestAttr("item", item))
+                post("/item/add").flashAttr("item", item)) // .flashAttr("item",item)
+                                                                                                             // 添加modelattribute
                 .andExpect(status().is3xxRedirection())
                 .andDo(print())
                 .andReturn();
 
-        logger.info("插入结果：{}",result.getResponse().getContentAsString());
+        logger.info(result.getResponse().getContentAsString());
+    }
+
+    @Test
+    public void deleteItem() throws Exception {
+        //add的item id
+            String itemId = "989065359545585664";
+        MvcResult mvcResult = mockMvc.perform(post("/item/delete").param("itemId", itemId))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andReturn();
+        logger.info(mvcResult.getResponse().getContentAsString());
+
     }
 
 }
