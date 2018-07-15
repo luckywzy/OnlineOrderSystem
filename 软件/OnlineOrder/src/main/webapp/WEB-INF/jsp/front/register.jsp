@@ -19,23 +19,23 @@
         <table class="Register">
             <tr>
                 <td width="40%" align="right" class="FontW">用户名：</td>
-                <td><input type="text" name="username" required autofocus></td>
+                <td><input type="text" id="username" name="username" required autofocus></td>
             </tr>
             <tr>
                 <td width="40%" align="right" class="FontW">密码：</td>
-                <td><input type="password" name="password" required></td>
+                <td><input type="password" id="password" name="password" required></td>
             </tr>
             <tr>
                 <td width="40%" align="right" class="FontW">再次确认：</td>
-                <td><input type="password" name="passwordConfirm" required></td>
+                <td><input type="password" id="passwordConfirm" name="passwordConfirm" required></td>
             </tr>
             <tr>
                 <td width="40%" align="right" class="FontW">电子邮件：</td>
-                <td><input type="email" name="email" pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$" required></td>
+                <td><input type="email" id="email" name="email" pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$" required></td>
             </tr>
             <tr>
                 <td width="40%" align="right" class="FontW">手机号码：</td>
-                <td><input type="text" name="phone_num" required pattern="[0-9]{11}"></td>
+                <td><input type="text" id="phone_num" name="phone_num" required pattern="[0-9]{11}"></td>
             </tr>
             <tr>
                 <td width="40%" align="right"></td>

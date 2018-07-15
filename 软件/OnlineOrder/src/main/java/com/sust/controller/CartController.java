@@ -2,6 +2,7 @@ package com.sust.controller;
 
 import com.sust.constants.CookieConstant;
 import com.sust.constants.UserConstant;
+import com.sust.constants.UserConstant;
 import com.sust.dto.ItemDetailDto;
 import com.sust.model.*;
 import com.sust.service.EnterInfoForDispatchService;
@@ -81,7 +82,7 @@ public class CartController {
                          Model model) {
         String cookieVal = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
         List<ItemDetailDto> itemDetailDtos = null;
-        if (cookieVal != null ) {
+        if (cookieVal != null) {
             itemDetailDtos = getItemFromCart(cookieVal);
         }
         model.addAttribute("itemDetailDtos", itemDetailDtos);
@@ -173,11 +174,9 @@ public class CartController {
                                     HttpServletResponse response) {
 
         String cookieVal = CookieUtils.getCookieValue(request, CookieConstant.SHOPPING_CART_NAME);
-        Map<String, Integer> cart = JsonUtils.jsonToPojo(cookieVal, HashMap.class);
-        if(cart.containsKey(itemId)){
-            cart.remove(itemId);
-        }
-        CookieUtils.setCookie(request, response, CookieConstant.SHOPPING_CART_NAME, JsonUtils.objectToJson(cart));
+        ShoppingCart shoppingCart = JsonUtils.jsonToPojo(cookieVal, ShoppingCart.class);
+        shoppingCart.removeGoods(itemId);
+        CookieUtils.setCookie(request, response, CookieConstant.SHOPPING_CART_NAME, JsonUtils.objectToJson(shoppingCart));
     }
 
 
@@ -197,7 +196,7 @@ public class CartController {
     public List<ItemDetailDto> getItemFromCart(String cookieVal) {
         List<ItemDetailDto> itemDetailDtos = new ArrayList<>();
         Map<String, Integer> cart = JsonUtils.jsonToPojo(cookieVal, HashMap.class);
-        if (cart != null && cart.size() > 0) {
+        if (cart != null) {
             List<String> itemIdList = cart.keySet().stream().collect(Collectors.toList());
             List<TItem> itemList = itemService.BatchQueryByitemId(itemIdList);
 

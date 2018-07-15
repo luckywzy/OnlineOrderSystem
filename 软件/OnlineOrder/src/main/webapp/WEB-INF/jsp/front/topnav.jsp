@@ -30,6 +30,8 @@
                                                              title="我的订单">我的订单</a> <a href="/user/tocart">购物车</a>
                                                              <a
                     href="/admin/admin-login.html" target="_blank" title="商家入口">商家入口</a>
+                <a
+                        href="/abcd" target="_blank" title="商家入口">新建</a>
             </div>
         </div>
     </section>

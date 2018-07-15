@@ -134,4 +134,9 @@ public class HomePageController {
         }
         return false;
     }
+
+    @RequestMapping("/abcd")
+    public String toabcd(){
+        return "front/abcd";
+    }
 }

@@ -148,6 +148,21 @@ function changeCurrentPage2(currentPage) {
 }
 
 function registerSub() {
+    var un = $('#username').val();
+    if(un.length <2){
+        showTips("用户名太短啦");
+        return;
+    }
+    if(un.length > 16){
+        showTips("用户名太长啦");
+        return;
+    }
+    var pa = $('#password').val();
+    var pa1 = $('#passwordConfirm').val();
+    if(pa!=pa1){
+        showTips("两次密码输入不一致,请重新输入");
+        return;
+    }
 
     $.ajax({
         url: "/register.do",
