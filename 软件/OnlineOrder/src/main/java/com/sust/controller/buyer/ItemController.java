@@ -1,7 +1,6 @@
-package com.sust.controller;
+package com.sust.controller.buyer;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
 import com.sust.model.TItem;
 import com.sust.service.ItemService;
 import com.sust.utils.IdUtils;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.annotation.Resource;
@@ -22,7 +20,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 对菜品的管理

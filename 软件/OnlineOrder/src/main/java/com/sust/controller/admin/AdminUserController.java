@@ -1,4 +1,4 @@
-package com.sust.controller;
+package com.sust.controller.admin;
 
 import com.sust.constants.UserConstant;
 import com.sust.dto.AdminOrderDto;

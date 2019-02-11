@@ -1,4 +1,4 @@
-package com.sust.controller;
+package com.sust.controller.buyer;
 
 import com.sust.constants.DisPatchPriceConstants;
 import com.sust.constants.UserConstant;

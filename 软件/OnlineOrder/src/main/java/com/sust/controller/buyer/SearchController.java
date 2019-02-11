@@ -1,4 +1,4 @@
-package com.sust.controller;
+package com.sust.controller.buyer;
 
 import com.sust.model.TEnterInfoForDispatch;
 import com.sust.service.EnterInfoForDispatchService;

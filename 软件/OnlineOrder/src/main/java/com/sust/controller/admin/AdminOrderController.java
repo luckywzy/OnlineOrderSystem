@@ -1,4 +1,4 @@
-package com.sust.controller;
+package com.sust.controller.admin;
 
 import com.google.common.base.Preconditions;
 import com.sust.constants.DisPatchPriceConstants;

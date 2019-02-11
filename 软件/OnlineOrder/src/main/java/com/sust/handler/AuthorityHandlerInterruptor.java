@@ -1,6 +1,5 @@
 package com.sust.handler;
 
-import com.sust.controller.UserController;
 import com.sust.utils.CookieUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;

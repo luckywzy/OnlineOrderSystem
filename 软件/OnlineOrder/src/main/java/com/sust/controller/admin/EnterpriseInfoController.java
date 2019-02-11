@@ -1,4 +1,4 @@
-package com.sust.controller;
+package com.sust.controller.admin;
 
 import com.sust.model.TEnterpriseInfo;
 import com.sust.service.EnterpriseInfoService;
